@@ -49,12 +49,12 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Session') }}</a>
                             </li>
 
-                           Metodo para hacer el registro
+                           <!-- Metodo para hacer el registro
                                 @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                                 </li>
-                            @endif 
+                            @endif -->
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -65,10 +65,20 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Cerrar Sesión') }}
+                                    </a>
+                                        <!-- Consultar Datos de las tablas -->
+                                    
+                                    <a class="dropdown-item" href="{{ route('ConsultDato') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('Datos').submit();">
+                                        {{ __('Cunsultar Datos') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <form id="Datos" action="{{ route('ConsultDato') }}" method="GET" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>

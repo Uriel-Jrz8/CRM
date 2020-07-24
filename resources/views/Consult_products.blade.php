@@ -19,16 +19,26 @@
       <br>
     </div>
  <br>
-            @isset($query)
-            @endisset
-
+            <!-- Metodo para mostrar la tabla con los datos requeridos-->
             @isset($query)
                 @include('partials.table', $query)
             @endisset
 
-    
+            <!-- Metodo para Descargar los datos en un formato excel-->
+            @isset($query)
+                @if(count($query) > 0 )
+            
+            <form method="POST" action="{{ route('export')}}">
+            @method('PUT')
+            @csrf
+                <input type="submit" value="Descargar" class="btn btn-outline-success">
+            </form>
+                    @else
+                       <h1><center>¡No hay Datos!</center></h1>
+                @endif
+            @endisset
+
         <button type="button" class="btn btn-outline-danger">Descargar en PDF</button>
-        <button type="button" class="btn btn-outline-success">Descargar en Excel</button>
 <div>
 
 @endsection

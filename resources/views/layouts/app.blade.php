@@ -78,7 +78,8 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <form id="Datos" action="{{ route('ConsultDato') }}" method="GET" style="display: none;">
+                                    <form id="Datos" action="{{ route('ConsultDato') }}" method="POST" style="display: none;">
+                                    @method('PUT')
                                         @csrf
                                     </form>
                                 </div>

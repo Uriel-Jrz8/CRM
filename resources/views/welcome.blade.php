@@ -19,6 +19,10 @@
                 height: 100vh;
                 margin: 0;
             }
+            .img{
+                height: 500px;
+                weight: 500px;
+            }
 
             .full-height {
                 height: 100vh;
@@ -70,7 +74,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('inicio') }}">INICIAR SESION</a>
+                        <a href="{{ route('Atencion') }}">INICIAR SESION</a>
 
                         <!-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
@@ -80,22 +84,7 @@
             @endif
 
             <div class="content">
-            <img src="Images/PerroNegro.png">
-                <div class="title m-b-md">
-                <img src="Images/Nombre.png">
-                    <!-- Merkado Croqueta -->
-                </div>
-
-                <!-- <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div> -->
+            <img class="img" src="Images/logo.jpg">
             </div>
         </div>
     </body>

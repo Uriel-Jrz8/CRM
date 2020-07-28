@@ -25,8 +25,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-            <img src="/Images/PerroNegro.png" width =50px height = 50px>
-            <img src="/Images/Nombre.png" width =150px height = 50px>
+            <img src="/Images/PerroNegro.png" width =50px height = 50px  href="{{ url('/') }}">
+            <img src="/Images/Nombre.png" width =150px height = 50px  href="{{ url('/') }}">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('Merkado Croqueta', 'Merkado Croqueta') }} -->
                     <!--{{ config('app.name', 'Merkado Croqueta') }}-->
@@ -60,8 +60,6 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                    
                                     {{ Auth::user()->name }} <span class="caret"></span>
-                                
-                                
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -70,31 +68,18 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar Sesión') }}
                                     </a>
-                                        <!-- Consultar Datos de las tablas -->
-                                    
-                                    <!-- <a class="dropdown-item" href="{{ route('ConsultDato') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('Datos').submit();">
-                                        {{ __('Cunsultar Datos') }}
-                                    </a> -->
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <!-- <form id="Datos" action="{{ route('ConsultDato') }}" method="POST" style="display: none;">
-                                    @method('PUT')
-                                        @csrf
-                                    </form> -->
                                 </div>
                             </li>
                         @endguest
-                    </ul>
+                     </ul>
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
-            @yield('content')
+            @yield('header')
         </main>
     </div>
 </body>

@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
-@section('content')
+@section('header')
+
 <div class="container">
 <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <div class="row justify-content-center">
@@ -15,8 +16,8 @@
                 </div>
             </div>
         </div>
-        <H1>{{ __('Pedidos en Línea') }} </H1> 
-      <br>
+        <H1>{{ __('Sucursal Acapulco') }} </H1> 
+        <br>
     </div>
  <br>
             <!-- Metodo para mostrar la tabla con los datos requeridos-->
@@ -39,6 +40,6 @@
                        <h1><center>¡No hay Datos!</center></h1>
                 @endif
             @endisset
-</div>
+<div>
 
 @endsection

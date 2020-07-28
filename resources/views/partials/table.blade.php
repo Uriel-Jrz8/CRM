@@ -15,6 +15,6 @@
             </tr>
         </tbody>
     @empty
-        No hay Resultados
+        <!-- No hay Resultados -->
     @endforelse
 </table>

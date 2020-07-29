@@ -74,7 +74,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('Atencion') }}">INICIAR SESION</a>
+                        <a href="{{ route('profiles') }}">INICIAR SESION</a>
 
                         <!-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
@@ -84,7 +84,7 @@
             @endif
 
             <div class="content">
-            <img class="img" src="Images/logo.jpg">
+            <img class="img" src="Images/logoNuevo.gif">
             </div>
         </div>
     </body>

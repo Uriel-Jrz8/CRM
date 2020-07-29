@@ -9,10 +9,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class newlogin extends Controller
 {
-    // public function Login (){
-    //     return view('Client');
-    // }
-
 
             //Metodos para visualizar los Pedidos
     public function ConsultData(Request $request){
@@ -108,15 +104,43 @@ class newlogin extends Controller
         return view('Shops');
         
     }
-
+        //Metodo para Crear el archivo en Ecxel
     public function exportDocument()
     {
         return Excel::download(new UsersExport, 'datos.xlsx');
     }
+    public function ViewStock()
+    {
+        return view('AddStock');
+    }
 
-    public function Client(Request $request)
+        //Metodos de rutas
+    public function profiles()
     {
         return view('profiles');
     }
+    
+    public function RouteClient()
+    {
+        return view('Client');
+    }
 
+    public function RouteShop()
+    {
+        return view('shops');
+    }
+    public function RouteShopAcapulco()
+    {
+        return view('ShopsAcapulco');
+    }
+
+    public function RouteAccounting()
+    {
+        return view('Accounting');
+    }
+
+    public function RouteAdmin()
+    {
+        return view('Admin');
+    }
 }

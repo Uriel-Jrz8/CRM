@@ -27,6 +27,7 @@ class HomeController extends Controller
         
         // Redireccionar la pagina despues de la validacion del login
         //return view('home');
-    return view('Accounting');
+   // return view('/auth/register');
+   return view('home');
     }
 }

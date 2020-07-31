@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Admin');
 });
 
 Auth::routes();
 
 Route::put('login','Auth\LoginController@Login')->name('login');
-Route::get('/fail', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/iniciar','newlogin@Login')->name('inicio');
 Route::put('/online/ordering','newlogin@ConsultData')->name('ConsultDato');
 Route::put('/orders/cdmx','newlogin@ConsultCDMX')->name('ConsultCDMX');
@@ -39,4 +39,8 @@ Route::get('/shop/cdmx', 'newlogin@RouteShop')->name('cdmx');
 Route::get('/shop/acapulco', 'newlogin@RouteShopAcapulco')->name('Acapulco');
 Route::get('/Accounting', 'newlogin@RouteAccounting')->name('AccountingMerkado');
 Route::get('/Admin/Merkado/Croqueta', 'newlogin@RouteAdmin')->name('Admin');
+Route::get('/fail','newlogin@fail')->name('fail');
+
+Route::put('/AddStock','newlogin@addstock')->name('addstock');
+Route::put('/import','newlogin@import')->name('import');
 

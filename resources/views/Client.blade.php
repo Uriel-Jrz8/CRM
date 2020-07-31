@@ -30,8 +30,8 @@ function validaNumericos(event) {
         @csrf
       <div class="form-row">
         <div  class="col-xs-12 col-sm-2">
-        <b><label class="text-info" for="exampleInput1">Número de Pedido</label></b>
-          <input type="text" class="form-control" name='pedido' autocomplete="off"
+        <b><label class="text-info" for="exampleInput1">Identificador de Pedido</label></b>
+          <input type="text" class="form-control" name='id' autocomplete="off"
                  placeholder="Número de Pedido" required onkeypress="return validaNumericos(event)">
         </div>
 
@@ -42,7 +42,7 @@ function validaNumericos(event) {
         </div>
 
         <div class="col-xs-12 col-sm-2">
-        <b><label class="text-info" for="exampleInput1">Marca</label></b>
+        <b><label class="text-info" for="exampleInput1">Marca del Producto</label></b>
           <select name="marca" class="form-control" required>
           <option>Purina</option>
           <option>Eukanuba</option>
@@ -57,11 +57,28 @@ function validaNumericos(event) {
         </div>
 
         <div class="col-xs-12 col-sm-2">
+         <b><label class="text-info" for="exampleInput1">Tipo de Animal</label></b>
+          <select name="animal" class="form-control" required>
+          <option>Perro</option>
+          <option>Gato</option>
+          </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-2">
          <b><label class="text-info" for="exampleInput1">Unidad de Medida</label></b>
           <select name="unidad" class="form-control" required>
           <option>1kg</option>
           <option>2kg</option>
           <option>3kg</option>
+          </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-2">
+         <b><label class="text-info" for="exampleInput1">Categoría</label></b>
+          <select name="categoria" class="form-control" required>
+          <option>Alimento</option>
+          <option>Salud e Higiene</option>
+          <option>Accesorios</option>
           </select>
         </div>
 

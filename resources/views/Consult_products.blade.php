@@ -32,6 +32,7 @@
             @method('PUT')
             @csrf
             <br>
+            <input type="hidden" name="mivar" value="Select * from pedidos;">
                 <input type="submit" value="Descargar Excel" class="btn btn-outline-success">
                 <!-- <a class="btn btn-outline-danger" href="{{ route('PDF') }}">Descargar PDF</a> -->
             </form>

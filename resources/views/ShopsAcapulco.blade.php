@@ -68,7 +68,7 @@ function validaNumericos(event) {
         </div>
 
         <div class="col-xs-12 col-sm-2">
-        <b><label class="text-info" for="exampleInput1">Marca</label></b>
+        <b><label class="text-info" for="exampleInput1">Marca del Producto</label></b>
           <select name="marca" class="form-control" required>
           <option>Purina</option>
           <option>Eukanuba</option>
@@ -81,6 +81,15 @@ function validaNumericos(event) {
           <option>Sportmix Wholesomes</option>
           </select>
           <br>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-2">
+         <b><label class="text-info" for="exampleInput1">Tipo de Animal</label></b>
+          <select name="animal" class="form-control" required>
+          <option>Perro</option>
+          <option>Gato</option>
+          </select>
         </div>
 
         <div class="col-xs-12 col-sm-2">
@@ -96,6 +105,15 @@ function validaNumericos(event) {
         <div class="col-xs-12 col-sm-2">
         <b><label class="text-info" for="exampleInput1">Precio Unitario</label></b>
           <input type="text" class="form-control" name='precio' autocomplete="off" placeholder="Precio Unitario" required  onkeypress="return validaNumericos(event)" >
+        </div>
+        
+        <div class="col-xs-12 col-sm-2">
+         <b><label class="text-info" for="exampleInput1">Categoría</label></b>
+          <select name="categoria" class="form-control" required>
+          <option>Alimento</option>
+          <option>Salud e Higiene</option>
+          <option>Accesorios</option>
+          </select>
         </div>
 
         <div class="col-xs-12 col-sm-2">

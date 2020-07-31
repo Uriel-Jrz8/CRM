@@ -66,21 +66,22 @@
     <body>
 
         <div class="flex-center position-ref full-height">
-        <div class="top-right links">
-        @guest
-                        @else                           
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <div class="top-right links">
+                @guest
+                @else                           
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar Sesión') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                  @csrf
                 </form>
+            </div>
             <div class="content">
                 <div class="title m-b-md">
                     Todavía no Tienes Acceso a un Perfil
                     @endguest
                 </div>
             </div>
-          </div>
         </div>
     </body>
 </html>

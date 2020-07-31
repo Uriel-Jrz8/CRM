@@ -17,7 +17,8 @@ class UsersExport implements FromView
     {
     //$query = DB::select('select id,name,email,password,email_verified_at from users');
      //$query = DB::select(request()->get('_token'));
-     $query = DB::select('select *from pedidos');
+     $query = DB::select(request()->get('mivar'));
+     //$query = DB::select('select *from pedidos');
      return view('partials.table', compact('query'));
 
     }

@@ -30,6 +30,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+   //return view('/auth/register');
 
     /**
      * Create a new controller instance.
@@ -38,6 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        //Deja entrar al registro aun estar logeado
         //$this->middleware('guest');
     }
 

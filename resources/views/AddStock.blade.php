@@ -1,6 +1,13 @@
 @extends('layouts.header')
 @section('header')
-
+<script>
+function validaNumericos(event) {
+    if(event.charCode >= 46 && event.charCode <= 57){
+      return true;
+     }
+     return false;        
+}
+</script>
 
 <div class="container">
     <div class=" shadow-lg p-4 mb-5 bg-white rounded">
@@ -18,16 +25,16 @@
             </div><H1>{{ __('Agregar Productos a la Bodega') }} </H1>
         </div>
          
-    
-    <form method="POST" action="{{route('Addline')}}">
+        <!-- Addline -->
+    <form method="POST" action="{{route('addstock')}}">
     @method('PUT')
         @csrf
 
-        <!-- <div  class="col-xs-12 col-sm-2">
-        <b><label class="text-info" for="exampleInput1">Número de Pedido</label></b>
-          <input type="text" class="form-control" name='pedido' autocomplete="off"
+        <div  class="col-xs-12 col-sm-8">
+        <b><label class="text-info" for="exampleInput1">Identificador Pedido</label></b>
+          <input type="text" class="form-control" name='id' autocomplete="off"
                  placeholder="Número de Pedido" required onkeypress="return validaNumericos(event)">
-        </div> -->
+        </div>
 
         <div class="col-xs-12 col-sm-8">
         <b><label class="text-info" for="exampleInput1">Nombre del Producto</label></b>
@@ -36,7 +43,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-8">
-        <b><label class="text-info" for="exampleInput1">Marca</label></b>
+        <b><label class="text-info" for="exampleInput1">Marca del Producto</label></b>
           <select name="marca" class="form-control" required>
           <option>Purina</option>
           <option>Eukanuba</option>
@@ -51,11 +58,28 @@
         </div>
 
         <div class="col-xs-12 col-sm-8">
+         <b><label class="text-info" for="exampleInput1">Tipo de Animal</label></b>
+          <select name="animal" class="form-control" required>
+          <option>Perro</option>
+          <option>Gato</option>
+          </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-8">
          <b><label class="text-info" for="exampleInput1">Unidad de Medida</label></b>
           <select name="unidad" class="form-control" required>
           <option>1kg</option>
           <option>2kg</option>
           <option>3kg</option>
+          </select>
+        </div>
+
+        <div class="col-xs-12 col-sm-8">
+         <b><label class="text-info" for="exampleInput1">Categoría</label></b>
+          <select name="categoria" class="form-control" required>
+          <option>Alimento</option>
+          <option>Salud e Higiene</option>
+          <option>Accesorios</option>
           </select>
         </div>
 
@@ -109,14 +133,23 @@
         </div> -->
 
         <div class="col-xs-12 col-sm-12">
-        <center><input type="submit" value="Agregar Producto" class="btn btn-outline-info"></center>
-         </form><br>
+            <center><input type="submit" value="Agregar Producto" class="btn btn-outline-info"></center>
+            </form><br>
 
               <form action="{{ route('ConsultDato') }}" method="POST">
               @method('PUT')
               @csrf
               <center><input type="submit" value="Acceder a Bodega" class="btn btn-outline-info"></center>
               </form>
+
+              <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+              @method('PUT')
+              @csrf
+              <button class="btn btn-outline-success"> Importar Archivo</button><br><br>
+              <input type="file" name="file" class="">
+              
+              </form>
+              
          </div>
     </div>
 </div>

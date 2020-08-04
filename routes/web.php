@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Admin');
+    return view('AddStock');
 });
 
 Auth::routes();
@@ -28,11 +28,13 @@ Route::put('/orders/acapulco','newlogin@ConsultAcapulco')->name('ConsultAcapulco
 Route::put('/downloadEcxel', 'newlogin@exportDocument')->name('export');
 Route::put('/downloadPDF', 'PDFController@downloadPDF')->name('PDF');
 Route::get('/profiles', 'newlogin@profiles')->name('profiles');
-Route::put('/Add/line','newlogin@add')->name('Addline');
-Route::put('/Add/Shops','newlogin@add')->name('AddShops');
+Route::put('/Add/line','newlogin@addOders')->name('Addline');
+Route::put('/Add/Shops','newlogin@addShops')->name('AddShops');
 Route::put('/stock/Shops/cdmx','newlogin@stockcdmx')->name('stockcdmx');
 Route::put('/stock/Add/Shops','newlogin@stockacapulco')->name('stockacapulco');
 Route::get('/Admin/Stock', 'newlogin@ViewStock')->name('AdminStock');
+Route::get('/update/orders', 'newlogin@update')->name('update');
+
 //Rutas para rediccionar a la hora de validar
 Route::get('/customer/service', 'newlogin@RouteClient')->name('service');
 Route::get('/shop/cdmx', 'newlogin@RouteShop')->name('cdmx');

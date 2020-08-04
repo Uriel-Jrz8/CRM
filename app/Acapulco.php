@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class stock extends Model
+class Acapulco extends Model
 {
-    protected $table = 'products_stock';
+    protected $table = 'stock_Acapulco';
 
     protected $primaryKey = 'id';
     
@@ -18,7 +18,7 @@ class stock extends Model
     // ];
 
     protected $fillable = [
-        'id','Nombre_Producto','Marca','Animal','Unidad_Medida','Categoria','Precio_Unitario','Codigo_SKU','Cantidad','Tienda'
+        'id','Nombre_Producto','Marca','Animal','Peso','Categoria','Precio','Codigo_Sku','Cantidad'
     ];
 
     // protected $hidden = [

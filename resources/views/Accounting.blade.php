@@ -46,26 +46,43 @@
                 @method('PUT')
                 @csrf
                 <br>
-                <input type="submit" value="Datos en Línea" class="btn btn-outline-success btn-lg btn-block">
+                <input type="submit" value="Pedidos Realizados en Línea" class="btn btn-outline-success btn-lg btn-block">
             </form>
 
             <form method="POST" action="{{ route('ConsultCDMX')}}">
                 @method('PUT')
                 @csrf
                 <br>
-                <input type="submit" value="Datos Ciudad de México" class="btn btn-outline-success btn-lg btn-block">
+                <input type="submit" value="Pedidos Realizados en Ciudad de México" class="btn btn-outline-success btn-lg btn-block">
             </form>
 
             <form method="POST" action="{{ route('ConsultAcapulco')}}">
                 @method('PUT')
                 @csrf
                 <br>
-                <input type="submit" value="Datos Acapulco" class="btn btn-outline-success btn-lg btn-block">
+                <input type="submit" value="Pedidos Realizados en Acapulco" class="btn btn-outline-success btn-lg btn-block">
             </form>
 
+            <form method="POST">
+                @method('PUT')
+                @csrf
+                <br>
+                <input type="submit" value="Productos en Linea" class="btn btn-outline-success btn-lg btn-block">
+            </form>
 
+            <form method="POST">
+                @method('PUT')
+                @csrf
+                <br>
+                <input type="submit" value="Productos en Ciudad de México" class="btn btn-outline-success btn-lg btn-block">
+            </form>
 
-
+            <form method="POST">
+                @method('PUT')
+                @csrf
+                <br>
+                <input type="submit" value="Productos en Acapulco" class="btn btn-outline-success btn-lg btn-block">
+            </form>
     <br>
             <!-- Metodo para mostrar la tabla con los datos requeridos-->
             @isset($query)

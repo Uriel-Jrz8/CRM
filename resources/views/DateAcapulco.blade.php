@@ -32,7 +32,7 @@
             <form method="POST" action="{{ route('export')}}">
             @method('PUT')
             @csrf
-            <br>
+            <br><input type="hidden" name="mivar" value="Select * from orders_Acapulco;">
                 <input type="submit" value="Descargar Excel" class="btn btn-outline-success">
                 <!-- <a class="btn btn-outline-danger" href="{{ route('PDF') }}">Descargar PDF</a> -->
             </form>

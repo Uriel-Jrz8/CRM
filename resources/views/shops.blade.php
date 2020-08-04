@@ -2,7 +2,7 @@
 @section('content')
 <script>
 function validaNumericos(event) {
-    if(event.charCode >= 48 && event.charCode <= 57){
+    if(event.charCode >= 46 && event.charCode <= 57){
       return true;
      }
      return false;        
@@ -21,7 +21,7 @@ function validaNumericos(event) {
                     @endif
                 </div>
             </div>
-            <h1>{{ __('Tienda Ciudad de México') }} </h1> 
+            <h1>{{ __('Pedidos, Ciudad de México') }} </h1> 
         </div>
         <ul  class="navbar-nav ml-auto">
                         
@@ -57,10 +57,15 @@ function validaNumericos(event) {
     <form method="POST" action="{{route('AddShops')}}">
     @method('PUT')
         @csrf
-      <div class="form-row">
+        <div class="form-row">
         <div  class="col-xs-12 col-sm-2">
-        <b><label class="text-info" for="exampleInput1">Número de Pedido</label></b>
-          <input type="text" class="form-control" name='pedido' autocomplete="off" placeholder="Número de Pedido" required onkeypress="return validaNumericos(event)">
+        <b><label class="text-info" for="exampleInput1">Número de Folio</label></b>
+          <input type="text" class="form-control" name='folio' autocomplete="off" placeholder="Número de Folio" required onkeypress="return validaNumericos(event)">
+        </div>
+
+        <div  class="col-xs-12 col-sm-2">
+        <b><label class="text-info" for="exampleInput1">Identificador de Producto</label></b>
+          <input type="text" class="form-control" name='id' autocomplete="off" placeholder="Identificador de Producto" required onkeypress="return validaNumericos(event)">
         </div>
 
         <div class="col-xs-12 col-sm-2">
@@ -93,13 +98,8 @@ function validaNumericos(event) {
         </div>
 
         <div class="col-xs-12 col-sm-2">
-         <b><label class="text-info" for="exampleInput1">Unidad de Medida</label></b>
-          <select name="unidad" class="form-control" required>
-          <option>1kg</option>
-          <option>2kg</option>
-          <option>3kg</option>
-          </select>
-          <br>
+        <b><label class="text-info" for="exampleInput1">Peso en Kilogramos</label></b>
+        <input type="text" class="form-control" name='unidad' autocomplete="off" placeholder="Peso" required>
         </div>
 
         <div class="col-xs-12 col-sm-2">
@@ -122,22 +122,13 @@ function validaNumericos(event) {
         </div>
 
         <div class="col-xs-12 col-sm-2">
-        <b><label class="text-info" for="exampleInput1">Número de Guía</label></b>
-          <input type="text" class="form-control" name='guia' autocomplete="off" placeholder="Número de Guía" required>
-        </div>
-
-        <div class="col-xs-12 col-sm-2">
         <b><label class="text-info" for="exampleInput1">Cantidad de Productos</label></b>
           <input type="text" class="form-control" name='cantidad' autocomplete="off" placeholder="Cantidad de Productos" required onkeypress="return validaNumericos(event)">
         </div>
 
         <div class="col-xs-12 col-sm-2">
-
-        <b><label class="text-info" for="exampleInput1">Sucursal</label></b>
-          <select name="sucursal" class="form-control" required>
-          <option>Ciudad de México</option>
-          <option>Acapulco</option>
-          <option>En Línea</option>
+        <b><label class="text-info" for="exampleInput1">Sucursal</label></b> <select name="sucursal" class="form-control" required>
+          <option>Ciudad de Mexico</option>
           </select> 
         </div>
 
@@ -146,26 +137,17 @@ function validaNumericos(event) {
           <input type="text" class="form-control" name='total' autocomplete="off" placeholder="Precio Total" required onkeypress="return validaNumericos(event)">
         </div>
 
-        <div class="col-xs-12 col-sm-2">
-        <b><label class="text-info" for="exampleInput1">Estatus del Pedido</label></b>
-          <select name="estatus" class="form-control" required>
-          <option>Entregado</option>
-          <option>Pendiente</option>
-          <option>Cancelado</option>
-          </select>
-          <br>
-        </div>
-
         <div class="col-xs-12 col-sm-12">
+        <br>
         <center><input type="submit" value="Agregar Pedido" class="btn btn-outline-info"></center>
         
-              </form><br>
-              <form action="{{ route('ConsultCDMX') }}" method="POST">
+      </form>
+    </div>
+    <form action="{{ route('ConsultCDMX') }}" method="POST">
               @method('PUT')
               @csrf
               <center><input type="submit" value="Ver Pedidos Agregados" class="btn btn-outline-info"></center>
               </form>
-    </div>
 </div><br>
 </div>
 @endsection

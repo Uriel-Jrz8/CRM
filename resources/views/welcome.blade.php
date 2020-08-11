@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="stylesheet" type="text/css" href="/css/perso.css" media="screen" />
         <title>Merkado Croqueta</title>
 
         <!-- Fonts -->
@@ -87,5 +87,10 @@
             <img class="img" src="Images/logoNuevo.gif">
             </div>
         </div>
+        <div id ="footer">
+            <p class="navbar-text pull-left">&copy <?php echo date('Y');?>
+              <a href="https://merkadocroqueta.com/" target="_blank" style="color: White">Merkado Croqueta</a>
+           </p>
+           </div>
     </body>
 </html>

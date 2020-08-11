@@ -14,35 +14,41 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('AddStock');
+    return view('welcome');
 });
 
+// Laravel
 Auth::routes();
-
 Route::put('login','Auth\LoginController@Login')->name('login');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/iniciar','newlogin@Login')->name('inicio');
-Route::put('/online/ordering','newlogin@ConsultData')->name('ConsultDato');
-Route::put('/orders/cdmx','newlogin@ConsultCDMX')->name('ConsultCDMX');
-Route::put('/orders/acapulco','newlogin@ConsultAcapulco')->name('ConsultAcapulco');
-Route::put('/downloadEcxel', 'newlogin@exportDocument')->name('export');
+
+//Principales del Sistema
+Route::put('/Add/line','MainController@addOders')->name('Addline');
+Route::put('/Add/Shops','MainController@addShops')->name('AddShops');
+Route::put('/Update/Stock','MainController@UpdateStock')->name('UpdateStock');
+Route::put('/NewAdd/Stock','MainController@NewAddstock')->name('NewAddstock');
+Route::put('/import','MainController@import')->name('import');
+Route::put('/downloadEcxel', 'MainController@exportDocument')->name('export');
+
+//Rutas Para vizualizar los Datos que se encuentran de la BD ViewData
+Route::put('/online/ordering','ViewData@ConsultData')->name('ConsultDato');
+Route::put('/orders/cdmx','ViewData@ConsultCDMX')->name('ConsultCDMX');
+Route::put('/orders/acapulco','ViewData@ConsultAcapulco')->name('ConsultAcapulco');
+Route::put('/stock/Shops/cdmx','ViewData@stockcdmx')->name('stockcdmx');
+Route::put('/stock/Add/Shops','ViewData@stockacapulco')->name('stockacapulco'); 
+
+//Rutas para rediccionar a la hora de validar ROUTES
+Route::get('/customer/service', 'routes@RouteClient')->name('service');
+Route::get('/profiles', 'routes@profiles')->name('profiles');
+Route::get('/shop/cdmx', 'routes@RouteShop')->name('cdmx');
+Route::get('/shop/acapulco', 'routes@RouteShopAcapulco')->name('Acapulco');
+Route::get('/Accounting', 'routes@RouteAccounting')->name('AccountingMerkado');
+Route::get('/Admin/Merkado/Croqueta', 'routes@RouteAdmin')->name('Admin');
+Route::get('/Admin/Stock', 'routes@ViewStock')->name('AdminStock');
+Route::get('/fail','routes@fail')->name('fail');
+
+//PDF pendiente
 Route::put('/downloadPDF', 'PDFController@downloadPDF')->name('PDF');
-Route::get('/profiles', 'newlogin@profiles')->name('profiles');
-Route::put('/Add/line','newlogin@addOders')->name('Addline');
-Route::put('/Add/Shops','newlogin@addShops')->name('AddShops');
-Route::put('/stock/Shops/cdmx','newlogin@stockcdmx')->name('stockcdmx');
-Route::put('/stock/Add/Shops','newlogin@stockacapulco')->name('stockacapulco');
-Route::get('/Admin/Stock', 'newlogin@ViewStock')->name('AdminStock');
-Route::get('/update/orders', 'newlogin@update')->name('update');
-
-//Rutas para rediccionar a la hora de validar
-Route::get('/customer/service', 'newlogin@RouteClient')->name('service');
-Route::get('/shop/cdmx', 'newlogin@RouteShop')->name('cdmx');
-Route::get('/shop/acapulco', 'newlogin@RouteShopAcapulco')->name('Acapulco');
-Route::get('/Accounting', 'newlogin@RouteAccounting')->name('AccountingMerkado');
-Route::get('/Admin/Merkado/Croqueta', 'newlogin@RouteAdmin')->name('Admin');
-Route::get('/fail','newlogin@fail')->name('fail');
-
-Route::put('/AddStock','newlogin@addstock')->name('addstock');
-Route::put('/import','newlogin@import')->name('import');
-
+//Actualizar pedido status de linea Pendiente
+//Route::get('/update/orders', 'newlogin@update')->name('update');
+Route::get('/ordersLine','MainController@index');

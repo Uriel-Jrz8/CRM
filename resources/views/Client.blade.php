@@ -47,8 +47,9 @@ function validaNumericos(event) {
         </div>
 
         <div class="col-xs-12 col-sm-2">
-        <b><label class="text-info" for="exampleInput1">Marca del Producto</label></b> <select name="marca" class="form-control" required>
-          <option>Purina</option>
+        <b><label class="text-info" for="exampleInput1">Marca del Producto</label></b> 
+        <select name="marca" class="form-control" required>
+          <!-- <option>Purina</option>
           <option>Eukanuba</option>
           <option>Royal Canin</option>
           <option>Hill´s</option>
@@ -56,8 +57,19 @@ function validaNumericos(event) {
           <option>Nupec</option>
           <option>Instict</option>
           <option>Diamond</option>
-          <option>Sportmix Wholesomes</option>
+          <option>Sportmix Wholesomes</option> -->
+                            @forelse ($users as $user)
+                  <option>{{ $user->Codigo_Sku }}</option>
+                  @empty
+                    <h1>no hay datos</h1>
+                  @endforelse
           </select>
+         
+          
+
+           
+          
+          
         </div>
 
         <div class="col-xs-12 col-sm-2">

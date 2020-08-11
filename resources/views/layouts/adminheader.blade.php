@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" type="text/css" href="/css/perso.css" media="screen" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -23,10 +23,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-black shadow-sm">
             <div class="container">
-            <img src="/Images/PerroNegro.png" width =50px height = 50px  href="{{ url('/') }}">
-            <img src="/Images/Nombre.png" width =150px height = 50px  href="{{ url('/') }}">
+            <img src="/Images/perroBlanco.png" width =90px height = 50px  href="{{ url('/') }}">
+            <img src="/Images/MercadoBlanco.png" width =200px height = 50px  href="{{ url('/') }}">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('Merkado Croqueta', 'Merkado Croqueta') }} -->
                     <!--{{ config('app.name', 'Merkado Croqueta') }}-->
@@ -46,7 +46,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesion') }}</a>
+                                <a class="nav-link" style="color:#FFF;" href="{{ route('login') }}">{{ __('Iniciar Sesion') }}</a>
                             </li>
 
                            <!-- Metodo para hacer el registro
@@ -57,7 +57,7 @@
                             @endif -->
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" style="color:#FFF;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                    
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -82,5 +82,10 @@
             @yield('admin')
         </main>
     </div>
+    <div id ="footer">
+            <p class="navbar-text pull-left">&copy <?php echo date('Y');?>
+              <a href="https://merkadocroqueta.com/" target="_blank" style="color: White">Merkado Croqueta</a>
+           </p>
+           </div>
 </body>
 </html>

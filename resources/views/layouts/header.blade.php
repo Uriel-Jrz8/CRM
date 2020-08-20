@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,12 +22,13 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-black shadow-sm">
             <div class="container">
-            <img src="/Images/PerroBlanco.png" width =90px height = 50px  href="{{ url('/') }}">
-            <img src="/Images/MercadoBlanco.png" width =200px height = 50px  href="{{ url('/') }}">
+                <img src="/Images/PerroBlanco.png" width=90px height=50px href="{{ url('/') }}">
+                <img src="/Images/MercadoBlanco.png" width=200px height=50px href="{{ url('/') }}">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('Merkado Croqueta', 'Merkado Croqueta') }} -->
                     <!--{{ config('app.name', 'Merkado Croqueta') }}-->
@@ -45,47 +47,46 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" style="color:#FFF;" href="{{ route('login') }}">{{ __('Iniciar Sesion') }}</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:#FFF;" href="{{ route('login') }}">{{ __('Iniciar Sesion') }}</a>
+                        </li>
 
-                           <!-- Metodo para hacer el registro
+                        <!-- Metodo para hacer el registro
                                 @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                                 </li>
                             @endif -->
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" style="color:#FFF;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                   
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" style="color:#FFF;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar Sesión') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                    {{ __('Cerrar Sesión') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @endguest
-                     </ul>
+                    </ul>
                 </div>
             </div>
         </nav>
-        <main class="py-4">
+        <div class="container">
             @yield('header')
-        </main>
+</div>
     </div>
-         <div id ="footer">
-            <p class="navbar-text pull-left">&copy <?php echo date('Y');?>
-              <a href="https://merkadocroqueta.com/" target="_blank" style="color: White">Merkado Croqueta</a>
-           </p>
-           </div>
+    <!-- <div id="footer">
+        <p class="navbar-text pull-left">&copy <?php echo date('Y'); ?>
+            <a href="https://merkadocroqueta.com/" target="_blank" style="color: White">Merkado Croqueta</a>
+        </p>
+    </div> -->
 </body>
 </html>

@@ -4,18 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\line;
-use App\Acapulco;
-use App\Cdmx;
 use App\User;
-use App\OrdersLine;
-use App\VentasLinea;
-use Auth;
+use App\Cdmx;
+use App\VentaCdmx;
+use App\OrdersCdmx;
 
-
-class routes extends Controller
+class VentasCdmx extends Controller
 {
-
     private function vaciarProductos()
     {
         $this->guardarProductos(null);
@@ -42,8 +37,8 @@ class routes extends Controller
         // Recorrer carrito de compras
         foreach ($productos as $producto) {
             // El producto que se vende...
-            $productoActualizado = line::find($producto->id);
-            $productoVendido = new OrdersLine();
+            $productoActualizado = Cdmx::find($producto->id);
+            $productoVendido = new OrdersCdmx();
             $total1 = $producto->Precio * $producto->cantidad;
             $productoVendido->folio = $data->folio;
             $productoVendido->Nombre_Producto = $producto->Nombre_Producto;
@@ -53,28 +48,26 @@ class routes extends Controller
             $productoVendido->Categoria = $producto->Categoria;
             $productoVendido->Precio = $producto->Precio;
             $productoVendido->Codigo_Sku = $producto->Codigo_Sku;
-            $productoVendido->Numero_Guia = $producto->Codigo_Sku;
             $productoVendido->Cantidad = $producto->cantidad;
             $productoVendido->Total = $total1;
-            $productoVendido->Estatus = $producto->Codigo_Sku;
             // Lo guardamos
             $productoVendido->saveOrFail();
             // Y restamos la existencia del original
-            $productoActualizado = line::find($producto->id);
+            $productoActualizado = Cdmx::find($producto->id);
             $productoActualizado->Cantidad -= $productoVendido->cantidad;
             $productoActualizado->saveOrFail();
         }
 
-        $TotalVenta = new VentasLinea();
+        $TotalVenta = new VentaCdmx();
         $TotalVenta->folio = $data->folio;
         $TotalVenta->Total = $finTotal;
         $TotalVenta->saveOrFail();
-        $query1 = DB::select("update stock_linea set Cantidad = ('$productoActualizado->Cantidad' - '$producto->cantidad')
+        $query1 = DB::select("update stock_cdmx set Cantidad = ('$productoActualizado->Cantidad' - '$producto->cantidad')
                              where Nombre_Producto = '$producto->Nombre_Producto' AND Codigo_Sku = '$producto->Codigo_Sku' ");
 
         $this->vaciarProductos();
         return redirect()
-            ->route("service")
+            ->route("cdmx")
             ->with([
                 "mensaje" => "Venta Realizada Correctamente",
                 "tipo" => "success"
@@ -87,7 +80,7 @@ class routes extends Controller
         array_splice($productos, $indice, 1);
         $this->guardarProductos($productos);
         return redirect()
-            ->route("service");
+            ->route("cdmx");
     }
 
     private function guardarProductos($productos)
@@ -118,10 +111,10 @@ class routes extends Controller
     public function agregarProductoVenta(Request $request)
     {
         $codigo = $request->post("codigo");
-        $producto = line::where("Codigo_Sku", "=", $codigo)->first();
+        $producto = Cdmx::where("Codigo_Sku", "=", $codigo)->first();
         if (!$producto) {
             return redirect()
-                ->route("service")
+                ->route("cdmx")
                 ->with([
                     "mensaje" => "Producto no encontrado",
                     "tipo" => "danger"
@@ -129,14 +122,14 @@ class routes extends Controller
         }
         $this->agregarProductoACarrito($producto);
         return redirect()
-            ->route("service");
+            ->route("cdmx");
     }
 
     private function agregarProductoACarrito($producto)
     {
 
         if ($producto->Cantidad <= 0) {
-            return redirect()->route("service")
+            return redirect()->route("cdmx")
                 ->with([
                     "mensaje" => "No hay existencias del producto",
                     "tipo" => "danger"
@@ -150,7 +143,7 @@ class routes extends Controller
             array_push($productos, $producto);
         } else {
             if ($productos[$posibleIndice]->cantidad + 1 > $producto->Cantidad) {
-                return redirect()->route("service")
+                return redirect()->route("cdmx")
                     ->with([
                         "mensaje" => "No se pueden agregar más productos de este tipo, se quedarían sin existencia",
                         "tipo" => "danger"
@@ -160,54 +153,19 @@ class routes extends Controller
         }
         $this->guardarProductos($productos);
     }
-
-
-
-    public function RouteClient()
+    
+    public function RouteShop()
     {
         $total = 0;
         foreach ($this->obtenerProductos() as $producto) {
             $total += $producto->cantidad * $producto->Precio;
         }
         return view(
-            "Client",
+            "shops",
             [
                 "total" => $total,
                 "clientes" => User::all(),
             ]
         );
-    }
-
-
-
-    public function RouteShopAcapulco()
-    {
-        $users = DB::table('stock_acapulco')->get();
-        return view('shops', compact('users'));
-    }
-
-    public function RouteAccounting()
-    {
-        return view('Accounting');
-    }
-
-    public function RouteAdmin()
-    {
-        return view('Admin');
-    }
-
-    public function ViewStock()
-    {
-        return view('AddStock');
-    }
-
-    public function fail()
-    {
-        return view('home');
-    }
-
-    public function profiles()
-    {
-        return view('profiles');
     }
 }

@@ -14,6 +14,7 @@ class LineImport implements ToModel
     */
     public function model(array $row)
     {
+        $mytime = date('Y-m-d H:i:s');
         return new line([
             'id'=>$row[0],
             'Nombre_Producto'=> $row[1],
@@ -24,6 +25,8 @@ class LineImport implements ToModel
             'Precio'=> $row[6],
             'Codigo_Sku'=> $row[7],
             'Cantidad'=> $row[8],
+            // 'created_at'=>$row[$mytime],
+            // 'updated_at'=>$row[$mytime],
             //'Tienda'=> $row[9],
         ]);
     }

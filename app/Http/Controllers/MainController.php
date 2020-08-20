@@ -16,12 +16,40 @@ use Auth;
 class MainController extends Controller
 {
 
-
-    public function index(){
-        $users = DB::table('stock_linea')->get();
-        //dd($users);
-        return view('Client',compact('users'));
+    public function index()
+    {
+        return view("Client", ["productos" => line::all()]);
     }
+    // public function index()
+    // {
+    //     $total = 0;
+    //     foreach ($this->obtenerProductos() as $producto) {
+    //         $total += $producto->cantidad * $producto->precio_venta;
+    //     }
+    //     return view("Client",
+    //         [
+    //             "total" => $total,
+    //             "clientes" => User::all(),
+    //         ]);
+    // }
+
+    public function agregarProductoVenta(Request $request)
+    {
+        //$codigo = $request->post("codigo");
+        //$producto = Producto::where("Codigo_Sku", "=", $codigo)->first();
+        // if (!$producto) {
+        //     return redirect()
+        //         ->route("ventas")
+        //         ->with("mensaje", "Producto no encontrado");
+        // }
+        // $this->agregarProductoACarrito($producto);
+        // return redirect()
+        //     ->route("ventas");
+        // return $producto;
+    }
+
+
+    // nuevo ^^^^^^^^^^^
 
     // Metodo para insertar los pedidos a la base de datos y restar lo que tienen en stock. de atencion a clientes
     public function addOders(){
@@ -100,6 +128,7 @@ class MainController extends Controller
 
 //Actualiza los productos de la base de datos que ya se importo con el excel Suma el valor del nuevo producto
     public function UpdateStock(){
+     $mytime = date('Y-m-d H:i:s');
      $data = request();
      $id = $data->id;
      $nombre = $data->nombre;
@@ -113,15 +142,15 @@ class MainController extends Controller
      $Cdmx = Cdmx::find($data->id);
      
      if($sucursal == "En Linea"){
-        $query = DB::select("update stock_linea set Cantidad = ('$line->Cantidad'+ '$cantidad'), Precio = ('$precio') where Nombre_Producto = '$nombre' AND Codigo_Sku = '$sku' ");
+        $query = DB::select("update stock_linea set Cantidad = ('$line->Cantidad'+ '$cantidad'), Precio = ('$precio'), updated_at = '$mytime' where Nombre_Producto = '$nombre' AND Codigo_Sku = '$sku' ");
         return view('AddStock');
         
         }else if($sucursal == "Acapulco"){
-            $query = DB::select("update stock_Acapulco set Cantidad = ('$Acapulco->Cantidad'+ '$cantidad'), Precio = ('$precio') where Nombre_Producto = '$nombre' ");
+            $query = DB::select("update stock_Acapulco set Cantidad = ('$Acapulco->Cantidad'+ '$cantidad'), Precio = ('$precio'), updated_at = '$mytime' where Nombre_Producto = '$nombre'");
             return view('AddStock');
 
             }else if($sucursal == "Ciudad de Mexico"){
-                $query = DB::select("update stock_cdmx set Cantidad = ('$Cdmx->Cantidad'+ '$cantidad'), Precio = ('$precio') where Nombre_Producto = '$nombre' AND Codigo_Sku = '$sku' ");
+                $query = DB::select("update stock_cdmx set Cantidad = ('$Cdmx->Cantidad'+ '$cantidad'), Precio = ('$precio'), updated_at = '$mytime' where Nombre_Producto = '$nombre' AND Codigo_Sku = '$sku' ");
                 return view('AddStock');
             } else{
                 return view('error');

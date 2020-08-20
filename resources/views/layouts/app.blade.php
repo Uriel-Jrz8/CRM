@@ -22,13 +22,15 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-black shadow-sm">
             <div class="container">
-            <img src="/Images/perroBlanco.png" width =90px height = 50px>
-            <img src="/Images/MercadoBlanco.png" width =200px height = 50px>
+            <!-- <img src="/Images/perroBlanco.png" width =90px height = 50px> -->
+            <img src="/Images/MercadoBlanco.png" width =150px height = 50px>
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('Merkado Croqueta', 'Merkado Croqueta') }} -->
                     <!--{{ config('app.name', 'Merkado Croqueta') }}-->
@@ -99,10 +101,10 @@
             @yield('content')
         </main>
     </div>
-    <div id ="footer">
+    <!-- <div id ="footer">
             <p class="navbar-text pull-left">&copy <?php echo date('Y');?>
               <a href="https://merkadocroqueta.com/" target="_blank" style="color: White">Merkado Croqueta</a>
            </p>
-           </div>
+           </div> -->
 </body>
 </html>

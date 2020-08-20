@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,17 +30,14 @@ Route::put('/import','MainController@import')->name('import');
 Route::put('/downloadEcxel', 'MainController@exportDocument')->name('export');
 
 //Rutas Para vizualizar los Datos que se encuentran de la BD ViewData
-Route::put('/online/ordering','ViewData@ConsultData')->name('ConsultDato');
-Route::put('/orders/cdmx','ViewData@ConsultCDMX')->name('ConsultCDMX');
+
 Route::put('/orders/acapulco','ViewData@ConsultAcapulco')->name('ConsultAcapulco');
 Route::put('/stock/Shops/cdmx','ViewData@stockcdmx')->name('stockcdmx');
 Route::put('/stock/Add/Shops','ViewData@stockacapulco')->name('stockacapulco'); 
 
 //Rutas para rediccionar a la hora de validar ROUTES
-Route::get('/customer/service', 'routes@RouteClient')->name('service');
+
 Route::get('/profiles', 'routes@profiles')->name('profiles');
-Route::get('/shop/cdmx', 'routes@RouteShop')->name('cdmx');
-Route::get('/shop/acapulco', 'routes@RouteShopAcapulco')->name('Acapulco');
 Route::get('/Accounting', 'routes@RouteAccounting')->name('AccountingMerkado');
 Route::get('/Admin/Merkado/Croqueta', 'routes@RouteAdmin')->name('Admin');
 Route::get('/Admin/Stock', 'routes@ViewStock')->name('AdminStock');
@@ -52,3 +48,29 @@ Route::put('/downloadPDF', 'PDFController@downloadPDF')->name('PDF');
 //Actualizar pedido status de linea Pendiente
 //Route::get('/update/orders', 'newlogin@update')->name('update');
 Route::get('/ordersLine','MainController@index');
+
+
+//Proceso Venta linea
+Route::get('/customer/service', 'routes@RouteClient')->name('service');
+Route::delete('/productoDeVenta', 'routes@quitarProductoDeVenta')->name('quitarProductoDeVenta');
+Route::put('/productoDeVenta', 'routes@agregarProductoVenta')->name('agregarProductoVenta');
+Route::put('/terminarOCancelarVenta', 'routes@terminarOCancelarVenta')->name('terminarOCancelarVenta');
+Route::put('/online/ordering','ViewData@ConsultData')->name('ConsultDato');
+Route::put('Informacion', 'ViewData@DetalleLinea')->name('DetalleLinea');
+
+//Proceso Venta CDMX
+Route::get('/shop/cdmx', 'VentasCdmx@RouteShop')->name('cdmx');
+Route::delete('/productoDeVentaCdmx', 'VentasCdmx@quitarProductoDeVenta')->name('quitarProductoDeVentaCdmx');
+Route::put('/productoDeVentaCdmx', 'VentasCdmx@agregarProductoVenta')->name('agregarProductoVentaCdmx');
+Route::put('/terminarOCancelarVentaCdmx', 'VentasCdmx@terminarOCancelarVenta')->name('terminarOCancelarVentaCdmx');
+Route::put('/orders/cdmx','ViewData@ConsultCDMX')->name('ConsultCDMX');
+Route::put('InformacionCdmx', 'ViewData@DetalleCdmx')->name('DetalleCdmx');
+
+
+//Proceso Venta Acapulco
+Route::get('/shop/acapulco', 'VentasAcapulco@RouteShopAcapulco')->name('Acapulco');
+Route::delete('/productoDeVentaAcapulco', 'VentasAcapulco@quitarProductoDeVenta')->name('quitarProductoDeVentaAcapulco');
+Route::put('/productoDeVentaAcapulco', 'VentasAcapulco@agregarProductoVenta')->name('agregarProductoVentaAcapulco');
+Route::put('/terminarOCancelarVentaAcapulco', 'VentasAcapulco@terminarOCancelarVenta')->name('terminarOCancelarVentaAcapulco');
+Route::put('/orders/Acapulco','ViewData@ConsultAcapulco')->name('ConsultAcapulco');
+Route::put('InformacionAcapulco', 'ViewData@DetalleAcapulco')->name('DetalleAcapulco');

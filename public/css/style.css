@@ -1,0 +1,297 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?441sfi');
+    src: url('fonts/icomoon.eot?441sfi#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?441sfi') format('truetype'), url('fonts/icomoon.woff?441sfi') format('woff'), url('fonts/icomoon.svg?441sfi#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.tamaño {
+    font-size: 100px;
+}
+
+.icon-home:before {
+    content: "\e900";
+}
+
+.icon-home2:before {
+    content: "\e901";
+}
+
+.icon-home3:before {
+    content: "\e902";
+}
+
+.icon-file-empty:before {
+    content: "\e924";
+}
+
+.icon-files-empty:before {
+    content: "\e925";
+}
+
+.icon-file-text2:before {
+    content: "\e926";
+}
+
+.icon-file-picture:before {
+    content: "\e927";
+}
+
+.icon-calculator:before {
+    content: "\e940";
+}
+
+.icon-phone:before {
+    content: "\e942";
+}
+
+.icon-display:before {
+    content: "\e956";
+}
+
+.icon-bubble:before {
+    content: "\e96b";
+}
+
+.icon-bubbles:before {
+    content: "\e96c";
+}
+
+.icon-bubbles3:before {
+    content: "\e96f";
+}
+
+.icon-users:before {
+    content: "\e972";
+}
+
+.icon-user-tie:before {
+    content: "\e976";
+}
+
+.icon-stats-dots:before {
+    content: "\e99b";
+}
+
+.icon-stats-bars:before {
+    content: "\e99c";
+}
+
+.icon-cloud:before {
+    content: "\e9c1";
+}
+
+.icon-sphere:before {
+    content: "\e9c9";
+}
+
+.icon-earth:before {
+    content: "\e9ca";
+}
+
+.icon-facebook:before {
+    content: "\ea90";
+}
+
+.icon-facebook2:before {
+    content: "\ea91";
+}
+
+.icon-instagram:before {
+    content: "\ea92";
+}
+
+.icon-whatsapp:before {
+    content: "\ea93";
+}
+
+.icon-pinterest:before {
+    content: "\ead1";
+}
+
+.icon-pinterest2:before {
+    content: "\ead2";
+}
+
+@import 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300';
+body {
+    color: #333;
+    font-family: "Raleway", Arial, Helvetica, serif;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+}
+
+h1 {
+    background: black;
+    color: #fff;
+    text-align: center;
+    margin: 0 0 5% 0;
+    padding: 0.5em;
+    margin: 0 0 5% 0;
+}
+
+.cardBox {
+    float: left;
+    font-size: 1.2em;
+    margin: 10% -5% 0% 5%;
+    perspective: 800px;
+    transition: all 0.3s ease 0s;
+    width: 23.7%;
+}
+
+.cardBox:hover .card {
+    transform: rotateY(180deg);
+}
+
+.card {
+    background: #222;
+    cursor: default;
+    height: 250px;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease 0s;
+    width: 80%;
+    -webkit-animation: giro 1s 1;
+    animation: giro 1s 1;
+    border-radius: 30px;
+}
+
+.card p {
+    margin-bottom: 1.8em;
+}
+
+.card .front,
+.card .back {
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    color: white;
+    display: block;
+    font-size: 1.2em;
+    height: 100%;
+    padding: 0.8em;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.card .front strong {
+    background: #fff;
+    border-radius: 100%;
+    color: #222;
+    font-size: 1.5em;
+    line-height: 30px;
+    padding: 0 7px 4px 6px;
+}
+
+.card .back {
+    transform: rotateY(180deg);
+}
+
+.card .back a {
+    padding: 0.5em 0.5em;
+    background: black;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: all 0.2s ease 0s;
+    border-radius: 10px;
+}
+
+.card .back a:hover {
+    background: #fff;
+    color: #000;
+    text-shadow: 0 0 1px #000;
+}
+
+.cardBox:nth-child(1) .card .back {
+    background: #b6e6ed
+}
+
+.cardBox:nth-child(2) .card .back {
+    background: #F5a623
+}
+
+
+/* .cardBox:nth-child(3) .card .back {
+    background: RED;
+} */
+
+.cardBox:nth-child(4) .card .back {
+    background: #Cb2177
+}
+
+.cardBox:nth-child(2) .card {
+    -webkit-animation: giro 1.5s 1;
+    animation: giro 1.5s 1;
+}
+
+.cardBox:nth-child(3) .card {
+    -webkit-animation: giro 2s 1;
+    animation: giro 2s 1;
+}
+
+.cardBox:nth-child(4) .card {
+    -webkit-animation: giro 2.5s 1;
+    animation: giro 2.5s 1;
+}
+
+@-webkit-keyframes giro {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes giro {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .cardBox {
+        /* margin-left: 2.8%; */
+        margin-left: 8%;
+        margin-top: 3%;
+        width: 46%;
+    }
+    .card {
+        height: 285px;
+    }
+    .cardBox:last-child {
+        margin-bottom: 3%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cardBox {
+        width: 94.5%;
+    }
+    .card {
+        height: 260px;
+    }
+}

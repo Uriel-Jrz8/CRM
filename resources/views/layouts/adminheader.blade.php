@@ -82,10 +82,10 @@
             @yield('admin')
         </main>
     </div>
-    <div id ="footer">
+    <!-- <div id ="footer">
             <p class="navbar-text pull-left">&copy <?php echo date('Y');?>
               <a href="https://merkadocroqueta.com/" target="_blank" style="color: White">Merkado Croqueta</a>
            </p>
-           </div>
+           </div> -->
 </body>
 </html>

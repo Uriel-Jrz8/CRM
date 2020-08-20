@@ -18,7 +18,7 @@ class line extends Model
     // ];
 
     protected $fillable = [
-        'id','Nombre_Producto','Marca','Animal','Peso','Categoria','Precio','Codigo_Sku','Cantidad'
+        'id','Nombre_Producto','Marca','Animal','Peso','Categoria','Precio','Codigo_Sku','Cantidad','created_at','updated_at'
     ];
 
     // protected $hidden = [

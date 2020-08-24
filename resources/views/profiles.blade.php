@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Merkado Croqueta</title>
@@ -30,8 +30,10 @@
             </a>
         </b>
     </div> -->
-    <h1>MERKADO CROQUETA</h1>
-
+    <!-- <h1>MERKADO CROQUETA</h1> -->
+    <div class="cont">
+    <img src="/Images/MercadoBlanco.png" class="img">
+    </div>
     <div class="boxesContainer">
         <div class="cardBox">
             <div class="card">

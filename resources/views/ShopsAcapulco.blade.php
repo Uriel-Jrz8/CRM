@@ -29,8 +29,8 @@
           @method('PUT')
           @csrf
           <div class="form-group">
-            <label class="text-info" for="id_cliente">Número de folio</label>
-            <input type="text" class="form-control" name='folio' autocomplete="off" placeholder="Número de Folio" required onkeypress="return validaNumericos(event)">
+            <label class="" for="id_cliente" style="color: black;">Número de folio</label>
+            <input type="text" class="form-control" name='folio' autocomplete="off" placeholder="Número de Folio" required onkeypress="return validaNumericos(event)" style="color: black;">
           </div>
           @if(session("productos") !== null)
 
@@ -49,8 +49,8 @@
           @method('PUT')
           @csrf
           <div class="form-group">
-            <label class="text-info" for="codigo">Código de barras o Código SKU</label>
-            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU">
+            <label class="" for="codigo" style="color: black;">Código de barras o Código SKU</label>
+            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU" style="color: black;">
           </div>
           
         </form>

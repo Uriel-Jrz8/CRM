@@ -3,55 +3,40 @@
 
 
 <div class="container">
-    <div class="shadow-lg p-3 mb-5 bg-white rounded">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div>
-                    <div>
-                        <!-- @if (session('status')) -->
-                            <div class="alert alert-success" role="alert">
-                            <!-- {{ session('status') }} -->
-                            </div>
-                        <!-- @endif -->
-                    </div>
+
+    <div class="row justify-content-center">
+
+        <div class= "slideUp">
+            <img src="/Images/perroNegro.png" class="img-fluid" style="margin: -3% 0% 10%;height: 450px;" >
+            </div>
+            <div class="col-md-4" style="margin: 0% 10% 0%;">
+            
+                
+                <div class="buttonWrapper">
+                    Registrar Usuario
+                <a class="buttonInner  " href="{{ route('register') }}"><span>Registrar Usuario</span></a>
+                </div><br>
+
+                <div class="buttonWrapper">
+                Agregar Productos
+                <a class="buttonInner  " href="{{ route('AdminStock') }}"><span>Agregar Productos</span></a>
+                </div><br>
+
+                <div class="buttonWrapper">
+                Ventas en Línea
+                <a class="buttonInner  " href="{{ route('Dateline') }}"><span>Ventas en Línea</span></a>
+                </div><br>
+
+                <div class="buttonWrapper">
+                Ventas Cd. de Mexico
+                <a class="buttonInner  " href="{{ route('DateCdmx') }}"><span>Ventas Ciudad de México</span></a>
+                </div><br>
+
+                <div class="buttonWrapper">
+                Ventas Acapulco
+                <a class="buttonInner  " href="{{ route('DateAcapulco') }}"><span>Ventas Acapulco</span></a>
                 </div>
             </div>
-        </div>
-        <form method="GET" action="{{ route('register') }}">
-                @method('HEAD')
-                @csrf
-                <br>
-                <input type="submit" value="Registrar un Nuevo Usuario" class="btn btn-outline-success btn-lg btn-block">
-            </form>
-
-            <form method="GET" action="{{ route('AdminStock') }}">
-                @method('HEAD')
-                @csrf
-                <br>
-                <input type="submit" value="Agregar Stock en Sucursal" class="btn btn-outline-success btn-lg btn-block">
-            </form>
- 
-            <form method="POST" action="{{ route('ConsultDato') }}">
-                @method('PUT')
-                @csrf
-                <br>
-                <input type="submit" value="Tienda en Línea" class="btn btn-outline-success btn-lg btn-block">
-            </form>
-
-            <form method="POST" action="{{ route('ConsultCDMX') }}">
-                @method('PUT')
-                @csrf
-                <br>
-                <input type="submit" value="Tienda en Ciudad de México" class="btn btn-outline-success btn-lg btn-block">
-            </form>
-
-            <form method="POST" action="{{ route('ConsultAcapulco') }}">
-                @method('PUT')
-                @csrf
-                <br>
-                <input type="submit" value="Tienda en Acapulco" class="btn btn-outline-success btn-lg btn-block">
-            </form>
-
     </div>
 </div>
 

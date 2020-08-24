@@ -49,10 +49,9 @@
           @method('PUT')
           @csrf
           <div class="form-group">
-            <label class="text-info" for="codigo">Código de barras o Código SKU</label>
-            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU">
+            <label class="" for="codigo" style="color: black;">Código de barras o Código SKU</label>
+            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU" style="color: black;">
           </div>
-          
         </form>
       </div>
       @if(session("productos") !== null)

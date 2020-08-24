@@ -57,6 +57,7 @@ Route::put('/productoDeVenta', 'routes@agregarProductoVenta')->name('agregarProd
 Route::put('/terminarOCancelarVenta', 'routes@terminarOCancelarVenta')->name('terminarOCancelarVenta');
 Route::put('/online/ordering','ViewData@ConsultData')->name('ConsultDato');
 Route::put('Informacion', 'ViewData@DetalleLinea')->name('DetalleLinea');
+Route::get('/date/line','ViewData@ConsultData')->name('Dateline');
 
 //Proceso Venta CDMX
 Route::get('/shop/cdmx', 'VentasCdmx@RouteShop')->name('cdmx');
@@ -65,6 +66,7 @@ Route::put('/productoDeVentaCdmx', 'VentasCdmx@agregarProductoVenta')->name('agr
 Route::put('/terminarOCancelarVentaCdmx', 'VentasCdmx@terminarOCancelarVenta')->name('terminarOCancelarVentaCdmx');
 Route::put('/orders/cdmx','ViewData@ConsultCDMX')->name('ConsultCDMX');
 Route::put('InformacionCdmx', 'ViewData@DetalleCdmx')->name('DetalleCdmx');
+Route::get('/date/cdmx','ViewData@ConsultCDMX')->name('DateCdmx');
 
 
 //Proceso Venta Acapulco
@@ -74,3 +76,4 @@ Route::put('/productoDeVentaAcapulco', 'VentasAcapulco@agregarProductoVenta')->n
 Route::put('/terminarOCancelarVentaAcapulco', 'VentasAcapulco@terminarOCancelarVenta')->name('terminarOCancelarVentaAcapulco');
 Route::put('/orders/Acapulco','ViewData@ConsultAcapulco')->name('ConsultAcapulco');
 Route::put('InformacionAcapulco', 'ViewData@DetalleAcapulco')->name('DetalleAcapulco');
+Route::get('/date/acapulco','ViewData@ConsultAcapulco')->name('DateAcapulco');

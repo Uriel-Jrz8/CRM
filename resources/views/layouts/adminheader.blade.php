@@ -25,14 +25,16 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-black shadow-sm">
             <div class="container">
-            <img src="/Images/perroBlanco.png" width =90px height = 50px  href="{{ url('/') }}">
+            <!-- <img src="/Images/perroBlanco.png" width =90px height = 50px  href="{{ url('/') }}"> -->
             <img src="/Images/MercadoBlanco.png" width =200px height = 50px  href="{{ url('/') }}">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('Merkado Croqueta', 'Merkado Croqueta') }} -->
                     <!--{{ config('app.name', 'Merkado Croqueta') }}-->
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon">                    <span class="navbar-toggler-icon"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-border-width" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 3.5A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-2zm0 5A.5.5 0 0 1 .5 8h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1zm0 4a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z" />
+                        </svg></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -79,6 +81,9 @@
             </div>
         </nav>
         <main class="py-4">
+            <br>
+                <br>
+                    <br>
             @yield('admin')
         </main>
     </div>

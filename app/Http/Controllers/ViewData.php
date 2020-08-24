@@ -41,7 +41,6 @@ class ViewData extends Controller
         return view('DateCdmx',compact('query','query2'));
     }
 
-
     public function DetalleCdmx()
     {
         $data = request();
@@ -50,9 +49,7 @@ class ViewData extends Controller
         return view('VentaDetalle/DetalleCdmx',compact('queryDetalle','queryTotal'));
     }
 
-    public function ConsultAcapulco(Request $request){
-
-        
+    public function ConsultAcapulco(Request $request){  
         $request->flash();
         $token = $request->get('_token');
         $query2 = DB::select('select folio From orders_acapulco group by folio');
@@ -68,12 +65,9 @@ class ViewData extends Controller
         return view('VentaDetalle/DetalleAcapulco',compact('queryDetalle','queryTotal'));
     }
 
-    // Metodos para ver el Stock de las tiendas
     public function stockcdmx(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        // Consulta para ver el stock de Cdmx
-        //select stock de cdmx
         $query = DB::select('select * from users');
         return view('DateCDMX',compact('query'));
     }

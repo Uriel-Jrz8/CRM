@@ -8,7 +8,7 @@
     return false;
   }
 </script>
-
+<br><br>
 
 <div class="container">
   <div class="shadow-lg p-4 mb-5 bg-white rounded">
@@ -29,8 +29,8 @@
           @method('PUT')
           @csrf
           <div class="form-group">
-            <label class="text-info" for="id_cliente">Número de folio</label>
-            <input type="text" class="form-control" name='folio' autocomplete="off" placeholder="Número de Folio" required onkeypress="return validaNumericos(event)">
+            <label class="" for="id_cliente" style="color: black;">Número de folio</label>
+            <input type="text" class="form-control" name='folio' autocomplete="off" placeholder="Número de Folio" required onkeypress="return validaNumericos(event)" style="color:black;">
           </div>
           @if(session("productos") !== null)
 
@@ -49,10 +49,10 @@
           @method('PUT')
           @csrf
           <div class="form-group">
-            <label class="text-info" for="codigo">Código de barras o Código SKU</label>
-            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU">
+            <label class="" for="codigo" style="color: black;">Código de barras o Código SKU</label>
+            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU" style="color: black;">
           </div>
-          
+
         </form>
       </div>
       @if(session("productos") !== null)
@@ -69,20 +69,38 @@
         <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
-              <th><center> Código de barras</center></th>
-              <th><center>Nombre de Producto</center></th>
-              <th><center>Precio</center></th>
-              <th><center>Cantidad</center></th>
-              <th><center>Quitar</center></th>
+              <th>
+                <center> Código de barras</center>
+              </th>
+              <th>
+                <center>Nombre de Producto</center>
+              </th>
+              <th>
+                <center>Precio</center>
+              </th>
+              <th>
+                <center>Cantidad</center>
+              </th>
+              <th>
+                <center>Quitar</center>
+              </th>
             </tr>
           </thead>
           <tbody>
             @foreach(session("productos") as $producto)
             <tr>
-              <td><center>{{$producto->Codigo_Sku}}</center></td>
-              <td><center>{{$producto->Nombre_Producto}}</center></td>
-              <td><center>${{number_format($producto->Precio, 2)}}</center></td>
-              <td><center>{{$producto->cantidad}}</center></td>
+              <td>
+                <center>{{$producto->Codigo_Sku}}</center>
+              </td>
+              <td>
+                <center>{{$producto->Nombre_Producto}}</center>
+              </td>
+              <td>
+                <center>${{number_format($producto->Precio, 2)}}</center>
+              </td>
+              <td>
+                <center>{{$producto->cantidad}}</center>
+              </td>
               <td>
                 <form action="{{route('quitarProductoDeVenta')}}" method="post">
                   @method("delete")
@@ -106,13 +124,13 @@
                     Escanea el código de barras o escribe y presiona Enter</h2> -->
       @endif
 
-       <form action="{{ route('ConsultDato') }}" method="POST">
-              @method('PUT')
-              @csrf
-              <center><input type="submit" value="Ventas Realizadas " class="btn btn-outline-pink"></center>
-              </form>
+      <form action="{{ route('ConsultDato') }}" method="POST">
+        @method('PUT')
+        @csrf
+        <center><input type="submit" value="Ventas Realizadas " class="btn btn-outline-pink"></center>
+      </form>
     </div>
-             
+
   </div>
 </div>
 @endsection

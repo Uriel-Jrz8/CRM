@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Acapulco;
@@ -30,7 +29,7 @@ class VentasAcapulco extends Controller
         $data = request();
         $finTotal = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $finTotal += $producto->cantidad * $producto->Precio;
+            $finTotal += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
 
         $productos = $this->obtenerProductos();
@@ -39,7 +38,7 @@ class VentasAcapulco extends Controller
             // El producto que se vende...
             $productoActualizado = Acapulco::find($producto->id);
             $productoVendido = new OrdersAcapulco();
-            $total1 = $producto->Precio * $producto->cantidad;
+            $total1 = $producto->Precio * $producto->cantidad - ($producto->Descuento * $producto->cantidad);
             $productoVendido->folio = $data->folio;
             $productoVendido->Nombre_Producto = $producto->Nombre_Producto;
             $productoVendido->Marca = $producto->Marca;
@@ -49,6 +48,8 @@ class VentasAcapulco extends Controller
             $productoVendido->Precio = $producto->Precio;
             $productoVendido->Codigo_Sku = $producto->Codigo_Sku;
             $productoVendido->Cantidad = $producto->cantidad;
+            $productoVendido->Subtotal = ($producto->cantidad * $producto->Precio);
+            $productoVendido->Descuento = $producto->Descuento * $producto->cantidad;
             $productoVendido->Total = $total1;
             // Lo guardamos
             $productoVendido->saveOrFail();
@@ -158,7 +159,7 @@ class VentasAcapulco extends Controller
     {
         $total = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $total += $producto->cantidad * $producto->Precio;
+            $total += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
         return view(
             "ShopsAcapulco",

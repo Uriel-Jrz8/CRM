@@ -69,39 +69,27 @@
         <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
-              <th>
-                <center> Código de barras</center>
-              </th>
-              <th>
-                <center>Nombre de Producto</center>
-              </th>
-              <th>
-                <center>Precio</center>
-              </th>
-              <th>
-                <center>Cantidad</center>
-              </th>
-              <th>
-                <center>Quitar</center>
-              </th>
+              <th><center>Cantidad</center></th>
+              <th><center>Descripcion de Producto</center></th>
+              <th><center>Código SKU</center></th>
+              <th><center>Precio Unitario</center></th>
+              <!-- <th><center>Subtotal Sin Descuento</center></th> -->
+              <th><center>Descuento</center></th>
+              <th><center>Subtotal</center></th>
+              <th><center>Eliminar</center></th>
             </tr>
           </thead>
           <tbody>
             @foreach(session("productos") as $producto)
             <tr>
-              <td>
-                <center>{{$producto->Codigo_Sku}}</center>
-              </td>
-              <td>
-                <center>{{$producto->Nombre_Producto}}</center>
-              </td>
-              <td>
-                <center>${{number_format($producto->Precio, 2)}}</center>
-              </td>
-              <td>
-                <center>{{$producto->cantidad}}</center>
-              </td>
-              <td>
+              <td><center>{{$producto->cantidad}}</center></td>
+              <td><center>{{$producto->Nombre_Producto}}</center></td>
+              <td><center>{{$producto->Codigo_Sku}}</center></td>
+              <td><center>$ {{number_format($producto->Precio, 2)}} MXN</center></td>
+              <!-- <td><center>$ {{number_format($producto->Precio * $producto->cantidad, 2)}} MXN</center></td> -->
+              <td><center>$ {{number_format($producto->Descuento * $producto->cantidad ,2 )}} MXN</center></td>
+              <td><center>$ {{number_format(($producto->Precio * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center></td>
+              <td><center>
                 <form action="{{route('quitarProductoDeVenta')}}" method="post">
                   @method("delete")
                   @csrf
@@ -111,7 +99,7 @@
                         <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
                       </svg></i>
                   </button>
-                </form>
+                </form></center>
               </td>
             </tr>
             @endforeach

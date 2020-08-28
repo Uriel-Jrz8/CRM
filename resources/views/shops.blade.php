@@ -8,7 +8,7 @@
     return false;
   }
 </script>
-
+<br><br>
 
 <div class="container">
   <div class="shadow-lg p-4 mb-5 bg-white rounded">
@@ -29,8 +29,8 @@
           @method('PUT')
           @csrf
           <div class="form-group">
-            <label class="text-info" for="id_cliente">Número de folio</label>
-            <input type="text" class="form-control" name='folio' autocomplete="off" placeholder="Número de Folio" required onkeypress="return validaNumericos(event)">
+            <label class="" for="id_cliente" style="color: black;">Número de folio</label>
+            <input type="text" class="form-control" name='folio' autocomplete="off" placeholder="Número de Folio" required onkeypress="return validaNumericos(event)" style="color:black;">
           </div>
           @if(session("productos") !== null)
 
@@ -52,6 +52,7 @@
             <label class="" for="codigo" style="color: black;">Código de barras o Código SKU</label>
             <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU" style="color: black;">
           </div>
+
         </form>
       </div>
       @if(session("productos") !== null)
@@ -65,24 +66,30 @@
       </div>
       <div class="table-responsive">
         <h1 align="right">Total: ${{number_format($total, 2)}} MXN</h1>
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
           <thead class="thead-dark">
             <tr>
-              <th>Código de barras</th>
-              <th>Nombre de Producto</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Quitar</th>
+              <th><center>Cantidad</center></th>
+              <th><center>Descripcion de Producto</center></th>
+              <th><center>Código SKU</center></th>
+              <th><center>Precio Unitario</center></th>
+              <!-- <th><center>Subtotal Sin Descuento</center></th> -->
+              <th><center>Descuento</center></th>
+              <th><center>Subtotal</center></th>
+              <th><center>Eliminar</center></th>
             </tr>
           </thead>
           <tbody>
             @foreach(session("productos") as $producto)
             <tr>
-              <td>{{$producto->Codigo_Sku}}</td>
-              <td>{{$producto->Nombre_Producto}}</td>
-              <td>${{number_format($producto->Precio, 2)}}</td>
-              <td>{{$producto->cantidad}}</td>
-              <td>
+              <td><center>{{$producto->cantidad}}</center></td>
+              <td><center>{{$producto->Nombre_Producto}}</center></td>
+              <td><center>{{$producto->Codigo_Sku}}</center></td>
+              <td><center>$ {{number_format($producto->Precio, 2)}} MXN</center></td>
+              <!-- <td><center>$ {{number_format($producto->Precio * $producto->cantidad, 2)}} MXN</center></td> -->
+              <td><center>$ {{number_format($producto->Descuento * $producto->cantidad ,2 )}} MXN</center></td>
+              <td><center>$ {{number_format(($producto->Precio * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center></td>
+              <td><center>
                 <form action="{{route('quitarProductoDeVentaCdmx')}}" method="post">
                   @method("delete")
                   @csrf
@@ -92,7 +99,7 @@
                         <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
                       </svg></i>
                   </button>
-                </form>
+                </form></center>
               </td>
             </tr>
             @endforeach
@@ -105,13 +112,13 @@
                     Escanea el código de barras o escribe y presiona Enter</h2> -->
       @endif
 
-       <form action="{{ route('ConsultCDMX') }}" method="POST">
-              @method('PUT')
-              @csrf
-              <center><input type="submit" value="Ventas Realizadas " class="btn btn-outline-pink"></center>
-              </form>
+      <form action="{{ route('ConsultDato') }}" method="POST">
+        @method('PUT')
+        @csrf
+        <center><input type="submit" value="Ventas Realizadas " class="btn btn-outline-pink"></center>
+      </form>
     </div>
-             
+
   </div>
 </div>
 @endsection

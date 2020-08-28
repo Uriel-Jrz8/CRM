@@ -27,7 +27,7 @@ class ViewData extends Controller
     public function DetalleLinea()
     {
         $data = request();
-        $queryDetalle = DB::select("select Nombre_Producto,Codigo_Sku,Marca,Precio,Cantidad,Total from orders_linea where folio = '$data->folioVenta' ");
+        $queryDetalle = DB::select("select Nombre_Producto,Codigo_Sku,Marca,Precio,Subtotal,Descuento,Cantidad,Total from orders_linea where folio = '$data->folioVenta' ");
         $queryTotal =DB::select(" select folio,Total from ventas where folio = '$data->folioVenta' group by folio,total");
         return view('VentaDetalle/DetalleLinea',compact('queryDetalle','queryTotal'));
     }
@@ -65,20 +65,26 @@ class ViewData extends Controller
         return view('VentaDetalle/DetalleAcapulco',compact('queryDetalle','queryTotal'));
     }
 
+    public function stocklinea(Request $request){
+        $request->flash();
+        $token = $request->get('_token');
+        $query = DB::select('select Codigo_Sku,Nombre_Producto, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad,Precio,Descuento from stock_linea');
+        return view('DateStock',compact('query'));
+    }
+
     public function stockcdmx(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select * from users');
-        return view('DateCDMX',compact('query'));
+        $query = DB::select('select Codigo_Sku, Nombre_Producto, Marca, Animal, Tipo_Alimento,Categoria, Peso, Cantidad,Precio,Descuento from stock_cdmx');
+        $query2 = "select Nombre_Producto, Marca, Animal, Tipo_Alimento, Peso, Categoria, Codigo_Sku,Cantidad,Precio,Descuento from stock_cdmx";
+        return view('DateStock',compact('query','query2'));
     }
 
     public function stockacapulco(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        //Consulta para ver el stock de acapulco
-        //select stock de acapulco
-        $query = DB::select('select * from password_resets');
-        return view('DateAcapulco',compact('query'));
+        $query = DB::select('select Nombre_Producto, Marca, Animal, Tipo_Alimento, Peso, Categoria, Codigo_Sku,Cantidad,Precio,Descuento from stock_acapulco');
+        return view('DateStock',compact('query'));
     }
 
     // public function Accounting(Request $request){

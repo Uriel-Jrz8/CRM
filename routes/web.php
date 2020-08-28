@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +29,14 @@ Route::put('/Update/Stock','MainController@UpdateStock')->name('UpdateStock');
 Route::put('/NewAdd/Stock','MainController@NewAddstock')->name('NewAddstock');
 Route::put('/import','MainController@import')->name('import');
 Route::put('/downloadEcxel', 'MainController@exportDocument')->name('export');
+Route::put('/discount','MainController@Discount')->name('descuento');
 
 //Rutas Para vizualizar los Datos que se encuentran de la BD ViewData
 
-Route::put('/orders/acapulco','ViewData@ConsultAcapulco')->name('ConsultAcapulco');
-Route::put('/stock/Shops/cdmx','ViewData@stockcdmx')->name('stockcdmx');
-Route::put('/stock/Add/Shops','ViewData@stockacapulco')->name('stockacapulco'); 
+
+Route::get('/stock/Shops/linea','ViewData@stocklinea')->name('stocklinea');
+Route::get('/stock/Shops/cdmx','ViewData@stockcdmx')->name('stockcdmx');
+Route::get('/stock/Add/acapulco','ViewData@stockacapulco')->name('stockacapulco'); 
 
 //Rutas para rediccionar a la hora de validar ROUTES
 
@@ -77,3 +80,4 @@ Route::put('/terminarOCancelarVentaAcapulco', 'VentasAcapulco@terminarOCancelarV
 Route::put('/orders/Acapulco','ViewData@ConsultAcapulco')->name('ConsultAcapulco');
 Route::put('InformacionAcapulco', 'ViewData@DetalleAcapulco')->name('DetalleAcapulco');
 Route::get('/date/acapulco','ViewData@ConsultAcapulco')->name('DateAcapulco');
+Route::put('/orders/acapulco','ViewData@ConsultAcapulco')->name('ConsultAcapulco');

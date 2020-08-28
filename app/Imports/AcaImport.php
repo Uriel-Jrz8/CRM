@@ -12,6 +12,8 @@ class AcaImport implements ToModel
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+
+    // modificar al hacer la bd Final
     public function model(array $row)
     {
         return new Acapulco([
@@ -19,12 +21,12 @@ class AcaImport implements ToModel
             'Nombre_Producto'=> $row[1],
             'Marca'=> $row[2],
             'Animal'=> $row[3],
-            'Peso'=> $row[4],
-            'Categoria'=> $row[5],
-            'Precio'=> $row[6],
-            'Codigo_Sku'=> $row[7],
-            'Cantidad'=> $row[8],
-            //'Tienda'=> $row[9],
-        ]);
+            'Tipo_Alimento'=> $row[4],
+            'Peso'=> $row[5],
+            'Categoria'=> $row[6],
+            'Precio'=> $row[7],
+            'Descuento'=>$row[8],
+            'Codigo_Sku'=> $row[9],
+            'Cantidad'=> $row[10],
     }
 }

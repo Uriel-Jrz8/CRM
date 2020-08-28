@@ -30,7 +30,7 @@ class VentasCdmx extends Controller
         $data = request();
         $finTotal = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $finTotal += $producto->cantidad * $producto->Precio;
+            $finTotal += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
 
         $productos = $this->obtenerProductos();
@@ -39,7 +39,7 @@ class VentasCdmx extends Controller
             // El producto que se vende...
             $productoActualizado = Cdmx::find($producto->id);
             $productoVendido = new OrdersCdmx();
-            $total1 = $producto->Precio * $producto->cantidad;
+            $total1 = $producto->Precio * $producto->cantidad - ($producto->Descuento * $producto->cantidad);
             $productoVendido->folio = $data->folio;
             $productoVendido->Nombre_Producto = $producto->Nombre_Producto;
             $productoVendido->Marca = $producto->Marca;
@@ -49,6 +49,8 @@ class VentasCdmx extends Controller
             $productoVendido->Precio = $producto->Precio;
             $productoVendido->Codigo_Sku = $producto->Codigo_Sku;
             $productoVendido->Cantidad = $producto->cantidad;
+            $productoVendido->Subtotal = ($producto->cantidad * $producto->Precio);
+            $productoVendido->Descuento = $producto->Descuento * $producto->cantidad;
             $productoVendido->Total = $total1;
             // Lo guardamos
             $productoVendido->saveOrFail();
@@ -158,7 +160,7 @@ class VentasCdmx extends Controller
     {
         $total = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $total += $producto->cantidad * $producto->Precio;
+            $total += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
         return view(
             "shops",

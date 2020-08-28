@@ -35,7 +35,7 @@ class routes extends Controller
         $data = request();
         $finTotal = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $finTotal += $producto->cantidad * $producto->Precio;
+            $finTotal += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
 
         $productos = $this->obtenerProductos();
@@ -44,19 +44,21 @@ class routes extends Controller
             // El producto que se vende...
             $productoActualizado = line::find($producto->id);
             $productoVendido = new OrdersLine();
-            $total1 = $producto->Precio * $producto->cantidad;
+            $total1 = $producto->Precio * $producto->cantidad - ($producto->Descuento * $producto->cantidad);
+            
             $productoVendido->folio = $data->folio;
             $productoVendido->Nombre_Producto = $producto->Nombre_Producto;
             $productoVendido->Marca = $producto->Marca;
             $productoVendido->Animal = $producto->Animal;
+            $productoVendido->Tipo_Alimento = $producto->Tipo_Alimento;
             $productoVendido->Peso = $producto->Peso;
             $productoVendido->Categoria = $producto->Categoria;
             $productoVendido->Precio = $producto->Precio;
             $productoVendido->Codigo_Sku = $producto->Codigo_Sku;
-            $productoVendido->Numero_Guia = $producto->Codigo_Sku;
             $productoVendido->Cantidad = $producto->cantidad;
+            $productoVendido->Subtotal = ($producto->cantidad * $producto->Precio);
+            $productoVendido->Descuento = $producto->Descuento * $producto->cantidad;
             $productoVendido->Total = $total1;
-            $productoVendido->Estatus = $producto->Codigo_Sku;
             // Lo guardamos
             $productoVendido->saveOrFail();
             // Y restamos la existencia del original
@@ -167,7 +169,7 @@ class routes extends Controller
     {
         $total = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $total += $producto->cantidad * $producto->Precio;
+            $total += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
         return view(
             "Client",
@@ -178,7 +180,7 @@ class routes extends Controller
         );
     }
 
-
+//Rutas
 
     public function RouteShopAcapulco()
     {

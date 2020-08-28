@@ -20,36 +20,7 @@ class MainController extends Controller
     {
         return view("Client", ["productos" => line::all()]);
     }
-    // public function index()
-    // {
-    //     $total = 0;
-    //     foreach ($this->obtenerProductos() as $producto) {
-    //         $total += $producto->cantidad * $producto->precio_venta;
-    //     }
-    //     return view("Client",
-    //         [
-    //             "total" => $total,
-    //             "clientes" => User::all(),
-    //         ]);
-    // }
 
-    public function agregarProductoVenta(Request $request)
-    {
-        //$codigo = $request->post("codigo");
-        //$producto = Producto::where("Codigo_Sku", "=", $codigo)->first();
-        // if (!$producto) {
-        //     return redirect()
-        //         ->route("ventas")
-        //         ->with("mensaje", "Producto no encontrado");
-        // }
-        // $this->agregarProductoACarrito($producto);
-        // return redirect()
-        //     ->route("ventas");
-        // return $producto;
-    }
-
-
-    // nuevo ^^^^^^^^^^^
 
     // Metodo para insertar los pedidos a la base de datos y restar lo que tienen en stock. de atencion a clientes
     public function addOders(){
@@ -115,7 +86,7 @@ class MainController extends Controller
 
                     $query2 = DB::select("insert into orders_Acapulco (folio,Nombre_Producto,Marca,Animal,Peso,Categoria,Precio,Codigo_Sku,Cantidad,Sucursal,Total)
                          VALUES ('$folio','$nombre','$marca','$animal','$peso','$categoria','$precio','$sku','$cantidad','$sucursal','$total')");  
-                         $query2 = DB::select("update stock_acapulco set Cantidad = ('$line->Cantidad' - '$cantidad') where Nombre_Producto = '$nombre' AND Codigo_Sku = '$sku' ");
+                         $query2 = DB::select("update stock_acapulco set Cantidad = ('$tienda->Cantidad' - '$cantidad') where Nombre_Producto = '$nombre' AND Codigo_Sku = '$sku' ");
 
                          return view('ShopsAcapulco');
                 }else{
@@ -226,6 +197,38 @@ class MainController extends Controller
                     }
     }
 
+    public function Discount(){
+        $data = request();
+        if($data->sucursal == "En Linea"){
+           $query = DB::select("UPDATE stock_linea SET Descuento = (Precio * '$data->des' / 100) WHERE Marca = '$data->desmarca' OR Codigo_Sku = '$data->desmarca' ") ;
+                    return redirect()->route('AdminStock')
+                    ->with([
+                        "mensaje" => "Descuento Aplicado Correctamente.",
+                        "tipo" => "success"
+                    ]);
+           //return view('AddStock'); 
+       
+        }else if ($data->sucursal == "Ciudad de Mexico"){
+            $query = DB::select("UPDATE stock_cdmx SET Descuento = (Precio * '$data->des' / 100) WHERE Marca = '$data->desmarca' OR Codigo_Sku = '$data->desmarca' ") ;
+                     return redirect()->route('AdminStock')
+                     ->with([
+                         "mensaje" => "Descuento Aplicado Correctamente.",
+                         "tipo" => "success"
+                     ]);
+            // return view('AddStock');
+        
+        }else if($data->sucursal == "Acapulco"){
+                $query = DB::select("UPDATE stock_acapulco SET Descuento = (Precio * '$data->des' / 100) WHERE Marca = '$data->desmarca' OR Codigo_Sku = '$data->desmarca' ") ;
+                        return redirect()->route('AdminStock')
+                        ->with([
+                            "mensaje" => "Descuento Aplicado Correctamente.",
+                            "tipo" => "success"
+                        ]);
+                //return view('AddStock');
+        }
+        
+        
+    }
 
     // Funcion Pendiente se pueden manipular datos.
     // public function update(){

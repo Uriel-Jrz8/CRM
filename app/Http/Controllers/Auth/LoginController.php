@@ -39,7 +39,7 @@ class LoginController extends Controller
         } else if(Auth::user()->email == $email && Auth::user()->id =="3"){
             return '/customer/service';
             } else if (Auth::user()->email == $email && Auth::user()->id =="4"){
-                return  '/shop/acapulco';
+                return  'shop/acapulco';
                 } else if(Auth::user()->email == $email && Auth::user()->id =="5"){
                     return '/Accounting';
                     } else{

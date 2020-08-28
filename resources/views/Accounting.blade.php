@@ -9,29 +9,31 @@
         </div>
 
         <div class="col-md-4" style="margin: 0% 12% 0%;">
-            <div class="buttonWrapper2">
-                Ventas en Línea
-                <a class="buttonInner2 " href="{{ route('ConsultDato')}}"> <span>Ventas en Línea</span></a>
+            <div class="buttonWrapper2">Ventas en Línea
+                <a class="buttonInner2 " href="{{ route('Dateline')}}"> <span>Ventas en Línea</span></a>
             </div><br>
 
             <div class="buttonWrapper2">Ventas en Ciudad de México
-                <a class="buttonInner2 " href=" route('ConsultCDMX')}}"> <span>Ventas en Ciudad de México</span></a>
+                <a class="buttonInner2 " href="{{route('DateCdmx')}}"> <span>Ventas en Ciudad de México</span></a>
             </div><br>
 
             <div class="buttonWrapper2">Ventas en Acapulco
-                <a class="buttonInner2 " href=" route('ConsultAcapulco')}}"> <span>Ventas en Acapulco</span></a>
+                <a class="buttonInner2 " href="{{route('DateAcapulco')}}"> <span>Ventas en Acapulco</span></a>
             </div><br>
 
             <div class="buttonWrapper2">Productos en Linea
-                <a class="buttonInner2 " href=" route('ConsultAcapulco')}}"> <span>Productos en Linea</span></a>
+                <a class="buttonInner2 " href="{{route('stocklinea')}}"> <span>Productos en Linea</span></a>
             </div><br>
 
             <div class="buttonWrapper2">Productos en Ciudad de México
-                <a class="buttonInner2 " href=" route('ConsultAcapulco')}}"> <span>Productos en Ciudad de México</span></a>
+                <a class="buttonInner2 " href="{{route('stockcdmx')}}"> <span>Productos en Ciudad de México</span></a>
             </div><br>
 
             <div class="buttonWrapper2">Productos en Acapulco
-                <a class="buttonInner2 " href=" route('ConsultAcapulco')}}"> <span>Productos en Acapulco</span></a>
+                <a class="buttonInner2 " href="{{route('stockacapulco')}}"> <span>Productos en Acapulco</span></a>
+            </div><br>
+            <div class="buttonWrapper2">Almacen General
+                <a class="buttonInner2 " href=""> <span>Almacen General</span></a>
             </div><br>
         </div>
     </div>

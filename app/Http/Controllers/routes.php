@@ -172,7 +172,7 @@ class routes extends Controller
             $total += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
         return view(
-            "Client",
+            "ViewLinea.Client",
             [
                 "total" => $total,
                 "clientes" => User::all(),
@@ -182,11 +182,11 @@ class routes extends Controller
 
 //Rutas
 
-    public function RouteShopAcapulco()
-    {
-        $users = DB::table('stock_acapulco')->get();
-        return view('shops', compact('users'));
-    }
+    // public function RouteShopAcapulco()
+    // {
+    //     $users = DB::table('stock_acapulco')->get();
+    //     return view('ViewCdmx.shops', compact('users'));
+    // }
 
     public function RouteAccounting()
     {

@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-black shadow-sm">
             <div class="container">
                 <!-- <img src="/Images/PerroBlanco.png" width=90px height=50px href="{{ url('/') }}"> -->
-                <img src="/Images/MercadoBlanco.png" width=200px height=50px href="{{ url('/') }}">
+                <img src="/Images/MercadoBlanco.png" width=150px height=50px href="{{ url('/') }}">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('Merkado Croqueta', 'Merkado Croqueta') }} -->
                     <!--{{ config('app.name', 'Merkado Croqueta') }}-->

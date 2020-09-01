@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @charset "UTF-8";
 
 /*!
@@ -37,6 +39,8 @@
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: "Nunito", sans-serif;
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-family-cursive: 'Nanum Pen Script', cursive;
+    --font-family-Fredoka: 'Fredoka One', cursive;
 }
 
 *,
@@ -1977,6 +1981,22 @@ pre code {
     border: 0;
 }
 
+.form-control4 {
+    display: block;
+    width: 90%;
+    height: calc(1.6em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: white;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid #F5a623;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
 .form-control3 {
     display: block;
     width: 100%;
@@ -3047,6 +3067,18 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-orange:hover {
+    color: #ffffff;
+    background-color: #F5a623;
+    border-color: #F5a623;
+}
+
+.btn-outline-orange2 {
+    color: #F5a623;
+    border-color: #F5a623;
+    background-color: #000;
+}
+
+.btn-outline-orange2:hover {
     color: #ffffff;
     background-color: #F5a623;
     border-color: #F5a623;
@@ -7151,7 +7183,8 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-    background-color: #343a40 !important;
+    /* background-color: #343a40 !important; */
+    background-color: #000000 !important;
 }
 
 a.bg-dark:hover,

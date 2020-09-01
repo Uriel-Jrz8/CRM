@@ -163,7 +163,7 @@ class VentasCdmx extends Controller
             $total += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
         return view(
-            "shops",
+            "ViewCdmx.shops",
             [
                 "total" => $total,
                 "clientes" => User::all(),

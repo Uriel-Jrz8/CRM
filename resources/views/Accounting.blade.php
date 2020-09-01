@@ -33,7 +33,7 @@
                 <a class="buttonInner2 " href="{{route('stockacapulco')}}"> <span>Productos en Acapulco</span></a>
             </div><br>
             <div class="buttonWrapper2">Almacen General
-                <a class="buttonInner2 " href=""> <span>Almacen General</span></a>
+                <a class="buttonInner2 " href="{{route('storehouse')}}"> <span>Almacen General</span></a>
             </div><br>
         </div>
     </div>

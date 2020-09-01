@@ -15,9 +15,9 @@
     <center>
       <h1 style="background-color:black; color:white;">Bodega Merkado Croqueta</h1>
     </center><br>
-    @if (session('mensaje'))
+    @if (session('message'))
     <div class="alert alert-success" role="alert">
-      {{ session('mensaje') }}
+      {{ session('message') }}
     </div>
     @endif
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -144,8 +144,8 @@
       <br>
       <H3 style="color: #DE2692">{{ __('Actualizar Producto') }} </H3>
       <div class="form-row">
-        <div class="col-xs-8 col-sm-3"> <b><label style="color: #DE2692" for="exampleInput1">Nombre del Producto</label></b>
-          <input type="text" class="form-control1" name="nombre" placeholder="Nombre Producto" autocomplete="off" required> </div>
+        <!-- <div class="col-xs-8 col-sm-3"> <b><label style="color: #DE2692" for="exampleInput1">Nombre del Producto</label></b>
+          <input type="text" class="form-control1" name="nombre" placeholder="Nombre Producto" autocomplete="off" required> </div> -->
 
         <div class="col-xs-8 col-sm-3"> <b><label style="color: #DE2692" for="exampleInput1">Codigo Sku</label></b>
           <input type="text" class="form-control1" name="sku" placeholder="Codigo SKU" autocomplete="off" required> </div>
@@ -160,10 +160,13 @@
           <input type="text" class="form-control1" name="cantidad" placeholder="Cantidad" autocomplete="off" required onkeypress="return validaNumericos(event)"> </div>
 
         <div class="col-xs-8 col-sm-3"> <b><label style="color: #DE2692" for="exampleInput1">Sucursal</label></b> <select name="sucursal" class="form-control1">
+            <option>Selecciona Sucursal</option>
+            <option>Almacen General</option>    
             <option>En Linea</option>
-            <option>Acapulco</option>
             <option>Ciudad de Mexico</option>
-          </select> </div>
+            <option>Acapulco</option>
+          </select>
+        </div>
       </div>
 
       <br>
@@ -182,6 +185,8 @@
         <div class="col-xs-8 col-sm-3">
           <b><label class="text-success" for="exampleInput1">Sucursal</label></b>
           <select name="sucursal" class="form-control" style="color:#6c757d;">
+            <option>Selecciona Sucursal</option>
+            <option>Almacen General</option>
             <option>En Linea</option>
             <option>Acapulco</option>
             <option>Ciudad de Mexico</option>

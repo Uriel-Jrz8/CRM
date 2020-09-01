@@ -8,8 +8,8 @@
                 <th><b>Cantidad</b></th>
                 <th><b>Nombre de Producto</b></th>
                 <th><b>Código SKU</th>
-                <th><b>Precio por Unitario</b></th>
-                <th><b>Subtotal Sin Descuento</b></th>
+                <th><b>Precio Unitario</b></th>
+                <!-- <th><b>Subtotal Sin Descuento</b></th> -->
                 <th><b>Descuento Aplicado</b></th>
                 <th><b>Subtotal</b></th>
             </tr>
@@ -21,7 +21,7 @@
                 <td><b>{{$producto->Nombre_Producto}}</b></td>
                 <td><b>{{$producto->Codigo_Sku}}</b></td>
                 <td><b>$ {{number_format($producto->Precio,2)}} MXN</b></td>
-                <td><b>$ {{number_format($producto->Subtotal,2)}} MXN</b></td>
+                <!-- <td><b>$ {{number_format($producto->Subtotal,2)}} MXN</b></td> -->
                 <td><b>$ {{number_format($producto->Descuento,2)}} MXN</b></td>
                 <td><b>$ {{number_format($producto->Total,2)}} MXN</b></td>
             </tr>
@@ -31,7 +31,7 @@
 
             <tr>
                 @foreach($queryTotal as $value)
-                <td colspan="5"></td>
+                <td colspan="4"></td>
                 <td><strong><h4>Total de la Venta</h4></strong></td>
                 <td><b><h4>$ {{number_format($value->Total,2)}} MXN</h4></b></td>
                 @endforeach

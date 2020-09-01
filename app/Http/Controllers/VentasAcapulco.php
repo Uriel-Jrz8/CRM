@@ -162,7 +162,7 @@ class VentasAcapulco extends Controller
             $total += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
         }
         return view(
-            "ShopsAcapulco",
+            "ViewAcapulco.ShopsAcapulco",
             [
                 "total" => $total,
                 "clientes" => User::all(),

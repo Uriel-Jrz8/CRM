@@ -20,12 +20,12 @@
         </div>
         @endif
         <center>
-          <h1>{{ __('Ventas Acapulco') }} </h1>
+          <h1>{{ __('Ventas En Linea') }} </h1>
         </center>
       </div>
 
       <div class="col-12 col-md-6">
-        <form action="{{route('terminarOCancelarVentaAcapulco')}}" method="POST">
+        <form action="{{route('terminarOCancelarVenta')}}" method="POST">
           @method('PUT')
           @csrf
           <div class="form-group">
@@ -45,7 +45,7 @@
       </div>
 
       <div class="col-12 col-md-6">
-        <form action="{{route('agregarProductoVentaAcapulco')}}" method="POST">
+        <form action="{{route('agregarProductoVenta')}}" method="POST">
           @method('PUT')
           @csrf
           <div class="form-group">
@@ -66,11 +66,11 @@
       </div>
       <div class="table-responsive">
         <h1 align="right">Total: ${{number_format($total, 2)}} MXN</h1>
-        <table class="table table-hover table-bordered table-active">
-          <thead class="thead-dark ">
+        <table class="table table-hover">
+          <thead class="thead-dark">
             <tr>
               <th><center>Cantidad</center></th>
-              <th><center>Descripcion de Producto</center></th>
+              <th><center>Descripción de Producto</center></th>
               <th><center>Código SKU</center></th>
               <th><center>Precio Unitario</center></th>
               <!-- <th><center>Subtotal Sin Descuento</center></th> -->
@@ -90,7 +90,7 @@
               <td><center>$ {{number_format($producto->Descuento * $producto->cantidad ,2 )}} MXN</center></td>
               <td><center>$ {{number_format(($producto->Precio * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center></td>
               <td><center>
-                <form action="{{route('quitarProductoDeVentaAcapulco')}}" method="post">
+                <form action="{{route('quitarProductoDeVenta')}}" method="post">
                   @method("delete")
                   @csrf
                   <input type="hidden" name="indice" value="{{$loop->index}}">

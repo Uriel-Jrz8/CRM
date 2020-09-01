@@ -70,7 +70,7 @@
           <thead class="thead-dark">
             <tr>
               <th><center>Cantidad</center></th>
-              <th><center>Descripcion de Producto</center></th>
+              <th><center>Descripción de Producto</center></th>
               <th><center>Código SKU</center></th>
               <th><center>Precio Unitario</center></th>
               <!-- <th><center>Subtotal Sin Descuento</center></th> -->

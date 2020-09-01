@@ -28,5 +28,6 @@ class AcaImport implements ToModel
             'Descuento'=>$row[8],
             'Codigo_Sku'=> $row[9],
             'Cantidad'=> $row[10],
+            ]);
     }
 }

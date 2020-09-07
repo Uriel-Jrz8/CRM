@@ -84,7 +84,7 @@
             <a href="{{ route('Entradas') }}"><button class="btn btn-outline-pink"> Ver Entradas</button></a>
         </div>
         <div class="btn-group">
-            <a href="{{ route('Salidas') }}"><button class="btn btn-outline-pink"> Ver Entradas</button></a>
+            <a href="{{ route('Salidas') }}"><button class="btn btn-outline-pink"> Ver Salidas</button></a>
         </div><br><br>
 
     </div>

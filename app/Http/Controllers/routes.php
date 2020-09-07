@@ -138,12 +138,14 @@ class routes extends Controller
     {
 
         if ($producto->Cantidad <= 0) {
+            
             return redirect()->route("service")
                 ->with([
                     "mensaje" => "No hay existencias del producto",
                     "tipo" => "danger"
                 ]);
         }
+
         $productos = $this->obtenerProductos();
         $posibleIndice = $this->buscarIndiceDeProducto($producto->Codigo_Sku, $productos);
         // Es decir, producto no fue encontrado
@@ -154,13 +156,18 @@ class routes extends Controller
             if ($productos[$posibleIndice]->cantidad + 1 > $producto->Cantidad) {
                 return redirect()->route("service")
                     ->with([
-                        "mensaje" => "No se pueden agregar más productos de este tipo, se quedarían sin existencia",
+                        "mensaje" => "No se puede agregar mas producto, Por favor pide producto a tu provedor",
                         "tipo" => "danger"
                     ]);
-            }
-            $productos[$posibleIndice]->cantidad++;
+           
+                    }
+                   
+                    $productos[$posibleIndice]->cantidad++;
         }
         $this->guardarProductos($productos);
+
+
+        
     }
 
 

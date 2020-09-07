@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <H1>{{ __('Almacen') }} </H1>
+            <H1>{{ __('Productos en Almacen') }} </H1>
             <br>
         </div>
         <!-- nuevo -->

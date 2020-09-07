@@ -26,12 +26,13 @@ class MainController extends Controller
     }
 
 
-    public function search(){
+    public function search()
+    {
         $data = request();
         $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Existencias_Iniciales,Entradas,
                              Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta FROM storehouse WHERE Descripcion LIKE '%$data->search%' OR Descripcion LIKE '%$data->search%'");
-        
-        return view('Store.StoreDetalle',compact('query'));
+
+        return view('Store.StoreDetalle', compact('query'));
     }
 
 
@@ -107,31 +108,6 @@ class MainController extends Controller
         }
     }
 
-    public function totales()
-    {
-        $data = request();
-        $sku = $data->sku;
-        $sucursal = $data->sucursal;
-        $almacen = StoreHouse::find($data->id);
-        if($sucursal == "En Linea"){
-        $precios = DB::select("update StoreHouse set Valor_Compra = ('$almacen->Cantidad_Existente' * '$almacen->Precio_Compra'), Valor_Venta = ('$almacen->Cantidad_Existente' * '$almacen->Precio_Venta')
-                                Valor where Codigo_Sku = '$sku' ");
-
-        } else if($sucursal == "Acapulco"){
-            $precios = DB::select("update StoreHouse set Valor_Compra = ('$almacen->Cantidad_Existente' * '$almacen->Precio_Compra'), Valor_Venta = ('$almacen->Cantidad_Existente' * '$almacen->Precio_Venta')
-            where Codigo_Sku = '$sku' ");
-
-        }else if ($sucursal == "Ciudad de Mexico"){
-            $precios = DB::select("update StoreHouse set Valor_Compra = ('$almacen->Cantidad_Existente' * '$almacen->Precio_Compra'), Valor_Venta = ('$almacen->Cantidad_Existente' * '$almacen->Precio_Venta')
-            where Codigo_Sku = '$sku' ");
-
-        }else if ($sucursal == "Almacen General"){
-            $precios = DB::select("update StoreHouse set Valor_Compra = ('$almacen->Cantidad_Existente' * '$almacen->Precio_Compra'), Valor_Venta = ('$almacen->Cantidad_Existente' * '$almacen->Precio_Venta')
-            where Codigo_Sku = '$sku' ");
-        }else{
-            return view('error');
-        }
-    }
 
     //Actualiza los productos de la base de datos que ya se importo con el excel Suma el valor del nuevo producto
     public function UpdateStock()
@@ -149,37 +125,164 @@ class MainController extends Controller
         $Cdmx = Cdmx::find($data->id);
         $almacen = StoreHouse::find($data->id);
 
-        if ($sucursal == "En Linea") {
-            $query = DB::select("UPDATE stock_linea SET Cantidad = ('$line->Cantidad'+ '$cantidad'), Precio = ('$precio'), updated_at = ('$mytime') WHERE Codigo_Sku = '$sku' ");
+        if ($sucursal == "En Linea" && $data->sku == $line->Codigo_Sku) {
+            $query = DB::select("UPDATE stock_linea SET Cantidad = ('$line->Cantidad'+ '$cantidad'), updated_at = ('$mytime') WHERE Codigo_Sku = '$sku' ");
             $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
             $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$sucursal','$mytime') ");
             $this->totales();
-            return view('AddStock');
-
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Cantidad Agregada Correctamente.",
+                    "tipo" => "success"
+                ]);
         } else if ($sucursal == "Acapulco") {
-            $query = DB::select("UPDATE stock_Acapulco SET Cantidad = ('$Acapulco->Cantidad'+ '$cantidad'), Precio = ('$precio'), updated_at = '$mytime' WHERE Nombre_Producto = '$nombre'");
+            $query = DB::select("UPDATE stock_Acapulco SET Cantidad = ('$Acapulco->Cantidad'+ '$cantidad'), updated_at = '$mytime' WHERE Nombre_Producto = '$nombre'");
             $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
             $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$mytime') ");
             $this->totales();
-            return view('AddStock');
-
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Cantidad Agregada Correctamente.",
+                    "tipo" => "success"
+                ]);
         } else if ($sucursal == "Ciudad de Mexico") {
-            $query = DB::select("UPDATE stock_cdmx SET Cantidad = ('$Cdmx->Cantidad'+ '$cantidad'), Precio = ('$precio'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
+            $query = DB::select("UPDATE stock_cdmx SET Cantidad = ('$Cdmx->Cantidad'+ '$cantidad'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
             $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
             $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$mytime') ");
             $this->totales();
-            return view('AddStock');
-
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Cantidad Agregada Correctamente.",
+                    "tipo" => "success"
+                ]);
         } else if ($sucursal == "Almacen General") {
             $query = DB::select(" UPDATE StoreHouse SET Entradas = ('$almacen->Entradas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' + '$cantidad') WHERE Codigo_Sku = '$sku' ");
             $entradas = DB::select("INSERT INTO Entradas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$mytime') ");
             $this->totales();
-            return view('AddStock');
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Cantidad Agregada Correctamente.",
+                    "tipo" => "success"
+                ]);
+        } else {
+            // return redirect()->route('AdminStock')
+            // ->with([
+            //     "message2" => "Código SKU Incorrecto ó Sucursal no Seleccionada.",
+            //     "tipo" => "danger"
+            // ]);
+            return request();
+        }
+    }
+
+    public function UpdatePrecio()
+    {
+        $mytime = date('Y-m-d H:i:s');
+        $data = request();
+        $nombre = $data->nombre;
+        $precio = $data->precio;
+        $sku = $data->sku;
+        $cantidad = $data->cantidad;
+        $sucursal = $data->sucursal;
+
+        $line = line::find($data->id);
+        $Acapulco = Acapulco::find($data->id);
+        $Cdmx = Cdmx::find($data->id);
+        $almacen = StoreHouse::find($data->id);
+
+        if ($sucursal == "En Linea") {
+            $query = DB::select("UPDATE stock_linea SET Precio = ('$precio'), updated_at = ('$mytime') WHERE Codigo_Sku = '$sku' ");
+
+
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Precio Modificado Correctamente.",
+                    "tipo" => "success"
+                ]);
+
+
+        } else if ($sucursal == "Acapulco") {
+            $query = DB::select("UPDATE stock_Acapulco SET Precio = ('$precio'), updated_at = '$mytime' WHERE Nombre_Producto = '$nombre'");
+
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Precio Modificado Correctamente.",
+                    "tipo" => "success"
+                ]);
+
+
+        } else if ($sucursal == "Ciudad de Mexico") {
+            $query = DB::select("UPDATE stock_cdmx SET Precio = ('$precio'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
+
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Precio Modificado Correctamente.",
+                    "tipo" => "success"
+                ]);
+
+
+        } else if ($sucursal == "Almacen General" && $sku == $almacen->Codigo_SKU) {
+
+            if ($data->opc == "Precio Compra") {
+                $query = DB::select("UPDATE storehouse SET Precio_Compra = ('$precio'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
+                $this->totales();
+                return redirect()->route('AdminStock')
+                    ->with([
+                        "message" => "Precio Modificado Correctamente.",
+                        "tipo" => "success"
+                    ]);
+
+
+            } else if ($data->opc == "Precio Venta") {
+                $query = DB::select("UPDATE storehouse SET Precio_Venta = ('$precio'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
+                $this->totales();
+                return redirect()->route('AdminStock')
+                    ->with([
+                        "message" => "Precio Modificado Correctamente.",
+                        "tipo" => "success"
+                    ]);
+            } else {
+                return redirect()->route('AdminStock')
+                    ->with([
+                        "message2" => "Selecciona una Opción, Precio Compra ó Precio Venta.",
+                        "tipo" => "danger"
+                    ]);
+            }
+        } else {
+            //return view('error');
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message2" => "Código SKU Incorrecto ó Selecciona una Sucursal.",
+                    "tipo" => "danger"
+                ]);
+        }
+    }
+
+
+    public function totales()
+    {
+        $data = request();
+        $sku = $data->sku;
+        $sucursal = $data->sucursal;
+        $almacen = StoreHouse::find($data->id);
+        if ($sucursal == "En Linea") {
+            $precios = DB::select("UPDATE StoreHouse SET Valor_Compra = ('$almacen->Precio_Compra' * '$almacen->Cantidad_Existente'), Valor_Venta = ('$almacen->Precio_Venta' * '$almacen->Cantidad_Existente')
+         where Codigo_SKU = '$sku' ");
+        } else if ($sucursal == "Acapulco") {
+            $precios = DB::select("UPDATE StoreHouse SET Valor_Compra = ('$almacen->Precio_Compra' * '$almacen->Cantidad_Existente'), Valor_Venta = ('$almacen->Precio_Venta' * '$almacen->Cantidad_Existente')
+             where Codigo_SKU = '$sku' ");
+        } else if ($sucursal == "Ciudad de Mexico") {
+            $precios = DB::select("UPDATE StoreHouse SET Valor_Compra = ('$almacen->Precio_Compra' * '$almacen->Cantidad_Existente'), Valor_Venta = ('$almacen->Precio_Venta' * '$almacen->Cantidad_Existente')
+             where Codigo_SKU = '$sku' ");
+        } else if ($sucursal == "Almacen General") {
+            $precios = DB::select("UPDATE StoreHouse SET Valor_Compra = ('$almacen->Precio_Compra' * '$almacen->Cantidad_Existente'), Valor_Venta = ('$almacen->Precio_Venta' * '$almacen->Cantidad_Existente')
+             where Codigo_SKU = '$sku' ");
+            //$precios = DB::select("UPDATE StoreHouse SET '$data->opc' = ('$almacen->Precio_Compra' '$almacen->Cantidad_Existente')
+            //where Codigo_SKU = '$sku' ");
+
         } else {
             return view('error');
         }
     }
-
 
 
     //Agrega nuevos productos a la bd del stock
@@ -218,51 +321,6 @@ class MainController extends Controller
     }
 
 
-
-    //Metodo para Crear y Exportar el archivo en Ecxel
-    public function exportDocument()
-    {
-        return Excel::download(new UsersExport, 'datos.xlsx');
-    }
-
-
-
-    //Funcion para Importar productos al stock masivos
-    public function import(Request $request)
-    {
-
-
-        $sucursal = $request->sucursal;
-        $file = $request->file('file');
-
-        if ($sucursal == "Almacen General") {
-
-            Excel::import(new StoreHouseImport, $file);
-            return back()->with('message', 'Importacion de datos correcta');
-
-        } else if ($sucursal == "En Linea") {
-
-            Excel::import(new LineImport, $file);
-            return back()->with('message', 'Importacion de datos correcta');
-
-        } else if ($sucursal == "Acapulco") {
-
-            Excel::import(new AcaImport, $file);
-            return back()->with('message', 'Importacion de datos correcta');
-
-        } else if ($sucursal == "Ciudad de Mexico") {
-            
-            Excel::import(new CdmxImport, $file);
-            return back()->with('message', 'Importacion de datos correcta');
-            
-        } else {
-            return view('error');
-        }
-    }
-
-
-
-
     public function Discount()
     {
         $data = request();
@@ -295,13 +353,37 @@ class MainController extends Controller
         }
     }
 
-    // Funcion Pendiente se pueden manipular datos.
-    // public function update(){
-    //     $data = request();
-    //     $folio = $data->folio;
-    //     $status = $data->estatus;
-    //     $query = DB::select("update orders_linea set Estatus = '$status' where folio ='$folio'");
-    //     return $data;
-    // }
 
+    //Funcion para Importar productos al stock masivos
+    public function import(Request $request)
+    {
+
+        $sucursal = $request->sucursal;
+        $file = $request->file('file');
+
+        if ($sucursal == "Almacen General") {
+
+            Excel::import(new StoreHouseImport, $file);
+            return back()->with('message', 'Importacion de datos correcta');
+        } else if ($sucursal == "En Linea") {
+
+            Excel::import(new LineImport, $file);
+            return back()->with('message', 'Importacion de datos correcta');
+        } else if ($sucursal == "Acapulco") {
+
+            Excel::import(new AcaImport, $file);
+            return back()->with('message', 'Importacion de datos correcta');
+        } else if ($sucursal == "Ciudad de Mexico") {
+
+            Excel::import(new CdmxImport, $file);
+            return back()->with('message', 'Importacion de datos correcta');
+        } else {
+            return view('error');
+        }
+    }
+    //Metodo para Crear y Exportar el archivo en Ecxel
+    public function exportDocument()
+    {
+        return Excel::download(new UsersExport, 'datos.xlsx');
+    }
 }

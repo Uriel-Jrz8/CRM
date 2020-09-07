@@ -1,11 +1,34 @@
 @extends('layouts.app')
 @section('content')
-<center><h1 style="font-family: Fredoka One;">Productos</h1></center>
+<center>
+    <h1 style="font-family: Fredoka One;">Productos</h1>
+</center><br>
+
+<div class="container-fluid">
+    <form action="">
+        <div class="form-group row justify-content">
+            <div class="col-xs-8 col-sm-2">
+            <b><label style="color: #000" for="exampleInput1">Fecha</label></b>
+                <input type="date" class="form-control1" name="date1" placeholder="Año-Mes-Dia" autocomplete="off" required>
+            </div><br><br>
+            <div class="col-xs-8 col-sm-2">
+            <b><label style="color: #000" for="exampleInput1">Fecha</label></b>
+                <input type="date" class="form-control1" name="dete2" placeholder="Año-Mes-Dia" autocomplete="off" required>
+            </div><br><br>  
+            <div class="col-sm-center col-xs-center">
+                
+            </div>
+            
+        </div>
+        <button class="btn btn-outline-pink" style="margin: 0% 0% 0% 10%">Buscar por Fecha</button>
+    </form>
+</div>
 <br>
+
 <div class="table-responsive">
     <table class="table table-hover table-striped table-bordered">
         <thead class="thead-dark">
-                <tr>
+            <tr>
                 <th><b>Código SKU</th>
                 <th><b>Nombre de Producto</b></th>
                 <th><b>Marca</b></th>

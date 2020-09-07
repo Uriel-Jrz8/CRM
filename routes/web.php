@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::put('/Add/line','MainController@addOders')->name('Addline');
 Route::put('/Add/Shops','MainController@addShops')->name('AddShops');
 Route::put('/Update/Stock','MainController@UpdateStock')->name('UpdateStock');
+Route::put('/Update/price','MainController@UpdatePrecio')->name('UpdatePrecio');
 Route::put('/NewAdd/Stock','MainController@NewAddstock')->name('NewAddstock');
 Route::put('/import','MainController@import')->name('import');
 Route::put('/downloadEcxel', 'MainController@exportDocument')->name('export');

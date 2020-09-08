@@ -125,7 +125,7 @@ class MainController extends Controller
         $Cdmx = Cdmx::find($data->id);
         $almacen = StoreHouse::find($data->id);
 
-        if ($sucursal == "En Linea" && $data->sku == $line->Codigo_Sku) {
+        if ($sucursal == "En Linea" and $data->sku == $line->Codigo_Sku) {
             $query = DB::select("UPDATE stock_linea SET Cantidad = ('$line->Cantidad'+ '$cantidad'), updated_at = ('$mytime') WHERE Codigo_Sku = '$sku' ");
             $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
             $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$sucursal','$mytime') ");
@@ -135,7 +135,7 @@ class MainController extends Controller
                     "message" => "Cantidad Agregada Correctamente.",
                     "tipo" => "success"
                 ]);
-        } else if ($sucursal == "Acapulco") {
+        } else if ($sucursal == "Acapulco" and $data->sku == $Acapulco->Codigo_Sku) {
             $query = DB::select("UPDATE stock_Acapulco SET Cantidad = ('$Acapulco->Cantidad'+ '$cantidad'), updated_at = '$mytime' WHERE Nombre_Producto = '$nombre'");
             $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
             $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$mytime') ");
@@ -145,7 +145,7 @@ class MainController extends Controller
                     "message" => "Cantidad Agregada Correctamente.",
                     "tipo" => "success"
                 ]);
-        } else if ($sucursal == "Ciudad de Mexico") {
+        } else if ($sucursal == "Ciudad de Mexico" and $data->sku == $Cdmx->Codigo_Sku) {
             $query = DB::select("UPDATE stock_cdmx SET Cantidad = ('$Cdmx->Cantidad'+ '$cantidad'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
             $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
             $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$mytime') ");
@@ -155,7 +155,7 @@ class MainController extends Controller
                     "message" => "Cantidad Agregada Correctamente.",
                     "tipo" => "success"
                 ]);
-        } else if ($sucursal == "Almacen General") {
+        } else if ($sucursal == "Almacen General" and $data->sku == $almacen->Codigo_SKU) {
             $query = DB::select(" UPDATE StoreHouse SET Entradas = ('$almacen->Entradas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' + '$cantidad') WHERE Codigo_Sku = '$sku' ");
             $entradas = DB::select("INSERT INTO Entradas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$mytime') ");
             $this->totales();
@@ -174,6 +174,7 @@ class MainController extends Controller
         }
     }
 
+    // Modificacion de precio de los productos
     public function UpdatePrecio()
     {
         $mytime = date('Y-m-d H:i:s');
@@ -189,39 +190,28 @@ class MainController extends Controller
         $Cdmx = Cdmx::find($data->id);
         $almacen = StoreHouse::find($data->id);
 
-        if ($sucursal == "En Linea") {
+        if ($sucursal == "En Linea" and $sku == $line->Codigo_Sku) {
             $query = DB::select("UPDATE stock_linea SET Precio = ('$precio'), updated_at = ('$mytime') WHERE Codigo_Sku = '$sku' ");
-
-
             return redirect()->route('AdminStock')
                 ->with([
                     "message" => "Precio Modificado Correctamente.",
                     "tipo" => "success"
                 ]);
-
-
-        } else if ($sucursal == "Acapulco") {
+        } else if ($sucursal == "Acapulco" and $sku == $Acapulco->Codigo_Sku) {
             $query = DB::select("UPDATE stock_Acapulco SET Precio = ('$precio'), updated_at = '$mytime' WHERE Nombre_Producto = '$nombre'");
-
             return redirect()->route('AdminStock')
                 ->with([
                     "message" => "Precio Modificado Correctamente.",
                     "tipo" => "success"
                 ]);
-
-
-        } else if ($sucursal == "Ciudad de Mexico") {
+        } else if ($sucursal == "Ciudad de Mexico" and $sku == $Cdmx->Codigo_Sku) {
             $query = DB::select("UPDATE stock_cdmx SET Precio = ('$precio'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
-
             return redirect()->route('AdminStock')
                 ->with([
                     "message" => "Precio Modificado Correctamente.",
                     "tipo" => "success"
                 ]);
-
-
-        } else if ($sucursal == "Almacen General" && $sku == $almacen->Codigo_SKU) {
-
+        } else if ($sucursal == "Almacen General" and $sku == $almacen->Codigo_SKU) {
             if ($data->opc == "Precio Compra") {
                 $query = DB::select("UPDATE storehouse SET Precio_Compra = ('$precio'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
                 $this->totales();
@@ -230,8 +220,6 @@ class MainController extends Controller
                         "message" => "Precio Modificado Correctamente.",
                         "tipo" => "success"
                     ]);
-
-
             } else if ($data->opc == "Precio Venta") {
                 $query = DB::select("UPDATE storehouse SET Precio_Venta = ('$precio'), updated_at = '$mytime' WHERE Codigo_Sku = '$sku' ");
                 $this->totales();
@@ -337,7 +325,7 @@ class MainController extends Controller
             $query = DB::select("UPDATE stock_cdmx SET Descuento = (Precio * '$data->des' / 100) WHERE Marca = '$data->desmarca' OR Codigo_Sku = '$data->desmarca' ");
             return redirect()->route('AdminStock')
                 ->with([
-                    "mensaje" => "Descuento Aplicado Correctamente.",
+                    "message" => "Descuento Aplicado Correctamente.",
                     "tipo" => "success"
                 ]);
             // return view('AddStock');
@@ -346,13 +334,50 @@ class MainController extends Controller
             $query = DB::select("UPDATE stock_acapulco SET Descuento = (Precio * '$data->des' / 100) WHERE Marca = '$data->desmarca' OR Codigo_Sku = '$data->desmarca' ");
             return redirect()->route('AdminStock')
                 ->with([
-                    "mensaje" => "Descuento Aplicado Correctamente.",
+                    "message" => "Descuento Aplicado Correctamente.",
                     "tipo" => "success"
                 ]);
             //return view('AddStock');
         }
     }
 
+    // Eliminar Producto
+
+    public function Delete(Request $request)
+    {
+        $data = request();
+
+        if ($data->sucursal == "Almacen General") {
+            $query = DB::select(" DELETE FROM storehouse WHERE Codigo_SKU = '$data->codigo' ");
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Producto Eliminado.",
+                    "tipo" => "success"
+                ]);
+        } else if ($data->sucursal == "En Linea") {
+            $query = DB::select(" DELETE FROM stock_linea WHERE Codigo_Sku = '$data->codigo' ");
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Producto Eliminado.",
+                    "tipo" => "success"
+                ]);
+        } else if ($data->sucursal == "Ciudad de Mexico") {
+            $query = DB::select(" DELETE FROM stock_cdmx WHERE Codigo_Sku = '$data->codigo' ");
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Producto Eliminado.",
+                    "tipo" => "success"
+                ]);
+        } else if ($data->sucursal == "Acapulco") {
+            $query = DB::select(" DELETE FROM stock_acapulco WHERE Codigo_Sku = '$data->codigo' ");
+        } else {
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message2" => "Error al Eliminar Producto.",
+                    "tipo" => "danger"
+                ]);
+        }
+    }
 
     //Funcion para Importar productos al stock masivos
     public function import(Request $request)

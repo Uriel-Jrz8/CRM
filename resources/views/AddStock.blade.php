@@ -25,6 +25,8 @@
       {{ session('message2') }}
     </div>
     @endif
+
+
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -35,17 +37,17 @@
             @method('PUT')
             @csrf
 
-            <div class="col-md-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Identificador Pedido</label></b>
               <input type="text" class="form-control2" name='id' autocomplete="off" placeholder="Número de Pedido" required onkeypress="return validaNumericos(event)" style="color: #6c757d; border-color:#6c757d;">
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Nombre del Producto</label></b>
               <input type="text" class="form-control2" name='nombre' autocomplete="off" placeholder="Nombre del Producto" required style="color: #6c757d; border-color:#6c757d;">
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Marca del Producto</label></b>
               <input type="text" class="form-control2" name='marca' autocomplete="off" placeholder="Marca" required style="color: #6c757d; border-color:#6c757d;">
               <!-- <select name="marca" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
@@ -61,7 +63,7 @@
               </select> -->
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Tipo de Animal</label></b>
               <select name="animal" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
                 <option>Perro</option>
@@ -69,12 +71,12 @@
               </select>
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Peso en Kilogramos</label></b>
               <input type="text" class="form-control2" name='unidad' autocomplete="off" placeholder="Peso" required style="color: #6c757d; border-color:#6c757d;">
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Categoría</label></b>
               <select name="categoria" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
                 <option>Alimento</option>
@@ -83,22 +85,22 @@
               </select>
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Precio Unitario</label></b>
               <input type="text" class="form-control2" name='precio' autocomplete="off" placeholder="Precio Unitario" required onkeypress="return validaNumericos(event)" required style="color: #6c757d; border-color:#6c757d;">
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Código SKU</label></b>
               <input type="text" class="form-control2" name='sku' autocomplete="off" placeholder="Código SKU" required required style="color: #6c757d; border-color:#6c757d;">
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Cantidad de Productos</label></b>
               <input type="text" class="form-control2" name='cantidad' autocomplete="off" placeholder="Cantidad de Productos" required onkeypress="return validaNumericos(event)" style="color: #6c757d; border-color:#6c757d;">
             </div>
 
-            <div class="col-xs-12 col-sm-8">
+            <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1" required>Tienda</label></b>
               <select name="sucursal" class="form-control" required style="color: #6c757d; border-color:#6c757d;">
                 <option>En Linea</option>
@@ -120,7 +122,7 @@
       <H3 style="color: #DE2692">{{ __('Aplicar Descuento') }} </H3>
       <div class="form-row">
 
-      <div class="col-xs-8 col-sm-3"> <b><label style="color: #000" for="exampleInput1">Marca del Producto ó Código SKU</label></b>
+        <div class="col-xs-8 col-sm-3"> <b><label style="color: #000" for="exampleInput1">Marca del Producto ó Código SKU</label></b>
           <input type="text" class="form-control1" name="desmarca" placeholder="Marca ó Código SKU" autocomplete="off" required>
         </div>
         <div class="col-xs-8 col-sm-3"> <b><label style="color: #000" for="exampleInput1">Descuento %</label></b>
@@ -139,7 +141,7 @@
           </svg>
 
         </button></center>
-    </form>
+    </form><br><br>
 
 
 
@@ -163,7 +165,7 @@
 
         <div class="col-xs-8 col-sm-3"> <b><label style="color: #000" for="exampleInput1">Sucursal</label></b> <select name="sucursal" class="form-control1">
             <option>Selecciona Sucursal</option>
-            <option>Almacen General</option>    
+            <option>Almacen General</option>
             <option>En Linea</option>
             <option>Ciudad de Mexico</option>
             <option>Acapulco</option>
@@ -177,7 +179,7 @@
             <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
           </svg></button> </center>
       <!-- style="color: #DE2692; border-color:#DE2692;" -->
-    </form>
+    </form><br><br>
 
 
 
@@ -199,16 +201,16 @@
         <div class="col-xs-8 col-sm-2"> <b><label style="color: #000" for="exampleInput1">Precio Producto</label></b>
           <input type="text" class="form-control1" name="precio" placeholder="$ MXN" required autocomplete="off" onkeypress="return validaNumericos(event)"> </div>
 
-          <div class="col-xs-8 col-sm-2.5"> <b><label style="color: #000" for="exampleInput1">Precio Compra ó Precio Venta</label></b> <select name="opc" class="form-control1">
+        <div class="col-xs-8 col-sm-2.5"> <b><label style="color: #000" for="exampleInput1">Precio Compra ó Precio Venta</label></b> <select name="opc" class="form-control1">
             <option>Selecciona una Opción</option>
-            <option>Precio Compra</option>    
+            <option>Precio Compra</option>
             <option>Precio Venta</option>
           </select>
         </div>&nbsp &nbsp
 
         <div class="col-xs-8 col-sm-2.5"> <b><label style="color: #000" for="exampleInput1">Sucursal</label></b> <select name="sucursal" class="form-control1">
             <option>Selecciona Sucursal</option>
-            <option>Almacen General</option>    
+            <option>Almacen General</option>
             <option>En Linea</option>
             <option>Ciudad de Mexico</option>
             <option>Acapulco</option>
@@ -254,14 +256,44 @@
             <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z" /></svg>
         </button>
       </center>
+    </form><br>
+
+
+    <form method="POST" action="{{route('Delete')}}">
+      @method('PUT')
+      @csrf
+      <H3 style="color: #DE2692">{{ __('Eliminar Producto') }} </H3>
+      <div class="form-row">
+
+        <div class="col-xs-8 col-sm-3"> <b><label style="color: #000" for="exampleInput1">Código SKU</label></b>
+          <input type="text" class="form-control1" name="codigo" placeholder="Código SKU" autocomplete="off" required>
+        </div>
+
+        <div class="col-xs-8 col-sm-3"> <b><label style="color: #000" for="exampleInput1">Sucursal</label></b> <select name="sucursal" class="form-control1">
+            <option>Selecciona Sucursal</option>
+            <option>Almacen General</option>
+            <option>En Linea</option>
+            <option>Ciudad de Mexico</option>
+            <option>Acapulco</option>
+          </select>
+        </div>
+
+      </div><br>
+      <center><button class="btn btn-outline-pink">Eliminar Producto &nbsp <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg>
+        </button></center>
     </form><br><br>
+
+
     <H3 style="color: #DE2692">{{ __('Agragar Nuevo Producto') }} </H3><br>
     <center>
-    <button type="button" class="btn btn-outline-pink" data-toggle="modal" data-target=".bd-example-modal-lg">Agrear Nuevo Producto &nbsp<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-      </svg>
-    </button>
+      <button type="button" class="btn btn-outline-pink" data-toggle="modal" data-target=".bd-example-modal-lg">Agrear Nuevo Producto &nbsp<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+        </svg>
+      </button>
     </center>
   </div>
 </div>

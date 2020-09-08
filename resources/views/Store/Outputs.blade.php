@@ -2,25 +2,26 @@
 @section('content')
 <center>
     <h1 style="font-family: Fredoka One;">Productos</h1>
-</center><br>
-
+</center>
 <div class="container-fluid">
-    <form action="">
+    <form  action="{{route('filtroSalidas')}}" method="GET">
+    @method('HEAD')
+          @csrf
         <div class="form-group row justify-content">
-            <div class="col-xs-8 col-sm-2">
-            <b><label style="color: #000" for="exampleInput1">Fecha</label></b>
-                <input type="date" class="form-control1" name="date1" placeholder="Año-Mes-Dia" autocomplete="off" required>
+            <div class="col col-sm-2">
+                <center> <b><label style="color: #000" for="exampleInput1">Fecha Inicial</label></b></center>
+                <input type="text" class="form-control11" name="date1" placeholder="Año-Mes-Dia  &#xf073;" autocomplete="off" required>
             </div><br><br>
-            <div class="col-xs-8 col-sm-2">
-            <b><label style="color: #000" for="exampleInput1">Fecha</label></b>
-                <input type="date" class="form-control1" name="dete2" placeholder="Año-Mes-Dia" autocomplete="off" required>
-            </div><br><br>  
-            <div class="col-sm-center col-xs-center">
-                
-            </div>
-            
+            <div class="col col-sm-2">
+                <center><b><label style="color: #000" for="exampleInput1">Fecha Final</label></b> </center>
+                <input type="text" class="form-control11" name="date2" placeholder="Año-Mes-Dia  &#xf073;" autocomplete="off" required>
+            </div><br><br>
         </div>
-        <button class="btn btn-outline-pink" style="margin: 0% 0% 0% 10%">Buscar por Fecha</button>
+        
+        <div class="col col-sm-4">
+            <center>
+        <button class="btn btn-outline-pink" style="margin: 0% 0% 0% 0%">Buscar por Fecha</button></center>
+        </div>
     </form>
 </div>
 <br>

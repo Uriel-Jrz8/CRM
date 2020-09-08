@@ -108,19 +108,32 @@ class ViewData extends Controller
     public function entradas(Request $request){ 
     $request->flash();
     $token = $request->get('_token');
-    $query = DB::select('select Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at from Entradas');
-    return view('Store.InputsOutputs',compact('query'));
+    $query = DB::select('SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Entradas');
+    return view('Store.Inputs',compact('query'));
     }
 
 
 
     public function salidas(Request $request){ 
-        $request->flash();
-        $token = $request->get('_token');
-        $query = DB::select('select Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at from Salidas');
-        return view('Store.InputsOutputs',compact('query'));
-        }
+    $request->flash();
+    $token = $request->get('_token');
+    $query = DB::select('SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Salidas');
+    return view('Store.Outputs',compact('query'));
+    }
 
+    public function filtroEntradas(Request $request){
+        $data = request();
+        $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Entradas
+         WHERE created_at BETWEEN '$data->date1 00:00:00' AND '$data->date2 12:59:59';");
+        return view('Store.Inputs',compact('query'));
+    }
+
+    public function filtroSalidas(Request $request){
+        $data = request();
+        $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Entradas
+         WHERE created_at BETWEEN '$data->date1 00:00:00' AND '$data->date2 12:59:59';");
+        return view('Store.Inputs',compact('query'));
+    }
 
 
 

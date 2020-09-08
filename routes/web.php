@@ -32,6 +32,9 @@ Route::put('/import','MainController@import')->name('import');
 Route::put('/downloadEcxel', 'MainController@exportDocument')->name('export');
 Route::put('/discount','MainController@Discount')->name('descuento');
 Route::get('/search','MainController@search')->name('search');
+Route::put('/delete','MainController@Delete')->name('Delete');
+
+
 
 //Rutas Para vizualizar los Datos que se encuentran de la BD ViewData
 
@@ -42,6 +45,8 @@ Route::get('/stock/Add/acapulco','ViewData@stockacapulco')->name('stockacapulco'
 Route::get('/stock/store/house','ViewData@storehouse')->name('storehouse');
 Route::get('/stock/store/house/inputs','ViewData@salidas')->name('Salidas'); 
 Route::get('/stock/store/house/outputs','ViewData@entradas')->name('Entradas'); 
+Route::get('/stock/store/house/entradas','ViewData@filtroEntradas')->name('filtroEntradas');
+Route::get('/stock/store/house/salidas','ViewData@filtroSalidas')->name('filtroSalidas');
 
 //Rutas para rediccionar a la hora de validar ROUTES
 

@@ -97,7 +97,7 @@ class ViewData extends Controller
     public function storehouse(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Existencias_Iniciales,Entradas,
+        $query = DB::select('select Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Entradas,
                              Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta from storehouse');
         return view('Store.StoreDetalle',compact('query'));
     }

@@ -38,76 +38,84 @@
             @csrf
 
             <div class="col-xs-12 col-sm-12">
-              <b><label class="text-info" for="exampleInput1">Identificador Pedido</label></b>
+              <b><label class="text-info" for="exampleInput1">Identificador de Producto</label></b>
               <input type="text" class="form-control2" name='id' autocomplete="off" placeholder="Número de Pedido" required onkeypress="return validaNumericos(event)" style="color: #6c757d; border-color:#6c757d;">
-            </div>
-
-            <div class="col-xs-12 col-sm-12">
-              <b><label class="text-info" for="exampleInput1">Nombre del Producto</label></b>
-              <input type="text" class="form-control2" name='nombre' autocomplete="off" placeholder="Nombre del Producto" required style="color: #6c757d; border-color:#6c757d;">
-            </div>
-
-            <div class="col-xs-12 col-sm-12">
-              <b><label class="text-info" for="exampleInput1">Marca del Producto</label></b>
-              <input type="text" class="form-control2" name='marca' autocomplete="off" placeholder="Marca" required style="color: #6c757d; border-color:#6c757d;">
-              <!-- <select name="marca" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
-                <option>Purina</option>
-                <option>Eukanuba</option>
-                <option>Royal Canin</option>
-                <option>Hill´s</option>
-                <option>Fulltrust</option>
-                <option>Nupec</option>
-                <option>Instict</option>
-                <option>Diamond</option>
-                <option>Sportmix Wholesomes</option>
-              </select> -->
-            </div>
-
-            <div class="col-xs-12 col-sm-12">
-              <b><label class="text-info" for="exampleInput1">Tipo de Animal</label></b>
-              <select name="animal" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
-                <option>Perro</option>
-                <option>Gato</option>
-              </select>
-            </div>
-
-            <div class="col-xs-12 col-sm-12">
-              <b><label class="text-info" for="exampleInput1">Peso en Kilogramos</label></b>
-              <input type="text" class="form-control2" name='unidad' autocomplete="off" placeholder="Peso" required style="color: #6c757d; border-color:#6c757d;">
-            </div>
-
-            <div class="col-xs-12 col-sm-12">
-              <b><label class="text-info" for="exampleInput1">Categoría</label></b>
-              <select name="categoria" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
-                <option>Alimento</option>
-                <option>Salud e Higiene</option>
-                <option>Accesorios</option>
-              </select>
-            </div>
-
-            <div class="col-xs-12 col-sm-12">
-              <b><label class="text-info" for="exampleInput1">Precio Unitario</label></b>
-              <input type="text" class="form-control2" name='precio' autocomplete="off" placeholder="Precio Unitario" required onkeypress="return validaNumericos(event)" required style="color: #6c757d; border-color:#6c757d;">
-            </div>
+            </div><br>
 
             <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Código SKU</label></b>
               <input type="text" class="form-control2" name='sku' autocomplete="off" placeholder="Código SKU" required required style="color: #6c757d; border-color:#6c757d;">
-            </div>
+            </div><br>
+
+            <div class="col-xs-12 col-sm-12">
+              <b><label class="text-info" for="exampleInput1">Nombre del Producto</label></b>
+              <input type="text" class="form-control2" name='nombre' autocomplete="off" placeholder="Nombre del Producto" required style="color: #6c757d; border-color:#6c757d;">
+            </div><br>
+
+            <div class="col-xs-12 col-sm-12">
+              <b><label class="text-info" for="exampleInput1">Marca del Producto</label></b>
+              <input type="text" class="form-control2" name='marca' autocomplete="off" placeholder="Marca" required style="color: #6c757d; border-color:#6c757d;">
+            </div><br>
+
+            <div class="col-xs-12 col-sm-12">
+              <b><label class="text-info" for="exampleInput1">Tipo de Animal</label></b>
+              <select name="animal" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
+                <option>Seleccionar</option>
+                <option>Perro</option>
+                <option>Gato</option>
+              </select>
+            </div><br>
+
+            <div class="col-xs-12 col-sm-12">
+              <b><label class="text-info" for="exampleInput1">Tipo Alimento</label></b>
+              <select name="alimento" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
+              <option>Seleccionar</option>
+                <option>Humedo</option>
+                <option>Seco</option>
+                <option>No Aplica</option>
+              </select>
+            </div><br>
+
+            <div class="col-xs-12 col-sm-12">
+              <b><label class="text-info" for="exampleInput1">Peso en Kilogramos</label></b>
+              <input type="text" class="form-control2" name='unidad' autocomplete="off" placeholder="Peso" required style="color: #6c757d; border-color:#6c757d;">
+            </div><br>
+
+            <div class="col-xs-12 col-sm-12">
+              <b><label class="text-info" for="exampleInput1">Categoría</label></b>
+              <select name="categoria" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
+              <option>Seleccionar</option>
+                <option>Alimento</option>
+                <option>Salud e Higiene</option>
+                <option>Accesorios</option>
+              </select>
+            </div><br>
+
+            <div class="col-xs-12 col-sm-12">
+              <b><label class="text-info" for="exampleInput1">Precio Compra</label></b>
+              <input type="text" class="form-control2" name='precioC' autocomplete="off" placeholder="Precio Compra" required onkeypress="return validaNumericos(event)" required style="color: #6c757d; border-color:#6c757d;">
+            </div><br>
+
+            <div class="col-xs-12 col-sm-12">
+              <b><label class="text-info" for="exampleInput1">Precio Venta</label></b>
+              <input type="text" class="form-control2" name='precioV' autocomplete="off" placeholder="Precio Venta" required onkeypress="return validaNumericos(event)" required style="color: #6c757d; border-color:#6c757d;">
+            </div><br>
 
             <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1">Cantidad de Productos</label></b>
               <input type="text" class="form-control2" name='cantidad' autocomplete="off" placeholder="Cantidad de Productos" required onkeypress="return validaNumericos(event)" style="color: #6c757d; border-color:#6c757d;">
-            </div>
+            </div><br>
 
             <div class="col-xs-12 col-sm-12">
               <b><label class="text-info" for="exampleInput1" required>Tienda</label></b>
               <select name="sucursal" class="form-control" required style="color: #6c757d; border-color:#6c757d;">
+                <option>Selecciona una Tienda</option>
+                <option>Almacen General</option>
                 <option>En Linea</option>
                 <option>Acapulco</option>
                 <option>Ciudad de Mexico</option>
               </select>
-            </div> <br>
+            </div> <br> <br>
             <center><button class="btn btn-outline-info">Nuevo Producto &nbsp <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-cart-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M11.354 5.646a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708 0z" />
                   <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />

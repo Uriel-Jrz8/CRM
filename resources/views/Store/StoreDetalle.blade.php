@@ -102,7 +102,7 @@
                     <th><b>Categoría</b></th>
                     <th><b>Precio de Compra</b></th>
                     <th><b>Precio de Venta</b></th>
-                    <th><b>Existencias Iniciales</th>
+
                     <th><b>Entradas</b></th>
                     <th><b>Salidas</b></th>
                     <th><b>Cantidad Existente</b></th>
@@ -122,7 +122,7 @@
                     <td><b>{{$producto->Categoria}}</b></td>
                     <td><b>${{number_format($producto->Precio_Compra,2)}}</b></td>
                     <td><b>${{number_format($producto->Precio_Venta,2)}}</b></td>
-                    <td><b>{{$producto->Existencias_Iniciales}}</b></td>
+               
                     <td><b>{{$producto->Entradas}}</b></td>
                     <td><b>{{$producto->Salidas}}</b></td>
                     <td><b>{{$producto->Cantidad_Existente}}</b></td>
@@ -135,7 +135,7 @@
         <form method="POST" action="{{ route('export')}}">
             @method('PUT')
             @csrf
-            <input type="hidden" name="mivar" value="select Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Existencias_Iniciales,Entradas,Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta from storehouse">
+            <input type="hidden" name="mivar" value="select Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Entradas,Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta from storehouse">
             <button type="submit" class="btn btn-outline-success">Descargar Inventario &nbsp <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin: 0% -1% 0% 0%;">
                     <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8z" />
                     <path fill-rule="evenodd" d="M5 7.5a.5.5 0 0 1 .707 0L8 9.793 10.293 7.5a.5.5 0 1 1 .707.707l-2.646 2.647a.5.5 0 0 1-.708 0L5 8.207A.5.5 0 0 1 5 7.5z" />

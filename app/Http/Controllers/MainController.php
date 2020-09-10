@@ -276,6 +276,7 @@ class MainController extends Controller
     //Agrega nuevos productos a la bd del stock
     public function NewAddstock()
     {
+        $mytime = date('Y-m-d H:i:s');
         $data = request();
         $nombre = $data->nombre;
         $marca = $data->marca;
@@ -290,22 +291,60 @@ class MainController extends Controller
         $line = line::find($data->id);
         $Acapulco = Acapulco::find($data->id);
         $Cdmx = Cdmx::find($data->id);
+        $almacen = StoreHouse::find($data->id);
 
-        if ($sucursal == "En Linea") {
-            $query = DB::select("insert into stock_linea (Nombre_Producto,Marca,Animal,Peso,Categoria,Precio,Codigo_Sku,Cantidad)
-                    VALUES ('$nombre','$marca','$animal','$peso','$categoria','$precio','$sku','$cantidad')");
-            return view('AddStock');
+
+        if ($sucursal == "Almacen General") {
+            $query = DB::select("INSERT INTO storehouse (Codigo_SKU,Descripcion,Marca,Animal,Tipo_alimento,Peso,Categoria,Precio_Compra,Precio_Venta,Entradas,Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta,created_at,updated_at)
+             VALUES ('$sku','$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioC','$data->precioV','$cantidad',0,'$cantidad','$data->precioC' * '$cantidad','$data->precioV '* '$cantidad','$mytime','$mytime')");
+            $entradas = DB::select("INSERT INTO Entradas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$sku','$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$cantidad','$sucursal','$mytime') ");
+
+            return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Producto Nuevo Agregado Correctamennte.",
+                    "tipo" => "success"
+                ]);
+                
+        } else if ($sucursal == "En Linea") {
+            $query = DB::select("insert into stock_linea (Nombre_Producto,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio,Codigo_Sku,Cantidad,Descuento)
+                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0)");
+                    $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
+                    $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$sku','$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$cantidad','$sucursal','$mytime') ");
+                    $this->totales();
+            return redirect()->route('AdminStock')
+            ->with([
+                "message" => "Producto Nuevo Agregado Correctamennte.",
+                "tipo" => "success"
+            ]);
+
         } else if ($sucursal == "Acapulco") {
-            $query = DB::select("insert into stock_Acapulco (Nombre_Producto,Marca,Animal,Peso,Categoria,Precio,Codigo_Sku,Cantidad)
-                 VALUES ('$nombre','$marca','$animal','$peso','$categoria','$precio','$sku','$cantidad')");
-            return view('AddStock');
+            $query = DB::select("insert into stock_acapulco (Nombre_Producto,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio,Codigo_Sku,Cantidad,Descuento)
+                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0)");
+                    $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
+                    $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$sku','$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$cantidad','$sucursal','$mytime') ");
+                    $this->totales();
+            return redirect()->route('AdminStock')
+            ->with([
+                "message" => "Producto Nuevo Agregado Correctamennte.",
+                "tipo" => "success"
+            ]);
+
         } else if ($sucursal == "Ciudad de Mexico") {
-            $query = DB::select("insert into stock_cdmx (Nombre_Producto,Marca,Animal,Peso,Categoria,Precio,Codigo_Sku,Cantidad)
-                     VALUES ('$nombre','$marca','$animal','$peso','$categoria','$precio','$sku','$cantidad')");
+            $query = DB::select("insert into stock_cdmx (Nombre_Producto,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio,Codigo_Sku,Cantidad,Descuento)
+                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0)");
+                    $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
+                    $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$sku','$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$cantidad','$sucursal','$mytime') ");
+                    $this->totales();
+
+            return redirect()->route('AdminStock')
+            ->with([
+                "message" => "Producto Nuevo Agregado Correctamennte.",
+                "tipo" => "success"
+            ]);
+
         } else {
-            return view('AddStock');
+            return view('error');
         }
-        return view('error');
     }
 
 

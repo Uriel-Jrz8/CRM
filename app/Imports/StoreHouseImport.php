@@ -26,12 +26,11 @@ class StoreHouseImport implements ToModel
             'Categoria'=> $row[7],
             'Precio_Compra'=> $row[8],
             'Precio_Venta'=> $row[9],
-            'Existencias_Iniciales'=> $row[10],
-            'Entradas'=>$row[11],
-            'Salidas'=>$row[12],
-            'Cantidad_Existente'=> $row[13],
-            'Valor_Compra'=> $row[14],
-            'Valor_Venta'=> $row[15],
+            'Entradas'=>$row[10],
+            'Salidas'=>$row[11],
+            'Cantidad_Existente'=> $row[12],
+            'Valor_Compra'=> $row[13],
+            'Valor_Venta'=> $row[14],
             //'Tienda'=> $row[9],
         ]);
     }

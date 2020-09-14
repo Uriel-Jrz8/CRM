@@ -8,17 +8,17 @@ class line extends Model
 {
     protected $table = 'stock_linea';
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'Id';
     
     public function getRouteKeyName(){
-        return 'id'; 
+        return 'Id'; 
     }
     // protected $casts = [
     //     'finalized' => 'boolean',
     // ];
 
     protected $fillable = [
-        'id','Nombre_Producto','Marca','Animal','Tipo_Alimento','Peso','Categoria','Precio','Descuento','Codigo_Sku','Cantidad','created_at','updated_at'
+        'Id','Descripcion','Marca','Animal','Tipo_Alimento','Peso','Categoria','Precio_Venta','Descuento','Codigo_SKU','Cantidad_Existente','Porcentaje','created_at','updated_at'
     ];
 
     // protected $hidden = [

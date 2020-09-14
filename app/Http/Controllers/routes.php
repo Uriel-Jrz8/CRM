@@ -35,44 +35,47 @@ class routes extends Controller
         $data = request();
         $finTotal = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $finTotal += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
+            $finTotal += $producto->cantidad * $producto->Precio_Venta - ($producto->Descuento * $producto->cantidad);
         }
 
         $productos = $this->obtenerProductos();
         // Recorrer carrito de compras
         foreach ($productos as $producto) {
             // El producto que se vende...
-            $productoActualizado = line::find($producto->id);
+            $productoActualizado = line::find($producto->Id);
             $productoVendido = new OrdersLine();
-            $total1 = $producto->Precio * $producto->cantidad - ($producto->Descuento * $producto->cantidad);
+            $total1 = $producto->Precio_Venta * $producto->cantidad - ($producto->Descuento * $producto->cantidad);
             
             $productoVendido->folio = $data->folio;
-            $productoVendido->Nombre_Producto = $producto->Nombre_Producto;
+            $productoVendido->Descripcion = $producto->Descripcion;
             $productoVendido->Marca = $producto->Marca;
             $productoVendido->Animal = $producto->Animal;
             $productoVendido->Tipo_Alimento = $producto->Tipo_Alimento;
             $productoVendido->Peso = $producto->Peso;
             $productoVendido->Categoria = $producto->Categoria;
-            $productoVendido->Precio = $producto->Precio;
-            $productoVendido->Codigo_Sku = $producto->Codigo_Sku;
+            $productoVendido->Precio_Venta = $producto->Precio_Venta;
+            $productoVendido->Codigo_SKU = $producto->Codigo_SKU;
             $productoVendido->Cantidad = $producto->cantidad;
-            $productoVendido->Subtotal = ($producto->cantidad * $producto->Precio);
+            $productoVendido->Subtotal = ($producto->Cantidad_Existente * $producto->Precio_Venta);
             $productoVendido->Descuento = $producto->Descuento * $producto->cantidad;
+            $productoVendido->Porcentaje = $producto->Porcentaje;
             $productoVendido->Total = $total1;
             // Lo guardamos
             $productoVendido->saveOrFail();
             // Y restamos la existencia del original
-            $productoActualizado = line::find($producto->id);
-            $productoActualizado->Cantidad -= $productoVendido->cantidad;
+            $productoActualizado = line::find($producto->Id);
+            $productoActualizado->Cantidad_Existente -= $productoVendido->cantidad;
             $productoActualizado->saveOrFail();
         }
-
+// Agregar ventas a la tabla ventas 
         $TotalVenta = new VentasLinea();
         $TotalVenta->folio = $data->folio;
         $TotalVenta->Total = $finTotal;
+        $TotalVenta->Metodo_Pago = "Transferencia";
+        $TotalVenta->Tarjeta = "xxx xxx xxx xxx";
         $TotalVenta->saveOrFail();
-        $query1 = DB::select("update stock_linea set Cantidad = ('$productoActualizado->Cantidad' - '$producto->cantidad')
-                             where Nombre_Producto = '$producto->Nombre_Producto' AND Codigo_Sku = '$producto->Codigo_Sku' ");
+        $query1 = DB::select("update stock_linea set Cantidad_Existente = ('$productoActualizado->Cantidad_Existente' - '$producto->cantidad')
+                             where Descripcion = '$producto->Descripcion' AND Codigo_SKU = '$producto->Codigo_SKU' ");
 
         $this->vaciarProductos();
         return redirect()
@@ -82,6 +85,8 @@ class routes extends Controller
                 "tipo" => "success"
             ]);
     }
+
+
     public function quitarProductoDeVenta(Request $request)
     {
         $indice = $request->post("indice");
@@ -101,7 +106,7 @@ class routes extends Controller
     private function buscarIndiceDeProducto(string $codigo, array &$productos)
     {
         foreach ($productos as $indice => $producto) {
-            if ($producto->Codigo_Sku === $codigo) {
+            if ($producto->Codigo_SKU === $codigo) {
                 return $indice;
             }
         }
@@ -120,7 +125,7 @@ class routes extends Controller
     public function agregarProductoVenta(Request $request)
     {
         $codigo = $request->post("codigo");
-        $producto = line::where("Codigo_Sku", "=", $codigo)->first();
+        $producto = line::where("Codigo_SKU", "=", $codigo)->first();
         if (!$producto) {
             return redirect()
                 ->route("service")
@@ -137,7 +142,7 @@ class routes extends Controller
     private function agregarProductoACarrito($producto)
     {
 
-        if ($producto->Cantidad <= 0) {
+        if ($producto->Cantidad_Existente <= 0) {
             
             return redirect()->route("service")
                 ->with([
@@ -147,13 +152,13 @@ class routes extends Controller
         }
 
         $productos = $this->obtenerProductos();
-        $posibleIndice = $this->buscarIndiceDeProducto($producto->Codigo_Sku, $productos);
+        $posibleIndice = $this->buscarIndiceDeProducto($producto->Codigo_SKU, $productos);
         // Es decir, producto no fue encontrado
         if ($posibleIndice === -1) {
             $producto->cantidad = 1;
             array_push($productos, $producto);
         } else {
-            if ($productos[$posibleIndice]->cantidad + 1 > $producto->Cantidad) {
+            if ($productos[$posibleIndice]->cantidad + 1 > $producto->Cantidad_Existente) {
                 return redirect()->route("service")
                     ->with([
                         "mensaje" => "No se puede agregar mas producto, Por favor pide producto a tu provedor",
@@ -176,7 +181,7 @@ class routes extends Controller
     {
         $total = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $total += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
+            $total += $producto->cantidad * $producto->Precio_Venta - ($producto->Descuento * $producto->cantidad);
         }
         return view(
             "ViewLinea.Client",

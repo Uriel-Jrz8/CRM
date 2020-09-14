@@ -19,7 +19,7 @@ class StoreHouse extends Model
 
     protected $fillable = [
         'id','Codigo_SKU','Descripcion','Marca','Animal','Tipo_Alimento','Peso','Categoria','Precio_Compra',
-        'Precio_Venta','Existencias_Iniciales','Entradas','Salidas','Cantidad_Existente','Valor_Compra','Valor_Venta','created_at','updated_at'
+        'Precio_Venta','Entradas','Salidas','Cantidad_Existente','Valor_Compra','Valor_Venta','created_at','updated_at'
     ];
 
     // protected $hidden = [

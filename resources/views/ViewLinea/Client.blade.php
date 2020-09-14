@@ -83,12 +83,12 @@
             @foreach(session("productos") as $producto)
             <tr>
               <td><center>{{$producto->cantidad}}</center></td>
-              <td><center>{{$producto->Nombre_Producto}}</center></td>
-              <td><center>{{$producto->Codigo_Sku}}</center></td>
-              <td><center>$ {{number_format($producto->Precio, 2)}} MXN</center></td>
+              <td><center>{{$producto->Descripcion}}</center></td>
+              <td><center>{{$producto->Codigo_SKU}}</center></td>
+              <td><center>$ {{number_format($producto->Precio_Venta, 2)}} MXN</center></td>
               <!-- <td><center>$ {{number_format($producto->Precio * $producto->cantidad, 2)}} MXN</center></td> -->
               <td><center>$ {{number_format($producto->Descuento * $producto->cantidad ,2 )}} MXN</center></td>
-              <td><center>$ {{number_format(($producto->Precio * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center></td>
+              <td><center>$ {{number_format(($producto->Precio_Venta * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center></td>
               <td><center>
                 <form action="{{route('quitarProductoDeVenta')}}" method="post">
                   @method("delete")

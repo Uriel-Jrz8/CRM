@@ -47,7 +47,7 @@ class VentasCdmx extends Controller
             $productoVendido->Peso = $producto->Peso;
             $productoVendido->Categoria = $producto->Categoria;
             $productoVendido->Precio = $producto->Precio;
-            $productoVendido->Codigo_Sku = $producto->Codigo_Sku;
+            $productoVendido->Codigo_SKU = $producto->Codigo_SKU;
             $productoVendido->Cantidad = $producto->cantidad;
             $productoVendido->Subtotal = ($producto->cantidad * $producto->Precio);
             $productoVendido->Descuento = $producto->Descuento * $producto->cantidad;
@@ -65,7 +65,7 @@ class VentasCdmx extends Controller
         $TotalVenta->Total = $finTotal;
         $TotalVenta->saveOrFail();
         $query1 = DB::select("update stock_cdmx set Cantidad = ('$productoActualizado->Cantidad' - '$producto->cantidad')
-                             where Nombre_Producto = '$producto->Nombre_Producto' AND Codigo_Sku = '$producto->Codigo_Sku' ");
+                             where Nombre_Producto = '$producto->Nombre_Producto' AND Codigo_SKU = '$producto->Codigo_SKU' ");
 
         $this->vaciarProductos();
         return redirect()
@@ -94,7 +94,7 @@ class VentasCdmx extends Controller
     private function buscarIndiceDeProducto(string $codigo, array &$productos)
     {
         foreach ($productos as $indice => $producto) {
-            if ($producto->Codigo_Sku === $codigo) {
+            if ($producto->Codigo_SKU === $codigo) {
                 return $indice;
             }
         }
@@ -113,7 +113,7 @@ class VentasCdmx extends Controller
     public function agregarProductoVenta(Request $request)
     {
         $codigo = $request->post("codigo");
-        $producto = Cdmx::where("Codigo_Sku", "=", $codigo)->first();
+        $producto = Cdmx::where("Codigo_SKU", "=", $codigo)->first();
         if (!$producto) {
             return redirect()
                 ->route("cdmx")
@@ -138,7 +138,7 @@ class VentasCdmx extends Controller
                 ]);
         }
         $productos = $this->obtenerProductos();
-        $posibleIndice = $this->buscarIndiceDeProducto($producto->Codigo_Sku, $productos);
+        $posibleIndice = $this->buscarIndiceDeProducto($producto->Codigo_SKU, $productos);
         // Es decir, producto no fue encontrado
         if ($posibleIndice === -1) {
             $producto->cantidad = 1;

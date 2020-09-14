@@ -25,7 +25,7 @@ class CdmxImport implements ToModel
             'Categoria'=> $row[6],
             'Precio'=> $row[7],
             'Descuento'=>$row[8],
-            'Codigo_Sku'=> $row[9],
+            'Codigo_SKU'=> $row[9],
             'Cantidad'=> $row[10],
             //'Tienda'=> $row[9],
         ]);

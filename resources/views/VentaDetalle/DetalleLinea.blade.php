@@ -19,7 +19,7 @@
             <tr>
                 <td><b>{{$producto->Cantidad}}</b></td>
                 <td><b>{{$producto->Nombre_Producto}}</b></td>
-                <td><b>{{$producto->Codigo_Sku}}</b></td>
+                <td><b>{{$producto->Codigo_SKU}}</b></td>
                 <td><b>$ {{number_format($producto->Precio,2)}} MXN</b></td>
                 <!-- <td><b>$ {{number_format($producto->Subtotal,2)}} MXN</b></td> -->
                 <td><b>$ {{number_format($producto->Descuento,2)}} MXN</b></td>

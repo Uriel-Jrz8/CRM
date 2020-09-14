@@ -9,6 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class OrdersLine extends Model
 {
     protected $table = "orders_linea";
-    protected $fillable = ["id","folio","Nombre_Producto","Marca","Animal","Tipo_Alimento","Peso","Categoria","Precio","Codigo_Sku",
-                           "Cantidad","Subtotal","Descuento","total"];
+    protected $fillable = ["id","folio","Descripcion","Marca","Animal","Tipo_Alimento","Peso","Categoria","Precio_Venta","Codigo_SKU",
+                           "Cantidad","Subtotal","Descuento","Porcentaje","Total"];
 }

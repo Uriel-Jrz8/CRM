@@ -81,8 +81,8 @@ class routes extends Controller
         return redirect()
             ->route("service")
             ->with([
-                "mensaje" => "Venta Realizada Correctamente",
-                "tipo" => "success"
+                "message" => "Venta Realizada Correctamente",
+                "tipo" => "info"
             ]);
     }
 

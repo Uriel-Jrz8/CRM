@@ -30,7 +30,7 @@ class MainController extends Controller
     {
         $data = request();
         $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Entradas,
-                             Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta FROM storehouse WHERE Descripcion LIKE '%$data->search%' OR Descripcion LIKE '%$data->search%'");
+                             Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta FROM storehouse WHERE Descripcion LIKE '%$data->search%' OR Marca LIKE '%$data->search%'");
 
         return view('Store.StoreDetalle', compact('query'));
     }
@@ -137,8 +137,8 @@ class MainController extends Controller
                 ]);
         } else if ($sucursal == "Acapulco" and $data->sku == $Acapulco->Codigo_SKU) {
             $query = DB::select("UPDATE stock_Acapulco SET Cantidad_Existente = ('$Acapulco->Cantidad_Existente'+ '$cantidad'), updated_at = '$mytime' WHERE Codigo_SKU = '$sku'");
-            $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
-            $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$mytime') ");
+            $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_SKU = '$sku' ");
+            $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$sucursal','$mytime') ");
             $this->totales();
             return redirect()->route('AdminStock')
                 ->with([
@@ -147,8 +147,8 @@ class MainController extends Controller
                 ]);
         } else if ($sucursal == "Ciudad de Mexico" and $data->sku == $Cdmx->Codigo_SKU) {
             $query = DB::select("UPDATE stock_cdmx SET Cantidad_Existente = ('$Cdmx->Cantidad_Existente'+ '$cantidad'), updated_at = '$mytime' WHERE Codigo_SKU = '$sku' ");
-            $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
-            $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$mytime') ");
+            $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_SKU = '$sku' ");
+            $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$almacen->Codigo_SKU','$almacen->Descripcion','$almacen->Marca','$almacen->Animal','$almacen->Tipo_Alimento','$almacen->Peso','$almacen->Categoria','$cantidad','$sucursal','$mytime') ");
             $this->totales();
             return redirect()->route('AdminStock')
                 ->with([
@@ -306,8 +306,8 @@ class MainController extends Controller
                 ]);
                 
         } else if ($sucursal == "En Linea") {
-            $query = DB::select("insert into stock_linea (Nombre_Producto,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio,Codigo_Sku,Cantidad,Descuento)
-                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0)");
+            $query = DB::select("INSERT INTO stock_linea (Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio_Venta,Codigo_SKU,Cantidad_Existente,Descuento,Porcentaje,created_at,updated_at)
+                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0,0,'$mytime','$mytime')");
                     $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
                     $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$sku','$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$cantidad','$sucursal','$mytime') ");
                     $this->totales();
@@ -318,8 +318,8 @@ class MainController extends Controller
             ]);
 
         } else if ($sucursal == "Acapulco") {
-            $query = DB::select("insert into stock_acapulco (Nombre_Producto,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio,Codigo_Sku,Cantidad,Descuento)
-                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0)");
+            $query = DB::select("INSERT INTO stock_acapulco (Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio_Venta,Codigo_SKU,Cantidad_Existente,Descuento,Porcentaje,created_at,updated_at)
+                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0,0,'$mytime','$mytime')");
                     $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
                     $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$sku','$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$cantidad','$sucursal','$mytime') ");
                     $this->totales();
@@ -330,8 +330,8 @@ class MainController extends Controller
             ]);
 
         } else if ($sucursal == "Ciudad de Mexico") {
-            $query = DB::select("insert into stock_cdmx (Nombre_Producto,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio,Codigo_Sku,Cantidad,Descuento)
-                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0)");
+            $query = DB::select("INSERT INTO stock_cdmx (Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Precio_Venta,Codigo_SKU,Cantidad_Existente,Descuento,Porcentaje,created_at,updated_at)
+                    VALUES ('$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$data->precioV','$sku','$cantidad',0,0,'$mytime','$mytime')");
                     $query2 = DB::select("UPDATE StoreHouse SET Salidas = ('$almacen->Salidas' + '$cantidad'), Cantidad_Existente = ('$almacen->Cantidad_Existente' - '$cantidad') WHERE Codigo_Sku = '$sku' ");
                     $salidas = DB::select("INSERT INTO Salidas (Codigo_SKU,Descripcion,Marca,Animal,Tipo_Alimento,Peso,Categoria,Cantidad,Sucursal,created_at) VALUES ('$sku','$nombre','$marca','$animal','$data->alimento','$peso','$categoria','$cantidad','$sucursal','$mytime') ");
                     $this->totales();
@@ -361,7 +361,7 @@ class MainController extends Controller
             //return view('AddStock'); 
 
         } else if ($data->sucursal == "Ciudad de Mexico") {
-            $query = DB::select("UPDATE stock_cdmx SET Descuento = (Precio_Venta * '$data->des' / 100) WHERE Marca = '$data->desmarca' OR Codigo_SKU = '$data->desmarca' ");
+            $query = DB::select("UPDATE stock_cdmx SET Descuento = (Precio_Venta * '$data->des' / 100), Porcentaje = '$data->des' WHERE Marca = '$data->desmarca' OR Codigo_SKU = '$data->desmarca' ");
             return redirect()->route('AdminStock')
                 ->with([
                     "message" => "Descuento Aplicado Correctamente.",
@@ -370,7 +370,7 @@ class MainController extends Controller
             // return view('AddStock');
 
         } else if ($data->sucursal == "Acapulco") {
-            $query = DB::select("UPDATE stock_acapulco SET Descuento = (Precio_Venta * '$data->des' / 100) WHERE Marca = '$data->desmarca' OR Codigo_SKU = '$data->desmarca' ");
+            $query = DB::select("UPDATE stock_acapulco SET Descuento = (Precio_Venta * '$data->des' / 100), Porcentaje = '$data->des' WHERE Marca = '$data->desmarca' OR Codigo_SKU = '$data->desmarca' ");
             return redirect()->route('AdminStock')
                 ->with([
                     "message" => "Descuento Aplicado Correctamente.",

@@ -30,51 +30,58 @@ class VentasCdmx extends Controller
         $data = request();
         $finTotal = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $finTotal += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
+            $finTotal += $producto->cantidad * $producto->Precio_Venta - ($producto->Descuento * $producto->cantidad);
         }
 
         $productos = $this->obtenerProductos();
         // Recorrer carrito de compras
         foreach ($productos as $producto) {
             // El producto que se vende...
-            $productoActualizado = Cdmx::find($producto->id);
+            $productoActualizado = Cdmx::find($producto->Id);
             $productoVendido = new OrdersCdmx();
-            $total1 = $producto->Precio * $producto->cantidad - ($producto->Descuento * $producto->cantidad);
+            $total1 = $producto->Precio_Venta * $producto->cantidad - ($producto->Descuento * $producto->cantidad);
+            
             $productoVendido->folio = $data->folio;
-            $productoVendido->Nombre_Producto = $producto->Nombre_Producto;
+            $productoVendido->Descripcion = $producto->Descripcion;
             $productoVendido->Marca = $producto->Marca;
             $productoVendido->Animal = $producto->Animal;
+            $productoVendido->Tipo_Alimento = $producto->Tipo_Alimento;
             $productoVendido->Peso = $producto->Peso;
             $productoVendido->Categoria = $producto->Categoria;
-            $productoVendido->Precio = $producto->Precio;
+            $productoVendido->Precio_Venta = $producto->Precio_Venta;
             $productoVendido->Codigo_SKU = $producto->Codigo_SKU;
             $productoVendido->Cantidad = $producto->cantidad;
-            $productoVendido->Subtotal = ($producto->cantidad * $producto->Precio);
+            $productoVendido->Subtotal = ($producto->Cantidad_Existente * $producto->Precio_Venta);
             $productoVendido->Descuento = $producto->Descuento * $producto->cantidad;
+            $productoVendido->Porcentaje = $producto->Porcentaje;
             $productoVendido->Total = $total1;
             // Lo guardamos
             $productoVendido->saveOrFail();
             // Y restamos la existencia del original
-            $productoActualizado = Cdmx::find($producto->id);
-            $productoActualizado->Cantidad -= $productoVendido->cantidad;
+            $productoActualizado = Cdmx::find($producto->Id);
+            $productoActualizado->Cantidad_Existente -= $productoVendido->cantidad;
             $productoActualizado->saveOrFail();
         }
-
+// Agregar ventas a la tabla ventas 
         $TotalVenta = new VentaCdmx();
         $TotalVenta->folio = $data->folio;
         $TotalVenta->Total = $finTotal;
+        $TotalVenta->Metodo_Pago = "Transferencia";
+        $TotalVenta->Tarjeta = "xxx xxx xxx xxx";
         $TotalVenta->saveOrFail();
-        $query1 = DB::select("update stock_cdmx set Cantidad = ('$productoActualizado->Cantidad' - '$producto->cantidad')
-                             where Nombre_Producto = '$producto->Nombre_Producto' AND Codigo_SKU = '$producto->Codigo_SKU' ");
+        $query1 = DB::select("update stock_cdmx set Cantidad_Existente = ('$productoActualizado->Cantidad_Existente' - '$producto->cantidad')
+                             where Descripcion = '$producto->Descripcion' AND Codigo_SKU = '$producto->Codigo_SKU' ");
 
         $this->vaciarProductos();
         return redirect()
             ->route("cdmx")
             ->with([
-                "mensaje" => "Venta Realizada Correctamente",
+                "message" => "Venta Realizada Correctamente",
                 "tipo" => "success"
             ]);
     }
+
+
     public function quitarProductoDeVenta(Request $request)
     {
         $indice = $request->post("indice");
@@ -130,13 +137,15 @@ class VentasCdmx extends Controller
     private function agregarProductoACarrito($producto)
     {
 
-        if ($producto->Cantidad <= 0) {
+        if ($producto->Cantidad_Existente <= 0) {
+            
             return redirect()->route("cdmx")
                 ->with([
                     "mensaje" => "No hay existencias del producto",
                     "tipo" => "danger"
                 ]);
         }
+
         $productos = $this->obtenerProductos();
         $posibleIndice = $this->buscarIndiceDeProducto($producto->Codigo_SKU, $productos);
         // Es decir, producto no fue encontrado
@@ -144,23 +153,28 @@ class VentasCdmx extends Controller
             $producto->cantidad = 1;
             array_push($productos, $producto);
         } else {
-            if ($productos[$posibleIndice]->cantidad + 1 > $producto->Cantidad) {
+            if ($productos[$posibleIndice]->cantidad + 1 > $producto->Cantidad_Existente) {
                 return redirect()->route("cdmx")
                     ->with([
-                        "mensaje" => "No se pueden agregar más productos de este tipo, se quedarían sin existencia",
+                        "mensaje" => "No se puede agregar mas producto, Por favor pide producto a tu provedor",
                         "tipo" => "danger"
                     ]);
-            }
-            $productos[$posibleIndice]->cantidad++;
+           
+                    }
+                   
+                    $productos[$posibleIndice]->cantidad++;
         }
         $this->guardarProductos($productos);
+
+
+        
     }
     
     public function RouteShop()
     {
         $total = 0;
         foreach ($this->obtenerProductos() as $producto) {
-            $total += $producto->cantidad * $producto->Precio - ($producto->Descuento * $producto->cantidad);
+            $total += $producto->cantidad * $producto->Precio_Venta - ($producto->Descuento * $producto->cantidad);
         }
         return view(
             "ViewCdmx.shops",

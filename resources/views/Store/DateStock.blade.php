@@ -34,7 +34,8 @@
                         <th><center>Peso</center></th>
                         <th><center>Cantidad Existente</center></th>
                         <th><center>Precio Unitario MXN</center></th>
-                        <th><center>Descuento MXN</center></th>
+                        <th><center>Descuento Aplicado MXN</center></th>
+                        <th><center>Porcentaje Aplicado % </center></th>
                         <!-- <th>Eliminar</th> -->
                     </tr>
                 </thead>

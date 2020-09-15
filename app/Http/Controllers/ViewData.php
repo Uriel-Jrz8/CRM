@@ -27,8 +27,8 @@ class ViewData extends Controller
     public function DetalleLinea()
     {
         $data = request();
-        $queryDetalle = DB::select("select Nombre_Producto,Codigo_SKU,Marca,Precio,Subtotal,Descuento,Cantidad,Total from orders_linea where folio = '$data->folioVenta' ");
-        $queryTotal =DB::select(" select folio,Total from ventas where folio = '$data->folioVenta' group by folio,total");
+        $queryDetalle = DB::select("select Descripcion,Codigo_SKU,Marca,Precio_Venta,Subtotal,Descuento,Cantidad,Total,Porcentaje from orders_linea where folio = '$data->folioVenta' ");
+        $queryTotal =DB::select(" select folio,Total from ventas_linea where folio = '$data->folioVenta' group by folio,total");
         return view('VentaDetalle/DetalleLinea',compact('queryDetalle','queryTotal'));
     }
 
@@ -44,7 +44,7 @@ class ViewData extends Controller
     public function DetalleCdmx()
     {
         $data = request();
-        $queryDetalle = DB::select("select Nombre_Producto,Codigo_SKU,Marca,Precio,Cantidad,Total from orders_cdmx where folio = '$data->folioVenta' ");
+        $queryDetalle = DB::select("select Descripcion,Codigo_SKU,Marca,Precio_Venta,Subtotal,Descuento,Cantidad,Total,Porcentaje from orders_cdmx where folio = '$data->folioVenta' ");
         $queryTotal =DB::select(" select folio,Total from ventas_cdmx where folio = '$data->folioVenta' group by folio,total");
         return view('VentaDetalle/DetalleCdmx',compact('queryDetalle','queryTotal'));
     }
@@ -60,24 +60,26 @@ class ViewData extends Controller
     public function DetalleAcapulco()
     {
         $data = request();
-        $queryDetalle = DB::select("select Nombre_Producto,Codigo_SKU,Marca,Precio,Cantidad,Total from orders_acapulco where folio = '$data->folioVenta' ");
+        $queryDetalle = DB::select("select Descripcion,Codigo_SKU,Marca,Precio_Venta,Subtotal,Descuento,Cantidad,Total,Porcentaje from orders_acapulco where folio = '$data->folioVenta' ");
         $queryTotal =DB::select(" select folio,Total from ventas_acapulco where folio = '$data->folioVenta' group by folio,total");
         return view('VentaDetalle/DetalleAcapulco',compact('queryDetalle','queryTotal'));
     }
 
+
+    // Metodos para vizualisar los datos del stock
+
     public function stocklinea(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Codigo_SKU,Nombre_Producto, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad,Precio,Descuento from stock_linea');
+        $query = DB::select('select Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_linea');
         return view('Store.DateStock',compact('query'));
     }
-
 
     
     public function stockcdmx(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Codigo_SKU, Nombre_Producto, Marca, Animal, Tipo_Alimento,Categoria, Peso, Cantidad,Precio,Descuento from stock_cdmx');
+        $query = DB::select('select Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_cdmx');
         $query2 = "select Nombre_Producto, Marca, Animal, Tipo_Alimento, Peso, Categoria, Codigo_SKU,Cantidad,Precio,Descuento from stock_cdmx";
         return view('Store.DateStock',compact('query','query2'));
     }
@@ -87,12 +89,9 @@ class ViewData extends Controller
     public function stockacapulco(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Nombre_Producto, Marca, Animal, Tipo_Alimento, Peso, Categoria, Codigo_SKU,Cantidad,Precio,Descuento from stock_acapulco');
+        $query = DB::select('select Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_acapulco');
         return view('Store.DateStock',compact('query'));
     }
-
-
-
 
     public function storehouse(Request $request){
         $request->flash();
@@ -102,17 +101,12 @@ class ViewData extends Controller
         return view('Store.StoreDetalle',compact('query'));
     }
 
-
-
-
     public function entradas(Request $request){ 
     $request->flash();
     $token = $request->get('_token');
     $query = DB::select('SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Entradas');
     return view('Store.Inputs',compact('query'));
     }
-
-
 
     public function salidas(Request $request){ 
     $request->flash();

@@ -11,6 +11,7 @@
                 <th><b>Precio Unitario</b></th>
                 <!-- <th><b>Subtotal Sin Descuento</b></th> -->
                 <th><b>Descuento Aplicado</b></th>
+                <th><b>Porcentaje</b></th>
                 <th><b>Subtotal</b></th>
             </tr>
         </thead>
@@ -18,11 +19,12 @@
             @foreach($queryDetalle as $producto)
             <tr>
                 <td><b>{{$producto->Cantidad}}</b></td>
-                <td><b>{{$producto->Nombre_Producto}}</b></td>
+                <td><b>{{$producto->Descripcion}}</b></td>
                 <td><b>{{$producto->Codigo_SKU}}</b></td>
-                <td><b>$ {{number_format($producto->Precio,2)}} MXN</b></td>
+                <td><b>$ {{number_format($producto->Precio_Venta,2)}} MXN</b></td>
                 <!-- <td><b>$ {{number_format($producto->Subtotal,2)}} MXN</b></td> -->
                 <td><b>$ {{number_format($producto->Descuento,2)}} MXN</b></td>
+                <td><b>{{$producto->Porcentaje}} %</b></td>
                 <td><b>$ {{number_format($producto->Total,2)}} MXN</b></td>
             </tr>
             @endforeach
@@ -31,7 +33,7 @@
 
             <tr>
                 @foreach($queryTotal as $value)
-                <td colspan="4"></td>
+                <td colspan="5"></td>
                 <td><strong><h4>Total de la Venta</h4></strong></td>
                 <td><b><h4>$ {{number_format($value->Total,2)}} MXN</h4></b></td>
                 @endforeach

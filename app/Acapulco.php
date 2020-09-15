@@ -18,7 +18,7 @@ class Acapulco extends Model
     // ];
 
     protected $fillable = [
-        'id','Descripcion','Marca','Animal','Tipo_Alimento','Peso','Categoria','Precio','Descuento','Codigo_SKU','Cantidad','Porcentaje','created_at','updated_at'
+        'Id','Descripcion','Marca','Animal','Tipo_Alimento','Peso','Categoria','Precio_Venta','Descuento','Codigo_SKU','Cantidad_Existente','Porcentaje','created_at','updated_at'
     ];
 
     // protected $hidden = [

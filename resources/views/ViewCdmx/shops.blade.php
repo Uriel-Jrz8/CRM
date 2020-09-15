@@ -14,11 +14,17 @@
   <div class="shadow-lg p-4 mb-5 bg-white rounded">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        @if (session('status'))
+        <!-- @if (session('status'))
         <div class="alert alert-success" role="alert">
           {{ session('status') }}
         </div>
+        @endif -->
+        @if (session('message'))
+        <div class="alert alert-info" role="alert">
+          {{ session('message') }}
+        </div>
         @endif
+        
         <center>
           <h1>{{ __('Ventas Ciudad de México') }} </h1>
         </center>
@@ -66,7 +72,7 @@
       </div>
       <div class="table-responsive">
         <h1 align="right">Total: ${{number_format($total, 2)}} MXN</h1>
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
               <th><center>Cantidad</center></th>
@@ -83,12 +89,12 @@
             @foreach(session("productos") as $producto)
             <tr>
               <td><center>{{$producto->cantidad}}</center></td>
-              <td><center>{{$producto->Nombre_Producto}}</center></td>
-              <td><center>{{$producto->Codigo_Sku}}</center></td>
-              <td><center>$ {{number_format($producto->Precio, 2)}} MXN</center></td>
+              <td><center>{{$producto->Descripcion}}</center></td>
+              <td><center>{{$producto->Codigo_SKU}}</center></td>
+              <td><center>$ {{number_format($producto->Precio_Venta, 2)}} MXN</center></td>
               <!-- <td><center>$ {{number_format($producto->Precio * $producto->cantidad, 2)}} MXN</center></td> -->
               <td><center>$ {{number_format($producto->Descuento * $producto->cantidad ,2 )}} MXN</center></td>
-              <td><center>$ {{number_format(($producto->Precio * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center></td>
+              <td><center>$ {{number_format(($producto->Precio_Venta * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center></td>
               <td><center>
                 <form action="{{route('quitarProductoDeVentaCdmx')}}" method="post">
                   @method("delete")

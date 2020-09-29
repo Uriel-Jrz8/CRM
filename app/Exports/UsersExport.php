@@ -16,7 +16,7 @@ class UsersExport implements FromView
     public function view(): View
     {
      $query = DB::select(request()->get('mivar'));
-     return view('partials.table', compact('query'));
+     return view('partials.table2', compact('query'));
 
     }
 }

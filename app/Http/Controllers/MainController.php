@@ -29,13 +29,26 @@ class MainController extends Controller
     public function search()
     {
         $data = request();
-        $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Entradas,
+        $query = DB::select("SELECT Id,Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Entradas,
                              Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta FROM storehouse WHERE Descripcion LIKE '%$data->search%' OR Marca LIKE '%$data->search%'");
-
         return view('Store.StoreDetalle', compact('query'));
     }
 
+    public function searchCDMX()
+    {
+        $data = request();
+        $query = DB::select("SELECT Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje
+                             FROM stock_cdmx WHERE Descripcion LIKE '%$data->search%' OR Marca LIKE '%$data->search%'");
+        return view('Store.DateStock', compact('query'));
+    }
 
+    public function searchLINEA()
+    {
+        $data = request();
+        $query = DB::select("SELECT Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje
+                             FROM stock_linea WHERE Descripcion LIKE '%$data->search%' OR Marca LIKE '%$data->search%'");
+        return view('Store.DateStockLinea', compact('query'));
+    }
 
     // Metodo para insertar los pedidos a la base de datos y restar lo que tienen en stock. de atencion a clientes
     public function addOders()

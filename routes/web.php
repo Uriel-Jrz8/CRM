@@ -32,6 +32,8 @@ Route::put('/import','MainController@import')->name('import');
 Route::put('/downloadEcxel', 'MainController@exportDocument')->name('export');
 Route::put('/discount','MainController@Discount')->name('descuento');
 Route::get('/search','MainController@search')->name('search');
+Route::get('/search/cdmx','MainController@searchCDMX')->name('searchCDMX');
+Route::get('/search/linea','MainController@searchLINEA')->name('searchLINEA');
 Route::put('/delete','MainController@Delete')->name('Delete');
 
 
@@ -76,6 +78,7 @@ Route::get('/date/line','ViewData@ConsultData')->name('Dateline');
 Route::get('/shop/cdmx', 'VentasCdmx@RouteShop')->name('cdmx');
 Route::delete('/productoDeVentaCdmx', 'VentasCdmx@quitarProductoDeVenta')->name('quitarProductoDeVentaCdmx');
 Route::put('/productoDeVentaCdmx', 'VentasCdmx@agregarProductoVenta')->name('agregarProductoVentaCdmx');
+Route::put('/productoDeVentasCdmx', 'VentasCdmx@CambioCdmx')->name('CambioCdmx');
 Route::put('/terminarOCancelarVentaCdmx', 'VentasCdmx@terminarOCancelarVenta')->name('terminarOCancelarVentaCdmx');
 Route::put('/orders/cdmx','ViewData@ConsultCDMX')->name('ConsultCDMX');
 Route::put('InformacionCdmx', 'ViewData@DetalleCdmx')->name('DetalleCdmx');

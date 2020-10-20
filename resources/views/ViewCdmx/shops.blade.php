@@ -24,7 +24,7 @@
           {{ session('message') }}
         </div>
         @endif
-        
+
         <center>
           <h1>{{ __('Ventas Ciudad de México') }} </h1>
         </center>
@@ -58,7 +58,6 @@
             <label class="" for="codigo" style="color: black;">Código de barras o Código SKU</label>
             <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU" style="color: black;">
           </div>
-
         </form>
       </div>
       @if(session("productos") !== null)
@@ -75,37 +74,65 @@
         <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
-              <th><center>Cantidad</center></th>
-              <th><center>Descripción de Producto</center></th>
-              <th><center>Código SKU</center></th>
-              <th><center>Precio Unitario</center></th>
+              <th>
+                <center>Cantidad</center>
+              </th>
+              <th>
+                <center>Descripción de Producto</center>
+              </th>
+              <th>
+                <center>Código SKU</center>
+              </th>
+              <th>
+                <center>Precio Unitario</center>
+              </th>
               <!-- <th><center>Subtotal Sin Descuento</center></th> -->
-              <th><center>Descuento</center></th>
-              <th><center>Subtotal</center></th>
-              <th><center>Eliminar</center></th>
+              <th>
+                <center>Descuento</center>
+              </th>
+              <th>
+                <center>Subtotal</center>
+              </th>
+              <th>
+                <center>Eliminar</center>
+              </th>
             </tr>
           </thead>
           <tbody>
             @foreach(session("productos") as $producto)
             <tr>
-              <td><center>{{$producto->cantidad}}</center></td>
-              <td><center>{{$producto->Descripcion}}</center></td>
-              <td><center>{{$producto->Codigo_SKU}}</center></td>
-              <td><center>$ {{number_format($producto->Precio_Venta, 2)}} MXN</center></td>
+              <td>
+                <center>{{$producto->cantidad}}</center>
+              </td>
+              <td>
+                <center>{{$producto->Descripcion}}</center>
+              </td>
+              <td>
+                <center>{{$producto->Codigo_SKU}}</center>
+              </td>
+              <td>
+                <center>$ {{number_format($producto->Precio_Venta, 2)}} MXN</center>
+              </td>
               <!-- <td><center>$ {{number_format($producto->Precio * $producto->cantidad, 2)}} MXN</center></td> -->
-              <td><center>$ {{number_format($producto->Descuento * $producto->cantidad ,2 )}} MXN</center></td>
-              <td><center>$ {{number_format(($producto->Precio_Venta * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center></td>
-              <td><center>
-                <form action="{{route('quitarProductoDeVentaCdmx')}}" method="post">
-                  @method("delete")
-                  @csrf
-                  <input type="hidden" name="indice" value="{{$loop->index}}">
-                  <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-trash"><svg width="20" height="20" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
-                      </svg></i>
-                  </button>
-                </form></center>
+              <td>
+                <center>$ {{number_format($producto->Descuento * $producto->cantidad ,2 )}} MXN</center>
+              </td>
+              <td>
+                <center>$ {{number_format(($producto->Precio_Venta * $producto->cantidad) - ($producto->Descuento * $producto->cantidad ) ,2 )}} MXN</center>
+              </td>
+              <td>
+                <center>
+                  <form action="{{route('quitarProductoDeVentaCdmx')}}" method="post">
+                    @method("delete")
+                    @csrf
+                    <input type="hidden" name="indice" value="{{$loop->index}}">
+                    <button type="submit" class="btn btn-danger">
+                      <i class="fa fa-trash"><svg width="20" height="20" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                        </svg></i>
+                    </button>
+                  </form>
+                </center>
               </td>
             </tr>
             @endforeach
@@ -117,6 +144,33 @@
                     <br>
                     Escanea el código de barras o escribe y presiona Enter</h2> -->
       @endif
+ <!-- Apartado de metodo de pago
+       <form action="{{route('CambioCdmx')}}" method="POST">
+        @method('PUT')
+        @csrf
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 ml-md-auto">
+              <center>
+                <h3>Método de Pago</h3>
+              </center>
+              <div class="form-group row">
+                <b><label for="staticEmail" class="col-form-label">Pago &nbsp &nbsp</label></b>
+                <div class="col-sm-8">
+                  <input autocomplete="off" required autofocus name="monto" type="text" class="form-control" placeholder="$" style="color: black;">
+                </div>
+              </div> -->
+              <!-- <div class="form-group row">
+                <b><label for="staticEmail" class="col-form-label">Cambio</label></b>
+                <div class="col-sm-8">
+                  <input id="cambio" autocomplete="off" required autofocus name="cambio" type="text" class="form-control" placeholder="$" style="color: black;">
+                </div>
+              </div> -->
+               <!-- <center><b><h5>Cambio: $ {{number_format($cambio, 2)}} MXN</h5></center>
+            </div>
+          </div>
+        </div>
+      </form> -->
 
       <form action="{{ route('ConsultDato') }}" method="POST">
         @method('PUT')

@@ -1,4 +1,4 @@
-@extends('layouts.Cdmx')
+@extends('layouts.Linea')
 
 @section('content')
 <!-- <div class="container"> -->

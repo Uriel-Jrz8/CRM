@@ -170,18 +170,47 @@ class VentasCdmx extends Controller
         
     }
     
-    public function RouteShop()
+    public function RouteShop(Request $request)
     {
+        $data = request();
         $total = 0;
+        $cambio =0;
         foreach ($this->obtenerProductos() as $producto) {
             $total += $producto->cantidad * $producto->Precio_Venta - ($producto->Descuento * $producto->cantidad);
+            $cambio =$data->monto;
         }
+        
         return view(
             "ViewCdmx.shops",
             [
+                "cambio" => $cambio,
                 "total" => $total,
                 "clientes" => User::all(),
             ]
         );
     }
+
+
+    public function CambioCdmx(Request $request)
+    {
+        $total = 0;
+        $cambio =0;
+        foreach ($this->obtenerProductos() as $producto) {
+            $total += $producto->cantidad * $producto->Precio_Venta - ($producto->Descuento * $producto->cantidad);
+            $cambio +=$request->monto - $total;
+        }
+        
+
+        return view(
+            "ViewCdmx.shops",
+            [
+                "total" => $total,
+                "cambio" => $cambio,
+                "clientes" => User::all(),
+            ]
+        );
+    }
+
+
+
 }

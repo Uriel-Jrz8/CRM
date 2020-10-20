@@ -19,7 +19,9 @@
     <link href="https://fonts.googleapis.com/css?family=Times-Roman" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="shortcut icon" href="/Images/perro.ico" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">

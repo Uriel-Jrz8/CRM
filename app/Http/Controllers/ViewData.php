@@ -71,16 +71,16 @@ class ViewData extends Controller
     public function stocklinea(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_linea');
-        return view('Store.DateStock',compact('query'));
+        $query = DB::select('select Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_linea');
+        return view('Store.DateStockLinea',compact('query'));
     }
 
     
     public function stockcdmx(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_cdmx');
-        $query2 = "select Nombre_Producto, Marca, Animal, Tipo_Alimento, Peso, Categoria, Codigo_SKU,Cantidad,Precio,Descuento from stock_cdmx";
+        $query = DB::select('select Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_cdmx');
+        $query2 = "select Id,Nombre_Producto, Marca, Animal, Tipo_Alimento, Peso, Categoria, Codigo_SKU,Cantidad,Precio,Descuento from stock_cdmx";
         return view('Store.DateStock',compact('query','query2'));
     }
 
@@ -89,14 +89,14 @@ class ViewData extends Controller
     public function stockacapulco(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_acapulco');
+        $query = DB::select('select Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_acapulco');
         return view('Store.DateStock',compact('query'));
     }
 
     public function storehouse(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Entradas,
+        $query = DB::select('select Id,Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Entradas,
                              Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta from storehouse');
         return view('Store.StoreDetalle',compact('query'));
     }

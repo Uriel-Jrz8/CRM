@@ -42,6 +42,7 @@
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
+                    <th><b>Identificador</b></th>
                     <th><b>Código SKU</b></th>
                     <th><b>Descripcion de Producto</b></th>
                     <th><b>Marca</th>
@@ -62,6 +63,7 @@
             <tbody>
                 @foreach($query as $producto)
                 <tr>
+                    <td><b>{{$producto->Id}}</b></td>
                     <td><b>{{$producto->Codigo_SKU}}</b></td>
                     <td><b>{{$producto->Descripcion}}</b></td>
                     <td><b>{{$producto->Marca}}</b></td>

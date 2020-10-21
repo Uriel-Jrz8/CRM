@@ -74,7 +74,7 @@ class routes extends Controller
         $TotalVenta->Metodo_Pago = "Transferencia";
         $TotalVenta->Tarjeta = "xxx xxx xxx xxx";
         $TotalVenta->saveOrFail();
-        $query1 = DB::select("update stock_linea set Cantidad_Existente = ('$productoActualizado->Cantidad_Existente' - '$producto->cantidad')
+        $query1 = DB::update("UPDATE stock_linea set Cantidad_Existente = ('$productoActualizado->Cantidad_Existente' - '$producto->cantidad')
                              where Descripcion = '$producto->Descripcion' AND Codigo_SKU = '$producto->Codigo_SKU' ");
 
         $this->vaciarProductos();

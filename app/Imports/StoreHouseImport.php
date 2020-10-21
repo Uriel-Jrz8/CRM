@@ -31,7 +31,6 @@ class StoreHouseImport implements ToModel
             'Cantidad_Existente'=> $row[12],
             'Valor_Compra'=> $row[13],
             'Valor_Venta'=> $row[14],
-            //'Tienda'=> $row[9],
         ]);
     }
 }

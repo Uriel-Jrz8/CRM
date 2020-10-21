@@ -71,7 +71,7 @@ class ViewData extends Controller
     public function stocklinea(Request $request){
         $request->flash();
         $token = $request->get('_token');
-        $query = DB::select('select Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_linea');
+        $query = DB::select('select Id,Codigo_SKU,Descripcion,Categoria,Tipo_Alimento,Animal,Marca,Peso,Precio_Venta,Cantidad_Existente,Descuento,Porcentaje from stock_linea');
         return view('Store.DateStockLinea',compact('query'));
     }
 
@@ -85,12 +85,12 @@ class ViewData extends Controller
     }
 
 
-
+    
     public function stockacapulco(Request $request){
         $request->flash();
         $token = $request->get('_token');
         $query = DB::select('select Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje from stock_acapulco');
-        return view('Store.DateStock',compact('query'));
+        return view('Store.DateStockAcapulco',compact('query'));
     }
 
     public function storehouse(Request $request){
@@ -104,29 +104,29 @@ class ViewData extends Controller
     public function entradas(Request $request){ 
     $request->flash();
     $token = $request->get('_token');
-    $query = DB::select('SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Entradas');
+    $query = DB::select('SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM entradas');
     return view('Store.Inputs',compact('query'));
     }
 
     public function salidas(Request $request){ 
     $request->flash();
     $token = $request->get('_token');
-    $query = DB::select('SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Salidas');
+    $query = DB::select('SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM salidas');
     return view('Store.Outputs',compact('query'));
     }
 
     public function filtroEntradas(Request $request){
         $data = request();
-        $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Entradas
-         WHERE created_at BETWEEN '$data->date1 00:00:00' AND '$data->date2 12:59:59';");
+        $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM entradas
+         WHERE created_at BETWEEN '$data->date1 00:00:00' AND '$data->date2 23:59:59'");
         return view('Store.Inputs',compact('query'));
     }
 
     public function filtroSalidas(Request $request){
         $data = request();
-        $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM Entradas
-         WHERE created_at BETWEEN '$data->date1 00:00:00' AND '$data->date2 12:59:59';");
-        return view('Store.Inputs',compact('query'));
+        $query = DB::select("SELECT Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Cantidad,Sucursal,created_at FROM salidas
+         WHERE created_at BETWEEN '$data->date1 00:00:00' AND '$data->date2 23:59:59';");
+        return view('Store.Outputs',compact('query'));
     }
 
 

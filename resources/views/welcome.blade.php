@@ -85,8 +85,8 @@
             </div>
             @endif
 
-            <div class="content">
-                <img src="Images/a.gif" >
+            <div class="content-image">
+                <img src="Images/logo.png"class="img-fluid" alt="Responsive image" >
             </div>
         </div>
     </div>

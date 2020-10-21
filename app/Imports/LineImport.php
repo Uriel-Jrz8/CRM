@@ -27,8 +27,8 @@ class LineImport implements ToModel
             'Peso'=> $row[7],
             'Precio_Venta'=> $row[8],
             'Cantidad_Existente'=> $row[9],
-            'Descuento'=>$row[10],
-            'Porcentaje'=>$row[11],
+            'Descuento'=> $row[10],
+            'Porcentaje'=> $row[11],
             
             // 'created_at'=>$row[$mytime],
             // 'updated_at'=>$row[$mytime],

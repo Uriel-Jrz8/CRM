@@ -5,7 +5,7 @@
 
     <div class="row justify-content">
         <div class= "slideUp">
-            <img src="/Images/perroNegro.png" class="img-fluid" style="margin: 0% 0% 0% 6%;height: 450px;" >
+            <img src="/Images/PerroNegro.png" class="img-fluid" style="margin: 0% 0% 0% 6%;height: 450px;" >
         </div>
 
         <div class="col-md-4" style="margin: 0% 12% 0%;">

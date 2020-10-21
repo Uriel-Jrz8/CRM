@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Acapulco extends Model
 {
-    protected $table = 'stock_Acapulco';
+    protected $table = 'stock_acapulco';
 
     protected $primaryKey = 'id';
     

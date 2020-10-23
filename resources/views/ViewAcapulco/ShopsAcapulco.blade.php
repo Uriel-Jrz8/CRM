@@ -69,7 +69,7 @@
             <div class="btn-group mr-2" role="group" aria-label="First group">
               <button name="accion" value="terminar" type="submit" class="btn btn-outline-success">Realizar Venta </button></div>
             <div class="btn-group mr-2" role="group" aria-label="First group">
-              <button name="accion" value="cancelar" type="submit" class="btn btn-outline-danger">Cancelar Ventaa </button></div>
+              <button name="accion" value="cancelar" type="submit" class="btn btn-outline-danger">Cancelar Venta </button></div>
           </div>
           @endif
         </form>

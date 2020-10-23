@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <br>
 <!-- shadow-lg p-10 mb-1 bg-white rounded -->
@@ -61,7 +60,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label" style="color: white;" for="remember">
                                         <b>{{ __('Recordar Cuenta') }}</b>
                                     </label>
                                 </div>
@@ -74,13 +73,13 @@
                                     {{ __('Accede a tu Cuenta') }}
                                 </button>
                                 
-                                <!-- Paso para el Restablecimiento de Contraseña
+                                <!-- Paso para el Restablecimiento de Contraseña 
                                     @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                                    -->
+                                   -->
                             </div>
                         </div>
                     </form>

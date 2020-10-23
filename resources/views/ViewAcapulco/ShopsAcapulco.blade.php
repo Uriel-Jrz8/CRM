@@ -29,6 +29,31 @@
           <h1>{{ __('Ventas Acapulco') }} </h1>
         </center>
       </div>
+      <nav class="navbar navbar-expand navbar-light ">
+          <div class="" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Productos en Almacén
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{route('stocklinea')}}">En Línea</a>
+                  <a class="dropdown-item" href="{{route('stockcdmx')}}">Ciudad de México</a>
+                  <a class="dropdown-item" href="{{route('stockacapulco')}}">Acapulco</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+      <div class="col-12 col-md-6">
+        <form action="{{route('agregarProductoVentaAcapulco')}}" method="POST">
+          @method('PUT')
+          @csrf
+          <div class="form-group">
+            <label class="" for="codigo" style="color: black;">Código de barras o Código SKU</label>
+            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU" style="color: black;">
+          </div>
 
       <div class="col-12 col-md-6">
         <form action="{{route('terminarOCancelarVentaAcapulco')}}" method="POST">
@@ -49,15 +74,6 @@
           @endif
         </form>
       </div>
-
-      <div class="col-12 col-md-6">
-        <form action="{{route('agregarProductoVentaAcapulco')}}" method="POST">
-          @method('PUT')
-          @csrf
-          <div class="form-group">
-            <label class="" for="codigo" style="color: black;">Código de barras o Código SKU</label>
-            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text" class="form-control" placeholder="Código de barras o Código SKU" style="color: black;">
-          </div>
 
         </form>
       </div>

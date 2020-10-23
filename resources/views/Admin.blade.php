@@ -11,7 +11,6 @@
             </div><br><br>
             <div class="col-md-4" style="margin: 0% 10% 0%;">
             
-                
                 <div class="buttonWrapper">
                     Registrar Usuario
                 <a class="buttonInner  " href="{{ route('register') }}"><span>Registrar Usuario</span></a>

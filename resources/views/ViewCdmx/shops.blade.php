@@ -187,7 +187,7 @@
         </div>
       </form> -->
 
-      <form action="{{ route('ConsultDato') }}" method="POST">
+      <form action="{{ route('ConsultCDMX') }}" method="POST">
         @method('PUT')
         @csrf
         <center><input type="submit" value="Ventas Realizadas " class="btn btn-outline-pink"></center>

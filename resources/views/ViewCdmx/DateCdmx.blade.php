@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="shadow-lg p-3 mb-5 bg-white rounded">
@@ -28,7 +27,7 @@
                         <th><center>Fecha de Venta</center></th>
                         <th><center>Total de la Venta (MXN)</center></th>
                         <th><center>Numero de Venta</center></th>
-                        <th><center>Ticket de la Venta</center></th>
+                        <!-- <th><center>Ticket de la Venta</center></th> -->
                         <th><center>Información de la Venta</center></th>
                         <!-- <th>Eliminar</th> -->
                     </tr>
@@ -40,16 +39,16 @@
                             <td><b><center>{{$value}}</center></b></td>
                         </center>
                         @endforeach
-                        <td>
+                        <!-- <td>
                             <button class="btn btn-outline-info"> Ticket de Venta &nbsp
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z" />
                                     <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z" />
                                 </svg>
                             </button>
-                        </td>
+                        </td> -->
 
-                        <td>
+                        <td><center>
                             <form action="{{route('DetalleCdmx')}}" method="POST">
                                 @method("PUT")
                                 @csrf
@@ -60,6 +59,7 @@
                                 </button>
                                 <input type="text" value="{{$value}}" name="folioVenta" hidden>
                             </form>
+                            </center>
                         </td>
                     </tr>
                 </tbody>

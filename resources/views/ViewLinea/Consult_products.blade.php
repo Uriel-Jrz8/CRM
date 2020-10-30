@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <H1>{{ __('Ventas en Líneaa') }} </H1>
+            <H1>{{ __('Ventas en Línea') }} </H1>
             <br>
         </div>
         <!-- nuevo -->

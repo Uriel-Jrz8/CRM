@@ -60,6 +60,7 @@ class routes extends Controller
             $productoVendido->Descuento = $producto->Descuento * $producto->cantidad;
             $productoVendido->Porcentaje = $producto->Porcentaje;
             $productoVendido->Total = $total1;
+            $productoVendido->Plataforma = $data->plataforma;
             // Lo guardamos
             $productoVendido->saveOrFail();
             // Y restamos la existencia del original

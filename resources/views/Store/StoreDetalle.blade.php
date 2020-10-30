@@ -100,13 +100,13 @@
                     <th><b>Código SKU</b></th>
                     <th><b>Descripcion de Producto</b></th>
                     <th><b>Marca</th>
+                    <th><b>Peso</b></th>
                     <th><b>Animal</b></th>
                     <th><b>Tipo Alimento</b></th>
                     <th><b>Peso</b></th>
                     <th><b>Categoría</b></th>
                     <th><b>Precio de Compra</b></th>
                     <th><b>Precio de Venta</b></th>
-
                     <th><b>Entradas</b></th>
                     <th><b>Salidas</b></th>
                     <th><b>Cantidad Existente</b></th>
@@ -121,13 +121,13 @@
                     <td><b>{{$producto->Codigo_SKU}}</b></td>
                     <td><b>{{$producto->Descripcion}}</b></td>
                     <td><b>{{$producto->Marca}}</b></td>
+                    <td><b>{{$producto->Peso}}</b></td>
                     <td><b>{{$producto->Animal}}</b></td>
                     <td><b>{{$producto->Tipo_Alimento}}</b></td>
                     <td><b>{{$producto->Peso}}</b></td>
                     <td><b>{{$producto->Categoria}}</b></td>
                     <td><b>${{number_format($producto->Precio_Compra,2)}}</b></td>
                     <td><b>${{number_format($producto->Precio_Venta,2)}}</b></td>
-               
                     <td><b>{{$producto->Entradas}}</b></td>
                     <td><b>{{$producto->Salidas}}</b></td>
                     <td><b>{{$producto->Cantidad_Existente}}</b></td>

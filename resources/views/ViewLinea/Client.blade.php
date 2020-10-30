@@ -39,6 +39,7 @@
                   <a class="dropdown-item" href="{{route('stocklinea')}}">En Línea</a>
                   <a class="dropdown-item" href="{{route('stockcdmx')}}">Ciudad de México</a>
                   <a class="dropdown-item" href="{{route('stockacapulco')}}">Acapulco</a>
+                  <a class="dropdown-item" href="{{route('AdminStock')}}">Actualizar producto</a>
                 </div>
               </li>
             </ul>
@@ -64,10 +65,16 @@
               <input type="text" class="form-control" name='folio' autocomplete="off" placeholder="Número de Folio" required onkeypress="return validaNumericos(event)" style="color:black;">
             </div>
             @if(session("productos") !== null)
-
+            <select name="plataforma" class="form-control2" required style="color: #6c757d; border-color:#6c757d;">
+                <option>Selecciona Plataforma</option>
+                <option>Página Web</option>
+                <option>Amazon</option>
+                <option>Mercado Libre</option>
+              </select><br>
             <div class="btn-group" role="group" aria-label="Basic example">
               <div class="btn-group mr-2" role="group" aria-label="First group">
                 <button name="accion" value="terminar" type="submit" class="btn btn-outline-success">Realizar Venta </button></div>
+                
               <div class="btn-group mr-2" role="group" aria-label="First group">
                 <button name="accion" value="cancelar" type="submit" class="btn btn-outline-danger">Cancelar Venta </button></div>
             </div>

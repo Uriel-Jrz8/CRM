@@ -20,7 +20,7 @@ class ViewData extends Controller
         $request->flash();
         $token = $request->get('_token');
         $query2 = DB::select('select folio From orders_linea group by folio');
-        $query = DB::select('select created_at, sum(Total), folio from orders_linea group by folio,created_at');
+        $query = DB::select('select created_at, sum(Total), folio, Plataforma from orders_linea group by folio,created_at,Plataforma');
         return view('ViewLinea.Consult_products',compact('query','query2'));
     }
 

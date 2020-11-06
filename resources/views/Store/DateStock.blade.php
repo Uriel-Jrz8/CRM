@@ -1,5 +1,4 @@
 @extends('layouts.Cdmx')
-
 @section('content')
 <!-- <div class="container"> -->
     <!-- <div class="shadow-lg p-2 mb-5 bg-white rounded"> -->
@@ -18,6 +17,7 @@
             <H1 style="font-family: Fredoka One;">{{ __('Productos en Almacen') }} </H1>
             <br>
         </div>
+        <a style="font-family: Fredoka One; color:black" href="{{route('filtrocdmx')}}">Filtrar por Existencia</a>
         <!-- nuevo -->
         <div class="table-responsive">
             <table class="table table-hover table-bordered">

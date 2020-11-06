@@ -51,7 +51,7 @@ class VentasCdmx extends Controller
             $productoVendido->Precio_Venta = $producto->Precio_Venta;
             $productoVendido->Codigo_SKU = $producto->Codigo_SKU;
             $productoVendido->Cantidad = $producto->cantidad;
-            $productoVendido->Subtotal = ($producto->Cantidad_Existente * $producto->Precio_Venta);
+            $productoVendido->Subtotal = ($producto->cantidad * $producto->Precio_Venta);
             $productoVendido->Descuento = $producto->Descuento * $producto->cantidad;
             $productoVendido->Porcentaje = $producto->Porcentaje;
             $productoVendido->Total = $total1;

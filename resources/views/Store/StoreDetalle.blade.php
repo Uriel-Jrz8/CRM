@@ -91,6 +91,7 @@
         </div><br><br>
 
     </div>
+    <a style="font-family: Fredoka One; color:black" href="{{route('searchstorehouse')}}">Filtrar por Existencia</a>
     <!-- </div> -->
     <div class="table-responsive ">
         <table class="table table-hover">
@@ -103,7 +104,6 @@
                     <th><b>Peso</b></th>
                     <th><b>Animal</b></th>
                     <th><b>Tipo Alimento</b></th>
-                    <th><b>Peso</b></th>
                     <th><b>Categoría</b></th>
                     <th><b>Precio de Compra</b></th>
                     <th><b>Precio de Venta</b></th>
@@ -124,7 +124,6 @@
                     <td><b>{{$producto->Peso}}</b></td>
                     <td><b>{{$producto->Animal}}</b></td>
                     <td><b>{{$producto->Tipo_Alimento}}</b></td>
-                    <td><b>{{$producto->Peso}}</b></td>
                     <td><b>{{$producto->Categoria}}</b></td>
                     <td><b>${{number_format($producto->Precio_Compra,2)}}</b></td>
                     <td><b>${{number_format($producto->Precio_Venta,2)}}</b></td>

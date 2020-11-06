@@ -39,7 +39,7 @@
                   <a class="dropdown-item" href="{{route('stocklinea')}}">En Línea</a>
                   <a class="dropdown-item" href="{{route('stockcdmx')}}">Ciudad de México</a>
                   <a class="dropdown-item" href="{{route('stockacapulco')}}">Acapulco</a>
-                  <a class="dropdown-item" href="{{route('AdminStock')}}">Actualizar producto</a>
+                  <a class="dropdown-item" href="{{route('Adminprecio')}}">Actualizar producto</a>
                 </div>
               </li>
             </ul>

@@ -28,13 +28,18 @@ Route::put('/Add/line','MainController@addOders')->name('Addline');
 Route::put('/Add/Shops','MainController@addShops')->name('AddShops');
 Route::put('/Update/Stock','MainController@UpdateStock')->name('UpdateStock');
 Route::put('/Update/price','MainController@UpdatePrecio')->name('UpdatePrecio');
+Route::put('/Update/price2','MainController@UpdatePrecio2')->name('UpdatePrecio2');
 Route::put('/NewAdd/Stock','MainController@NewAddstock')->name('NewAddstock');
 Route::put('/import','MainController@import')->name('import');
 Route::put('/downloadEcxel', 'MainController@exportDocument')->name('export');
 Route::put('/discount','MainController@Discount')->name('descuento');
+Route::put('/discount2','MainController@Discount2')->name('descuento2');
 Route::get('/search','MainController@search')->name('search')->middleware('auth');
+Route::get('/filtro/searchstorehouse','MainController@searchstorehouse')->name('searchstorehouse')->middleware('auth');
 Route::get('/search/cdmx','MainController@searchCDMX')->name('searchCDMX')->middleware('auth');
+Route::get('/filtro/cdmx','MainController@filtrocdmx')->name('filtrocdmx')->middleware('auth');
 Route::get('/search/linea','MainController@searchLINEA')->name('searchLINEA')->middleware('auth');
+Route::get('/filtro/linea','MainController@filtroline')->name('filtroline')->middleware('auth');
 Route::put('/delete','MainController@Delete')->name('Delete');
 
 //Rutas Para vizualizar los Datos que se encuentran de la BD ViewData
@@ -52,6 +57,7 @@ Route::get('/profiles', 'routes@profiles')->name('profiles');
 Route::get('/Accounting', 'routes@RouteAccounting')->name('AccountingMerkado')->middleware('auth');
 Route::get('/Admin/Merkado/Croqueta', 'routes@RouteAdmin')->name('Admin')->middleware('auth');
 Route::get('/Admin/Stock', 'routes@ViewStock')->name('AdminStock')->middleware('auth');
+Route::get('/Update/View/Price', 'routes@Updateprecio2')->name('Adminprecio')->middleware('auth');
 Route::get('/fail','routes@fail')->name('fail');
 
 //PDF pendiente

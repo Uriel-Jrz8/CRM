@@ -34,6 +34,14 @@ class MainController extends Controller
         return view('Store.StoreDetalle', compact('query'));
     }
 
+    public function searchstorehouse()
+    {
+        $data = request();
+        $query = DB::select("SELECT Id,Codigo_SKU, Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria, Precio_Compra,Precio_Venta,Entradas,
+                             Salidas,Cantidad_Existente,Valor_Compra,Valor_Venta FROM storehouse WHERE Cantidad_Existente > 0 ");
+        return view('Store.StoreDetalle', compact('query'));
+    }
+
     public function searchCDMX()
     {
         $data = request();
@@ -42,11 +50,27 @@ class MainController extends Controller
         return view('Store.DateStock', compact('query'));
     }
 
+    public function filtrocdmx()
+    {
+        $data = request();
+        $query = DB::select("SELECT Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje
+                             FROM stock_cdmx WHERE Cantidad_Existente > 0");
+        return view('Store.DateStockLinea', compact('query'));
+    }
+
     public function searchLINEA()
     {
         $data = request();
         $query = DB::select("SELECT Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje
                              FROM stock_linea WHERE Descripcion LIKE '%$data->search%' OR Marca LIKE '%$data->search%'");
+        return view('Store.DateStockLinea', compact('query'));
+    }
+
+    public function filtroline()
+    {
+        $data = request();
+        $query = DB::select("SELECT Id,Codigo_SKU,Descripcion, Marca, Animal, Tipo_Alimento, Peso, Categoria,Cantidad_Existente,Precio_Venta,Descuento,Porcentaje
+                             FROM stock_linea WHERE Cantidad_Existente > 0");
         return view('Store.DateStockLinea', compact('query'));
     }
 
@@ -259,6 +283,77 @@ class MainController extends Controller
     }
 
 
+    public function UpdatePrecio2()
+    {
+        $mytime = date('Y-m-d H:i:s');
+        $data = request();
+        $nombre = $data->nombre;
+        $precio = $data->precio;
+        $sku = $data->sku;
+        $cantidad = $data->cantidad;
+        $sucursal = $data->sucursal;
+
+        $line = line::find($data->id);
+        $Acapulco = Acapulco::find($data->id);
+        $Cdmx = Cdmx::find($data->id);
+        $almacen = StoreHouse::find($data->id);
+
+        if ($sucursal == "En Linea" and $sku == $line->Codigo_SKU) {
+            $query = DB::update("UPDATE stock_linea SET Precio_Venta = ('$precio'), updated_at = ('$mytime') WHERE Codigo_SKU = '$sku' ");
+            return redirect()->route('Updateprecio')
+                ->with([
+                    "message" => "Precio Modificado Correctamente.",
+                    "tipo" => "success"
+                ]);
+        } else if ($sucursal == "Acapulco" and $sku == $Acapulco->Codigo_SKU) {
+            $query = DB::update("UPDATE stock_Acapulco SET Precio_Venta = ('$precio'), updated_at = '$mytime' WHERE Codigo_SKU = '$sku'");
+            return redirect()->route('Updateprecio')
+                ->with([
+                    "message" => "Precio Modificado Correctamente.",
+                    "tipo" => "success"
+                ]);
+        } else if ($sucursal == "Ciudad de Mexico" and $sku == $Cdmx->Codigo_SKU) {
+            $query = DB::update("UPDATE stock_cdmx SET Precio_Venta = ('$precio'), updated_at = '$mytime' WHERE Codigo_SKU = '$sku' ");
+            return redirect()->route('Updateprecio')
+                ->with([
+                    "message" => "Precio Modificado Correctamente.",
+                    "tipo" => "success"
+                ]);
+        } else if ($sucursal == "Almacen General" and $sku == $almacen->Codigo_SKU) {
+            if ($data->opc == "Precio Compra") {
+                $query = DB::update("UPDATE storehouse SET Precio_Compra = ('$precio'), updated_at = '$mytime' WHERE Codigo_SKU = '$sku' ");
+                $this->totales();
+                return redirect()->route('Updateprecio')
+                    ->with([
+                        "message" => "Precio Modificado Correctamente.",
+                        "tipo" => "success"
+                    ]);
+            } else if ($data->opc == "Precio Venta") {
+                $query = DB::update("UPDATE storehouse SET Precio_Venta = ('$precio'), updated_at = '$mytime' WHERE Codigo_SKU = '$sku' ");
+                $this->totales();
+                return redirect()->route('Updateprecio')
+                    ->with([
+                        "message" => "Precio Modificado Correctamente.",
+                        "tipo" => "success"
+                    ]);
+            } else {
+                return redirect()->route('Updateprecio')
+                    ->with([
+                        "message2" => "Selecciona una Opción, Precio Compra ó Precio Venta.",
+                        "tipo" => "danger"
+                    ]);
+            }
+        } else {
+            //return view('error');
+            return redirect()->route('Updateprecio')
+                ->with([
+                    "message2" => "Código SKU Incorrecto ó Selecciona una Sucursal.",
+                    "tipo" => "danger"
+                ]);
+        }
+    }
+
+
     public function totales()
     {
         $data = request();
@@ -385,6 +480,38 @@ class MainController extends Controller
         } else if ($data->sucursal == "Acapulco") {
             $query = DB::update("UPDATE stock_acapulco SET Descuento = (Precio_Venta * '$data->des' / 100), Porcentaje = '$data->des' WHERE Marca = '$data->desmarca' OR Codigo_SKU = '$data->desmarca' ");
             return redirect()->route('AdminStock')
+                ->with([
+                    "message" => "Descuento Aplicado Correctamente.",
+                    "tipo" => "success"
+                ]);
+            //return view('AddStock');
+        }
+    }
+
+    public function Discount2()
+    {
+        $data = request();
+        if ($data->sucursal == "En Linea") {
+            $query = DB::update("UPDATE stock_linea SET Descuento = (Precio_Venta * '$data->des' / 100), Porcentaje = '$data->des' WHERE Marca = '$data->desmarca' OR Codigo_SKU = '$data->desmarca' ");
+            return redirect()->route('Updateprecio')
+                ->with([
+                    "message" => "Descuento Aplicado Correctamente.",
+                    "tipo" => "success"
+                ]);
+            //return view('AddStock'); 
+
+        } else if ($data->sucursal == "Ciudad de Mexico") {
+            $query = DB::update("UPDATE stock_cdmx SET Descuento = (Precio_Venta * '$data->des' / 100), Porcentaje = '$data->des' WHERE Marca = '$data->desmarca' OR Codigo_SKU = '$data->desmarca' ");
+            return redirect()->route('Updateprecio')
+                ->with([
+                    "message" => "Descuento Aplicado Correctamente.",
+                    "tipo" => "success"
+                ]);
+            // return view('AddStock');
+
+        } else if ($data->sucursal == "Acapulco") {
+            $query = DB::update("UPDATE stock_acapulco SET Descuento = (Precio_Venta * '$data->des' / 100), Porcentaje = '$data->des' WHERE Marca = '$data->desmarca' OR Codigo_SKU = '$data->desmarca' ");
+            return redirect()->route('Updateprecio')
                 ->with([
                     "message" => "Descuento Aplicado Correctamente.",
                     "tipo" => "success"

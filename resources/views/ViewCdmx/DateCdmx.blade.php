@@ -26,6 +26,7 @@
                     <tr>
                         <th><center>Fecha de Venta</center></th>
                         <th><center>Total de la Venta (MXN)</center></th>
+                        <th><center>Plataforma</center></th>
                         <th><center>Numero de Venta</center></th>
                         <!-- <th><center>Ticket de la Venta</center></th> -->
                         <th><center>Información de la Venta</center></th>

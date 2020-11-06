@@ -62,6 +62,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right" style="color: white;">{{ __('Asignar Perfil') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="profile" name="profile" class="form-control" required style="color: #6c757d;">
+                                    <option>Seleccionar</option>
+                                    <option>Administrador</option>
+                                    <option>Contabilidad</option>
+                                    <option>Ventas Linea</option>
+                                    <option>Ventas Ciudad de Mexico</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <center> <button type="submit" class="btn btn-outline-pink2 center" style="margin: 0% 0% 0% -8%;">

@@ -36,19 +36,19 @@ class LoginController extends Controller
         ]);
         $email = $credentials['email'];
 
-        if (Auth::user()->email == $email && Auth::user()->id == "1") {
+        if (Auth::user()->email == $email && Auth::user()->profile == "Administrador") {
             return '/Admin/Merkado/Croqueta';
 
-        } else if (Auth::user()->email == $email && Auth::user()->id == "3") {
+        } else if (Auth::user()->email == $email && Auth::user()->profile == "Ventas Linea") {
             return '/customer/service';
 
-        } else if (Auth::user()->email == $email && Auth::user()->id == "4") {
+        } else if (Auth::user()->email == $email && Auth::user()->profile == "Ventas Cdmx") {
             return  'shop/cdmx';
 
-        } else if (Auth::user()->email == $email && Auth::user()->id == "5") {
+        } else if (Auth::user()->email == $email && Auth::user()->profile == "Ventas Acapulco") {
             return  'shop/acapulco';
 
-        } else if (Auth::user()->email == $email && Auth::user()->id == "2") {
+        } else if (Auth::user()->email == $email && Auth::user()->profile == "Contabilidad") {
             return '/Accounting';
 
         } else {
